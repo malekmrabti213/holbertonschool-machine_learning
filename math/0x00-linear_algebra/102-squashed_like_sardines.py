@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+       
+
 # def matrix_shape(matrix):
 
 #     if type(matrix[0]) != list:
@@ -10,12 +13,9 @@
 #     if matrix_shape(mat1) != matrix_shape(mat2):
 #         return None
 #     else:
-        
+
 def matrix_shape(matrix):
-    """
-    Needs a matrix as input
-    Returns the shape as a list of integers
-    """
+
     if type(matrix[0]) is not list:
         return [len(matrix)]
     else:
@@ -23,10 +23,7 @@ def matrix_shape(matrix):
 
 
 def concat_recursive(mat1, mat2, axe):
-    """
-    Needs a matrix as input
-    Returns a concatenated matrix
-    """
+
     result = []
     if axe == 0:
         result = mat1 + mat2
@@ -37,10 +34,7 @@ def concat_recursive(mat1, mat2, axe):
     return result
 
 def cat_matrices(mat1, mat2, axis=0):
-    """
-    Needs a matrix as input
-    Returns the resulting matrix
-    """
+
     if len(matrix_shape(mat1)) > axis and len(matrix_shape(mat2)) > axis:
         return concat_recursive(mat1, mat2, axis)
     else:
