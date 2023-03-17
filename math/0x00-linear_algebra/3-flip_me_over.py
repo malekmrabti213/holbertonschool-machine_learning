@@ -1,6 +1,6 @@
-import numpy as np 
+#!/usr/bin/env python3
 def matrix_transpose(matrix):
-
+    
     matrix_transpose = []
     for index, row in enumerate(matrix):
         if index is 0:
@@ -9,4 +9,4 @@ def matrix_transpose(matrix):
         for idx, i in enumerate(row):
             matrix_transpose[idx].append(i)
     return matrix_transpose
-    #np.transpose(matrix)
+ 
