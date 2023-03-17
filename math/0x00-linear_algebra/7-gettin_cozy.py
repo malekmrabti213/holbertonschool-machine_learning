@@ -1,7 +1,6 @@
-import numpy as np
-import copy
+#!/usr/bin/env python3
 def cat_matrices2D(mat1, mat2, axis=0):
-     
+    import copy
     if axis == 0 :
         for i in range(len(mat1)):
              for j in range(len(mat2)):       
@@ -12,18 +11,14 @@ def cat_matrices2D(mat1, mat2, axis=0):
 
                     axis0 = mat1copy+mat2copy
                     return axis0
-        #return(np.append(mat1,mat2,axis))
-            
-    
-        
+                              
     elif (axis == 1) and (len(mat1)==len(mat2)):
             
             axis1=[]
             for i in range(len(mat1)):                     
                 axis1.append(mat1[i]+mat2[i])
             return axis1
-            
-            #return(np.append(mat1,mat2,axis))
+    
     else:
             return None
     
