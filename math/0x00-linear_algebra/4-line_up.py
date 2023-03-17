@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def add_arrays(arr1, arr2):
     sumadd=[]
     if len(arr1)!=len(arr2):
