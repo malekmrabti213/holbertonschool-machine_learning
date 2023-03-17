@@ -6,11 +6,11 @@ def np_slice(matrix, axes={}):
 
     for k, v in sorted(axes.items()):
         slice_val = slice(*v)
-        print('*****')
-        print(slice_val)
-        print('======')
+        # print('*****')
+        # print(slice_val)
+        # print('======')
         slice_mat[k] = slice_val
-        print(slice_mat[k])
-        print("@@@@@")
-        print(tuple(slice_mat))
+        # print(slice_mat[k])
+        # print("@@@@@")
+        # print(tuple(slice_mat))
     return matrix[tuple(slice_mat)]
