@@ -1,4 +1,3 @@
-import numpy as np
 def mat_mul(mat1, mat2):
 
     if len(mat1[0]) != len(mat2):
@@ -13,5 +12,3 @@ def mat_mul(mat1, mat2):
             row.append(sum)
         multiplication.append(row)
     return multiplication
-    # multiplication = np.dot(mat1,mat2)
-    # return multiplication
