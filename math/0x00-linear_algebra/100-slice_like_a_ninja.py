@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def np_slice(matrix, axes={}):
     #https://docs.python.org/3/library/functions.html#slice
     slice_mat = [slice(None, None, None)] * matrix.ndim
