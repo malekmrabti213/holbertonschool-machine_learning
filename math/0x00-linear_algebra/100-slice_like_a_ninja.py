@@ -13,5 +13,4 @@ def np_slice(matrix, axes={}):
         print(slice_mat[k])
         print("@@@@@")
         print(tuple(slice_mat))
-    matrix = matrix[tuple(slice_mat)]
-    return matrix
+    return matrix[tuple(slice_mat)]
