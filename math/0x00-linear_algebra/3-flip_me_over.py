@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 def matrix_transpose(matrix):
 
-    matrix_transpose = []
-    for index, row in enumerate(matrix):
-        if index == 0:
-            for i in row:
-                matrix_transpose.append([])
-        for idx, i in enumerate(row):
-            matrix_transpose[idx].append(i)
-    return matrix_transpose
+    """returns the transpose of a 2d matrix"""
+    transpose = []
+    for i in range(len(matrix[0])):
+        transpose.append([])
+        for j in range(len(matrix)):
+            transpose[i].append(matrix[j][i])
+    return transpose
  
