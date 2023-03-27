@@ -6,7 +6,8 @@ def matrix_shape(matrix):
     # else:
     #     return [len(matrix)] + matrix_shape(matrix[0])
     matrix_shape = []
-    while (type(matrix) is list):
+    while (type(matrix) is list): 
+        #list of lists 
         matrix_shape.append(len(matrix))
         matrix = matrix[0]
     return matrix_shape

@@ -2,6 +2,7 @@
 def add_matrices2D(mat1, mat2):
 
     add=[] 
+    #to do addition or subtraction we should have the same number of elements in each row or column
     for i in range(len(mat1)):       
         if (len(mat1[i])!=len(mat2[i])):
             return None

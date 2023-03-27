@@ -7,5 +7,11 @@ def matrix_transpose(matrix):
         transpose.append([])
         for j in range(len(matrix)):
             transpose[i].append(matrix[j][i])
+            print(matrix[j][i])
+            #we start with the first row when i = 0
+            # [0,0][1,0] i= row and j column position first loop
+            #then [0,1][1,1]
+
+
     return transpose
  
