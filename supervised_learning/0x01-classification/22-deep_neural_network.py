@@ -104,37 +104,23 @@ class DeepNeuralNetwork:
         return self.__nx
 
     def forward_prop(self, X):
-        """
-        Compute the forward propagation of the deep neural network
-        :param X: The data set
-        :return: The result of the forward propagation and the cache
-                 for the result of each layers
-        """
         self.__cache["A0"] = X
-        for layer_idx in range(self.L):
-            input_key = "A{}".format(layer_idx)
-            weight_key = "W{}".format(layer_idx + 1)
-            bias_key = "b{}".format(layer_idx + 1)
-            z = np.matmul(
-                self.weights.get(weight_key),
-                self.cache.get(input_key)
-            ) + self.weights.get(bias_key)
-            A = np.vectorize(lambda x: 1 / (1 + np.exp(-x)))(z)
-            self.__cache["A{}".format(layer_idx + 1)] = A
+        for lay in range(self.__L):
+            weights = self.__weights
+            cache = self.__cache
+            Za = np.matmul(weights["W" + str(lay + 1)], cache["A" + str(lay)])
+            Z = Za + weights["b" + str(lay + 1)]
+            cache["A" + str(lay + 1)] = 1 / (1 + np.exp(-Z))
 
-        return A, self.cache
-
+        return cache["A" + str(self.__L)], cache
+    
     def cost(self, Y, A):
-        """
-        Compute the cost function for the logistic function
-        :param Y: The thruth labels
-        :param A: The predictions
-        :return: The result of the cost function
-        """
-        num_of_sample = Y.shape[1]
-        return - np.sum(
-            Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
-        ) / num_of_sample
+
+
+        m = Y.shape[1]
+        C = (-1 / m) * np.sum(Y * np.log(A) + (1 - Y) *
+                                (np.log(1.0000001 - A)))
+        return C
 
     def evaluate(self, X, Y):
         """
