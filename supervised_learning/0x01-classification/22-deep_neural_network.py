@@ -115,12 +115,16 @@ class DeepNeuralNetwork():
         return cache["A" + str(self.__L)], cache
     
     def cost(self, Y, A):
-
-
-        m = Y.shape[1]
-        C = (-1 / m) * np.sum(Y * np.log(A) + (1 - Y) *
-                                (np.log(1.0000001 - A)))
-        return C
+        """
+        Compute the cost function for the logistic function
+        :param Y: The thruth labels
+        :param A: The predictions
+        :return: The result of the cost function
+        """
+        num_of_sample = Y.shape[1]
+        return - np.sum(
+            Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
+        ) / num_of_sample
 
     def evaluate(self, X, Y):
         """
