@@ -143,8 +143,12 @@ class DeepNeuralNetwork:
         :param Y: The thruth label
         :return: The array of the predictions, and the cost function res
         """
-        preds, *_ = self.forward_prop(X)
-        return np.where(preds < 0.5, 0, 1), self.cost(Y, preds)
+        cache = self.__cache
+        A, cache = self.forward_prop(X)
+        cost = self.cost(Y, A)
+        prediction = np.where(A >= 0.5, 1, 0)  # broadcasting
+        return prediction, cost
+
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """
