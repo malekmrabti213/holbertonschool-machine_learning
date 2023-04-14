@@ -1,7 +1,7 @@
-
 #!/usr/bin/env python3
 
 import numpy as np
+
 Deep = __import__('22-deep_neural_network').DeepNeuralNetwork
 
 np.random.seed(22)
