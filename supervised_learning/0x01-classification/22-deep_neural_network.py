@@ -104,15 +104,26 @@ class DeepNeuralNetwork():
         return self.__nx
 
     def forward_prop(self, X):
+        """
+        Compute the forward propagation of the deep neural network
+        :param X: The data set
+        :return: The result of the forward propagation and the cache
+                 for the result of each layers
+        """
         self.__cache["A0"] = X
-        for lay in range(self.__L):
-            weights = self.__weights
-            cache = self.__cache
-            Za = np.matmul(weights["W" + str(lay + 1)], cache["A" + str(lay)])
-            Z = Za + weights["b" + str(lay + 1)]
-            cache["A" + str(lay + 1)] = 1 / (1 + np.exp(-Z))
+        for layer_idx in range(self.L):
+            input_key = "A{}".format(layer_idx)
+            weight_key = "W{}".format(layer_idx + 1)
+            bias_key = "b{}".format(layer_idx + 1)
+            z = np.dot(
+                self.weights.get(weight_key),
+                self.cache.get(input_key)
+            ) + self.weights.get(bias_key)
+            A = 1 / (1 + np.exp(-z))
+            self.__cache["A{}".format(layer_idx + 1)] = A
 
-        return cache["A" + str(self.__L)], cache
+        return A, self.cache
+
     
     def cost(self, Y, A):
         """
