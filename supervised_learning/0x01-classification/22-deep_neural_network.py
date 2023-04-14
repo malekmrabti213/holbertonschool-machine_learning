@@ -54,7 +54,7 @@ def _check_layers(layers: int) -> None:
           raise ValueError("layers must be a list of positive integers")"""
 
 
-class DeepNeuralNetwork:
+class DeepNeuralNetwork():
     """Deep neural network interface"""
     def __init__(self, nx, layers):
         """
@@ -166,16 +166,17 @@ class DeepNeuralNetwork:
                 ) * previous_preds * (1 - previous_preds)
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
-
-                if type(iterations) is not int:
-                    raise TypeError("iterations must be an integer")
-                if iterations <= 0:
-                    raise ValueError("iterations must be a positive integer")
-                if type(alpha) is not float:
-                    raise TypeError("alpha must be a float")
-                if alpha <= 0:
-                    raise ValueError("alpha must be positive")
-                for itr in range(iterations):
-                    A, cache = self.forward_prop(X)
-                    self.gradient_descent(Y, cache, alpha)
-                return (self.evaluate(X, Y))
+        """
+        Train the model up to n iteration
+        :param X: The data set
+        :param Y: The thruth label
+        :param iterations: The number of iteration
+        :param alpha: The learning rate
+        :return: The evaluation of the model
+        """
+        _check_iterations(iterations)
+        _check_alpha(alpha)
+        for _ in range(iterations):
+            _, cache = self.forward_prop(X)
+            self.gradient_descent(Y, cache, alpha)
+        return self.evaluate(X, Y)
