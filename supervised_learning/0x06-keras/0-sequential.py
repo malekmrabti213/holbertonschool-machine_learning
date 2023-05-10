@@ -24,7 +24,7 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     sequential = []
 
     # Set the deep learning regularization technique:
-    regularizer = K.regularizers.L2(lambtha)
+    regularizer = K.regularizers.l2(lambtha)
 
     # Define the model architecture contemplating all layers, nodes and
     # activation functions:
