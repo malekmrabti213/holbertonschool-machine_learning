@@ -21,7 +21,7 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     """
 
     # Create the model structure:
-
+    sequential = []
 
     # Set the deep learning regularization technique:
     regularizer = K.regularizers.L2(lambtha)
@@ -31,16 +31,16 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     for i in range(len(layers)):
         if i == 0:
             # First layer: receive nx input features:
-            K.Sequential.add(K.layers.Dense(layers[i],
+            sequential.add(K.layers.Dense(layers[i],
                                      input_shape=(nx,),
                                      activation=activations[i],
                                      kernel_regularizer=regularizer))
         else:
             # Add all other hidden layers with Dropout and L2 techniques:
-            K.Sequential.add(K.layers.Dropout(1 - keep_prob))
-            K.Sequential.add(K.layers.Dense(layers[i],
+            sequential.add(K.layers.Dropout(1 - keep_prob))
+            sequential.add(K.layers.Dense(layers[i],
                                      activation=activations[i],
                                      kernel_regularizer=regularizer))
 
-    return K.Sequential
+    return K.Sequential(sequential)
 
