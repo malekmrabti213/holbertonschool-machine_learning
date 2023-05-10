@@ -31,16 +31,17 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     for i in range(len(layers)):
         if i == 0:
             # First layer: receive nx input features:
-            sequential.add(K.layers.Dense(layers[i],
+            sequential.append(K.layers.Dense(layers[i],
                                      input_shape=(nx,),
                                      activation=activations[i],
                                      kernel_regularizer=regularizer))
         else:
             # Add all other hidden layers with Dropout and L2 techniques:
-            sequential.add(K.layers.Dropout(1 - keep_prob))
-            sequential.add(K.layers.Dense(layers[i],
+            sequential.append(K.layers.Dropout(1 - keep_prob))
+            sequential.append(K.layers.Dense(layers[i],
                                      activation=activations[i],
                                      kernel_regularizer=regularizer))
 
-    return K.Sequential(sequential)
+    model = K.Sequential(sequential)
+    return model
 
