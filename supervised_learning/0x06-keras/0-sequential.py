@@ -25,14 +25,14 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
 
     # Set the deep learning regularization technique:
     regularizer = K.regularizers.L2(lambtha)
-
+    shape = (nx,)
     # Define the model architecture contemplating all layers, nodes and
     # activation functions:
     for i in range(len(layers)):
-        if i is 0:
+        if i == 0:
             # First layer: receive nx input features:
             model.add(K.layers.Dense(layers[i],
-                                     input_shape=(nx,),
+                                     input_shape=shape,
                                      activation=activations[i],
                                      kernel_regularizer=regularizer))
         else:
