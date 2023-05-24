@@ -1,16 +1,15 @@
 #!/usr/bin/python3
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-
 from tensorflow import keras as K
 lenet5 = __import__('5-lenet5').lenet5
 
 if __name__ == "__main__":
     np.random.seed(0)
     tf.set_random_seed(0)
-    lib = np.load('../data/MNIST.npz')
+    lib = np.load('C:/Users/CAMPUSNA/Desktop/ML Projects/supervised learnning/classification/data/MNIST.npz')
     X_train = lib['X_train']
     m, h, w = X_train.shape
     X_train_c = X_train.reshape((-1, h, w, 1))
@@ -31,6 +30,6 @@ if __name__ == "__main__":
     Y_pred = model.predict(X_valid_c)
     print(Y_pred)
     Y_pred = np.argmax(Y_pred, 1)
-    plt.imshow(X_valid[0])
-    plt.title(str(Y_valid[0]) + ' : ' + str(Y_pred[0]))
-    plt.show()
+    # plt.imshow(X_valid[0])
+    # plt.title(str(Y_valid[0]) + ' : ' + str(Y_pred[0]))
+    # plt.show()

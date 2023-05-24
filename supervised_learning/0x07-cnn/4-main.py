@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 lenet5 = __import__('4-lenet5').lenet5
@@ -42,6 +42,6 @@ if __name__ == "__main__":
         Y_pred = sess.run(y_pred, feed_dict={x:X_valid_c, y:Y_valid})
         print(Y_pred[0])
         Y_pred = np.argmax(Y_pred, 1)
-        plt.imshow(X_valid[0])
-        plt.title(str(Y_valid[0]) + ' : ' + str(Y_pred[0]))
-        plt.show()
+        # plt.imshow(X_valid[0])
+        # plt.title(str(Y_valid[0]) + ' : ' + str(Y_pred[0]))
+        # plt.show()
