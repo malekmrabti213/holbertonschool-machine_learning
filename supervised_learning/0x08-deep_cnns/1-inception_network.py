@@ -1,4 +1,3 @@
-1-inception_network.py
 #!/usr/bin/env python3
 
 import tensorflow.keras as K
