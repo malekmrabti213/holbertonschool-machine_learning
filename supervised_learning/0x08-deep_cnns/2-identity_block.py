@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 
-# import tensorflow.keras as K
+import tensorflow.keras as K
 
-import tensorflow as tf
-
-from tensorflow import keras as K
 def identity_block(A_prev, filters):
 
     F11, F3, F12 = filters
