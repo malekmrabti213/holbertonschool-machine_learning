@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
+import tensorflow as tf
 
-import tensorflow.keras as K
+from tensorflow import keras as K
+#import tensorflow.keras as K
+
 
 def inception_block(A_prev, filters):
 

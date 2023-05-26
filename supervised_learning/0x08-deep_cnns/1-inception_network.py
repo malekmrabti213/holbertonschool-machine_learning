@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-import tensorflow.keras as K
+import tensorflow as tf
+
+from tensorflow import keras as K
+#import tensorflow.keras as K
+
 inception_block = __import__('0-inception_block').inception_block
 
 def inception_network():

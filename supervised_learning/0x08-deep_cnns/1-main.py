@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
-import tensorflow.keras as K
+import tensorflow as tf
+
+from tensorflow import keras as K
 inception_network = __import__('1-inception_network').inception_network
 
 if __name__ == '__main__':
