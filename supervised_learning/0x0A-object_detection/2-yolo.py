@@ -151,3 +151,4 @@ class Yolo:
         filtered_boxes = boxes[box_mask]
         box_classes = classes[box_mask]
         box_scores = classes_scores[box_mask]
+        return filtered_boxes, box_classes, box_scores
