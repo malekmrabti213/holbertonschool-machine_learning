@@ -154,5 +154,5 @@ class Yolo:
         box_mask = np.any(box_mask, axis=-1)
 
         filtered_boxes = boxes[box_mask]
-        box_classes = classes[mask]
-        box_scores = classes_scores[mask]
+        box_classes = classes[box_mask ]
+        box_scores = classes_scores[box_mask]
