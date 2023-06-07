@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-import tensorflow.keras as K
+
+# import tensorflow.keras as K
+
+import tensorflow as tf
+from tensorflow import keras as K
 
 def transition_layer(X, nb_filters, compression):
 

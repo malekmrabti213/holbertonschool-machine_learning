@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
-import tensorflow.keras as K
+# import tensorflow.keras as K
+
+import tensorflow as tf
+from tensorflow import keras as K
 
 projection_block = __import__('3-projection_block').projection_block
 

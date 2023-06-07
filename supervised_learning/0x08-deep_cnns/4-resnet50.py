@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-import tensorflow.keras as K
+# import tensorflow.keras as K
+
+import tensorflow as tf
+from tensorflow import keras as K
+
 identity_block = __import__('2-identity_block').identity_block
 projection_block = __import__('3-projection_block').projection_block
 
@@ -10,6 +14,7 @@ def resnet50():
     X = K.layers.Conv2D(64, (7, 7), strides=(2, 2), padding='same', kernel_initializer=K.initializers.he_normal())(inputs)
     X = K.layers.BatchNormalization(axis=3)(X)
     X = K.layers.Activation('relu')(X)
+    # X=K.layers.ReLU()(X)
 
     X = K.layers.MaxPool2D(pool_size=(3, 3), strides=(2, 2), padding='same')(X)
 

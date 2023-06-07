@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-import tensorflow as tf
 
+# import tensorflow.keras as K
+
+import tensorflow as tf
 from tensorflow import keras as K
+
 identity_block = __import__('2-identity_block').identity_block
 X1 = K.Input(shape=(56, 56, 256))
 Y1 = identity_block(X1, [64, 64, 256])

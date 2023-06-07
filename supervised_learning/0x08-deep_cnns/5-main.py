@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-import tensorflow.keras as K
+# import tensorflow.keras as K
+
+import tensorflow as tf
+from tensorflow import keras as K
+
 dense_block = __import__('5-dense_block').dense_block
 
 if __name__ == '__main__':

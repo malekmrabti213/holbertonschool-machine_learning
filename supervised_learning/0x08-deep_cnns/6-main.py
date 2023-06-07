@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 
-import tensorflow.keras as K
+# import tensorflow.keras as K
+
+import tensorflow as tf
+from tensorflow import keras as K
+
 transition_layer = __import__('6-transition_layer').transition_layer
 
 if __name__ == '__main__':
