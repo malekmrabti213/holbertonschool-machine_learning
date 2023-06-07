@@ -149,7 +149,9 @@ class Yolo:
         box_mask = box_scores >= self.class_t
         box_mask = np.any(box_mask, axis=-1)
         filtered_boxes = boxes[box_mask]
-        box_classes = np.argmax(box_scores, -1)[box_mask]
-        box_scores = np.max(box_scores, -1)[box_mask]
+        bc=np.argmax(box_scores, axis=-1)
+        box_classes = bc[box_mask]
+        bs=np.max(box_scores, axis=-1)
+        box_scores = bs[box_mask]
 
         return filtered_boxes, box_classes, box_scores
