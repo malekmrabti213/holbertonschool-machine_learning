@@ -126,8 +126,14 @@ class Yolo:
         """
         # Flatten the boxes, box_confidences, and box_class_probs lists
         boxes = [box.reshape(-1, 4) for box in boxes]
-        for confidence, probs in zip(box_confidences, box_class_probs):
-            box_scores.append(confidence * probs)
+        box_confidences = [
+            box_confidence.reshape(-1, 1) for box_confidence in box_confidences
+            ]
+        box_class_probs = [
+            box_class_prob.reshape(
+                -1,
+                len(self.class_names)) for box_class_prob in box_class_probs
+            ]
 
         # Concatenate the flattened arrays
         boxes = np.concatenate(boxes)
@@ -140,8 +146,7 @@ class Yolo:
         box_scores = box_confidences * box_class_probs
 
         # Filter boxes based on box_scores and class threshold
-        box_mask = box_scores >= self.class_t
-        box_mask = np.any(box_mask, axis=-1)
+        box_mask = np.where(box_scores >= self.class_t)
         filtered_boxes = boxes[box_mask]
         box_classes = np.argmax(box_scores, axis=-1)[box_mask]
         box_scores = np.max(box_scores, axis=-1)[box_mask]
