@@ -132,7 +132,6 @@ class Yolo:
         # Find the box scores by multiplying box_confidences with
         # box_class_probs
    
-        box_scores = []
         for confidence, class_probs in zip(box_confidences, box_class_probs):
             box_scores.append(confidence * class_probs )
 
