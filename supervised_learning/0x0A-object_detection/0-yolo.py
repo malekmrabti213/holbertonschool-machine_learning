@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
+"""
+Initialize Yolo
+"""
+
 
 import tensorflow.keras as K
 
+
 class Yolo:
-    """Class to perform the Yolo algorithm on image data"""
+    """
+    Yolo class
+    """
     def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
-        """initializes the Yolo class"""
-        self.class_t = class_t # class score threshold
-        self.nms_t = nms_t # non max suppression threshold
-        self.model = K.models.load_model(model_path) # keras darknet model
-        self.anchors = anchors # anchor boxes
-        with open(classes_path) as f:
-            self.class_names = [class_name.strip() for class_name in f.readlines()]
+        self.model = K.models.load_model(model_path)
+        with open(classes_path, 'r') as classes_file:
+            self.class_names = [
+                line.strip() for line in classes_file.readlines()
+                ]
+        self.class_t = class_t
+        self.nms_t = nms_t
+        self.anchors = anchors
