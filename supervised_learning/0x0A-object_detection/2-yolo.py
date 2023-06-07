@@ -135,10 +135,10 @@ class Yolo:
         for confidence, class_probs in zip(box_confidences, box_class_probs):
             box_scores.append(confidence * class_probs )
 
-        classes = [np.argmax(c, -1) for b in box_scores]
+        classes = [np.argmax(b, -1) for b in box_scores]
         classes = [c.reshape(-1) for c in classes]
 
-        classes_scores = [np.max(cs, -1) for b in box_scores]
+        classes_scores = [np.max(b, -1) for b in box_scores]
         classes_scores = [cs.reshape(-1) for cs in classes_scores]
     
 
@@ -150,7 +150,8 @@ class Yolo:
 
         # Filter boxes based on box_scores and class threshold
 
-        box_mask= np.where(classes_scores >= self.class_t)
+        box_mask = box_scores >= self.class_t
+        box_mask = np.any(box_mask, axis=-1)
 
         filtered_boxes = boxes[box_mask]
         box_classes = classes[box_mask ]
