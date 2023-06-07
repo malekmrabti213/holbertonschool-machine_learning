@@ -150,8 +150,7 @@ class Yolo:
 
         # Filter boxes based on box_scores and class threshold
 
-        box_mask = box_scores >= self.class_t
-        box_mask = np.any(box_mask, axis=-1)
+        box_mask= np.where(classes_scores >= self.class_t)
 
         filtered_boxes = boxes[box_mask]
         box_classes = classes[box_mask ]
