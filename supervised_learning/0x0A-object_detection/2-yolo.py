@@ -124,31 +124,25 @@ class Yolo:
             box_scores -- numpy.ndarray of shape (?) containing the box scores
             for each box in filtered_boxes, respectively
         """
-        # Flatten the boxes, box_confidences, and box_class_probs lists
-        boxes = [box.reshape(-1, 4) for box in boxes]
-        box_confidences = [
-            box_confidence.reshape(-1, 1) for box_confidence in box_confidences
-            ]
-        box_class_probs = [
-            box_class_prob.reshape(
-                -1,
-                len(self.class_names)) for box_class_prob in box_class_probs
-            ]
+        box = [ele.reshape(-1, 4) for ele in boxes]
+        box = np.concatenate(box)
+        box_scores = []
+        for confidence, probs in zip(box_confidences, box_class_probs):
+            box_scores.append(confidence * probs)
 
-        # Concatenate the flattened arrays
-        boxes = np.concatenate(boxes)
-        box_confidences = np.concatenate(box_confidences)
-        box_class_probs = np.concatenate(box_class_probs)
+        classes = [np.argmax(ele, -1) for ele in box_scores]
+        classes = [ele.reshape(-1) for ele in classes]
+        classes = np.concatenate(classes)
 
-        # Find the box scores by multiplying box_confidences with
-        # box_class_probs
-        box_scores = box_confidences * box_class_probs
+        classes_scores = [np.max(ele, -1) for ele in box_scores]
+        classes_scores = [ele.reshape(-1) for ele in classes_scores]
+        classes_scores = np.concatenate(classes_scores)
 
-        # Filter boxes based on box_scores and class threshold
-        box_mask = box_scores >= self.class_t
-        box_mask = np.any(box_mask, axis=-1)
-        filtered_boxes = boxes[box_mask]
-        box_classes = np.argmax(box_scores, axis=-1)[box_mask]
-        box_scores = np.max(box_scores, axis=-1)[box_mask]
+        # mask
+        mask = np.where(classes_scores >= self.class_t)
 
-        return filtered_boxes, box_classes, box_scores
+        filtered_boxes = box[mask]
+        box_classes = classes[mask]
+        box_scores = classes_scores[mask]
+
+        return (filtered_boxes, box_classes, box_scores)
