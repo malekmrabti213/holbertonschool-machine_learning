@@ -127,17 +127,14 @@ class Yolo:
          # Flatten the boxes
         boxes = [box.reshape(-1, 4) for box in boxes]
         
-
-
         # Find the box scores by multiplying box_confidences with
         # box_class_probs
    
         box_scores = np.array(box_confidences) * np.array(box_class_probs)
-        
+
         b_classe = [np.argmax(b, -1) for b in box_scores]
         b_classe = [c.reshape(-1) for c in b_classe]
         
-
         b_score = [np.max(b, -1) for b in box_scores]
         b_score = [cs.reshape(-1) for cs in b_score]
         
