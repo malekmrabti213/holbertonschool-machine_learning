@@ -77,8 +77,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
         output, weights = sdp_attention(Q, K, V, mask)
         output = tf.transpose(output, perm=[0, 2, 1, 3])
-        attention_output = tf.reshape(output,
-                                      (batch, -1, self.dm))
+        attention_output = tf.reshape(output,(batch, -1, self.dm))
 
         output = self.linear(attention_output)
 
