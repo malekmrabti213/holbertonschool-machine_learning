@@ -67,3 +67,4 @@ class Transformer(tf.keras.Model):
         transformer_output = self.linear(decoder_output)
 
         return transformer_output
+    
