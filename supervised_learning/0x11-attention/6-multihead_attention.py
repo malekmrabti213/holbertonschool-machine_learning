@@ -32,7 +32,8 @@ class MultiHeadAttention(tf.keras.layers.Layer):
             linear: Dense layer with dm units, used to generate the attention
                 output
         """
-        super().__init__()
+        #changed
+        super(MultiHeadAttention, self).__init__()
         self.h = h
         self.dm = dm
         self.depth = int(dm / h)
