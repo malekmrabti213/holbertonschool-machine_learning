@@ -139,4 +139,4 @@ class NST:
             flattened_inputs,
             transpose_a=True
         )
-        return gram_matrix * (1 / (input_layer.shape[1] * input_layer.shape[2]))
+        return gram_matrix / (input_layer.shape[1] * input_layer.shape[2])
