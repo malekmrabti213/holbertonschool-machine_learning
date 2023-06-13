@@ -132,7 +132,7 @@ class NST:
         batch_size, height, width, channels = input_layer.shape
         flattened_inputs = tf.reshape(
             input_layer,
-            [-1, channels]
+            [batch_size, height * width, channels]
         )
         gram_matrix = tf.matmul(
             flattened_inputs,
