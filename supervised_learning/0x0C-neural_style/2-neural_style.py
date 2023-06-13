@@ -128,14 +128,15 @@ class NST:
         #     flattened_inputs,
         # ) / tf.cast(flattened_inputs.shape[0], tf.float32)
         # return tf.reshape(gram_matrix, [1, -1, channels])
-        coef = 1 / (input_layer.shape[1] * input_layer.shape[2])
+        # coef = 1 / (input_layer.shape[1] * input_layer.shape[2])
         batch_size, height, width, channels = input_layer.shape
         flattened_inputs = tf.reshape(
             input_layer,
             [batch_size, height * width, channels]
         )
         gram_matrix = tf.matmul(
-            tf.transpose(flattened_inputs),
-            flattened_inputs
-        ) / tf.cast(tf.shape(flattened_inputs)[0], tf.float32)
-        return gram_matrix * coef
+            flattened_inputs,
+            flattened_inputs,
+            transpose_a=True
+        )
+        return gram_matrix * (1 / (input_layer.shape[1] * input_layer.shape[2]))
