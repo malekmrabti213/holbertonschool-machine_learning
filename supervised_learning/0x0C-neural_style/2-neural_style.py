@@ -139,4 +139,4 @@ class NST:
             flattened_inputs,
             transpose_a=True
         )
-        return gram_matrix * coef
+        return tf.reshape(gram_matrix, [1, -1, channels])
