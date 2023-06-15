@@ -67,6 +67,7 @@ class NST:
         self.alpha = alpha
         self.beta = beta
         self.load_model()
+        self.generate_features()
 
     @staticmethod
     def scale_image(image):
@@ -139,3 +140,49 @@ class NST:
             flattened_inputs,
         ) / tf.cast(flattened_inputs.shape[0], tf.float32)
         return tf.reshape(gram_matrix, [1, -1, channels])
+
+    def generate_features(self):
+        """
+        Forward propagation of our 2 images throught the model
+        Saved the content and style feature representations from our model
+        :return: Nothing
+        """
+        preprocess_style = tf.keras.applications.vgg19.preprocess_input(
+            self.style_image * 255
+        )
+        preprocess_content = tf.keras.applications.vgg19.preprocess_input(
+            self.content_image * 255
+        )
+
+        style_output = self.model(preprocess_style)
+        content_output = self.model(preprocess_content)
+
+        style_outputs = style_output[:-1]
+        content_ouput = content_output[-1]
+
+        self.gram_style_features = [self.gram_matrix(layer)
+                                    for layer in
+                                    style_outputs]
+        self.content_feature = content_ouput
+
+    def layer_style_cost(self, style_output, gram_target):
+        """
+        Calculates the style cost for a single layer
+        :param style_output: The style output from a layer
+        :param gram_target: The targat value
+        :return: The layers cost
+        """
+        check_tensor_rank_input(style_output, "style_output")
+        output_channel = style_output.shape[-1]
+        if not isinstance(gram_target, (tf.Tensor, tf.Variable)) or \
+                gram_target.shape != [1, output_channel, output_channel]:
+            raise TypeError(
+                "gram_target must be a tensor of shape [1, {}, {}]".format(
+                    output_channel,
+                    output_channel
+                )
+            )
+
+        gram_style = self.gram_matrix(style_output)
+
+        return tf.reduce_mean(tf.square(gram_style - gram_target))
