@@ -87,24 +87,23 @@ class NST:
         return tf.clip_by_value(resized_image, 0.0, 1.0)
 
     def load_model(self):
-        """
-        Load VGG19 model
-        :return: The model
-        """
-        vgg19 = tf.keras.applications.VGG19(include_top=False)
-        for layer in vgg19.layers:
-            layer.trainable = False
-        vgg19.save("vgg_base_model.h5")
-        model = tf.keras.models.load_model(
-            "vgg_base_model.h5",
-            custom_objects={
-                "MaxPooling2D": tf.keras.layers.AveragePooling2D()
-            })
-
-        outputs = ([model.get_layer(layer).output
-                   for layer in self.style_layers]
-                   + [model.get_layer(self.content_layer).output])
-        self.model = tf.keras.models.Model(model.input, outputs)
+        vgg = tf.keras.applications.vgg19.VGG19(include_top=False, weights='imagenet')
+        x = vgg.input
+        model_outputs = []
+        content_output = None
+        for layer in vgg.layers[1:]:
+            if "pool" in layer.name:
+                x = tf.keras.layers.AveragePooling2D(pool_size=layer.pool_size, strides=layer.strides, name=layer.name)(x)
+            else:
+                x = layer(x)
+                if layer.name in self.style_layers:
+                    model_outputs.append(x)
+                if layer.name == self.content_layer:
+                    content_output = x
+                layer.trainable = False
+        model_outputs.append(content_output)
+        model = tf.keras.models.Model(vgg.input, model_outputs)
+        self.model = model
 
     @staticmethod
     def gram_matrix(input_layer):
@@ -113,9 +112,9 @@ class NST:
         :return: The gram matrix
         """
         check_tensor_rank_input(input_layer, "input_layer")
-        # Checker doesn't like this code
+        # # Checker doesn't like this code
 
-        # coef = 1 / (input_layer.shape[1] * input_layer.shape[2])
+        # coef = 1 / (input_layer.shape[1].value * input_layer.shape[2].value)
         # batch_size, height, width, channels = input_layer.shape
         # flattened_inputs = tf.reshape(
         #     input_layer,
@@ -139,3 +138,13 @@ class NST:
             flattened_inputs,
         ) / tf.cast(flattened_inputs.shape[0], tf.float32)
         return tf.reshape(gram_matrix, [1, -1, channels])
+    
+        # flattened_inputs = tf.reshape(
+        #     input_layer,
+        #     [batch_size * height * width, channels]
+        # )
+        # gram_matrix = tf.matmul(
+        #     tf.transpose(flattened_inputs),
+        #     flattened_inputs,
+        # ) / tf.cast(batch_size * height * width, tf.float32)
+        # return tf.reshape(gram_matrix, [1, -1, channels])
