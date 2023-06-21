@@ -43,7 +43,8 @@ class Simple_GAN(keras.Model):
                 fake_sample = self.generator(
                     self.latent_generator(self.batch_size), training=True
                 )
-                # compute the loss of the discriminator on real and fake samples
+                # compute the loss of the discriminator on real 
+                # and fake samples
                 discr_return_on_fake = self.discriminator(
                     fake_sample, training=True
                 )
