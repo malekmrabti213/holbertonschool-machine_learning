@@ -191,9 +191,23 @@ class NST:
 
         return tf.reduce_mean(tf.square(gram_style - gram_target))
 
-    def style_cost(self, style_outputs):   
-        if type(style_outputs) is not list or len(style_outputs) != len(self.style_layers):
-            raise TypeError('style_outputs must be a list with a length of {}'.format(len(self.style_layers)))
-        J_style = tf.add_n([self.layer_style_cost(style_outputs[i], self.gram_style_features[i]) for i in range(len(style_outputs))])
-        J_style /= tf.cast(len(style_outputs), tf.float32)
-        return J_style
+    def style_cost(self, style_outputs):
+        """
+        Get the style cost
+        :param style_outputs: Style output for the generated image
+        :return: The total cost for style
+        """
+        if not isinstance(style_outputs, list) or \
+                len(style_outputs) != len(self.style_layers):
+            raise TypeError(
+                "style_outputs must be a list with a length of {}".format(
+                    len(self.style_layers)
+                )
+            )
+        total_cost = 0.0
+        weight = 1.0 / float(len(style_outputs))
+        for style, target in zip(style_outputs, self.gram_style_features):
+            total_cost += weight * self.layer_style_cost(
+                style, target
+            )
+        return total_cost
