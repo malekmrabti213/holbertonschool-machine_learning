@@ -41,24 +41,23 @@ class NST:
         return image
 
     def load_model(self):
-        """
-        Load VGG19 model
-        :return: The model
-        """
-        vgg19 = tf.keras.applications.VGG19(include_top=False)
-        for layer in vgg19.layers:
-            layer.trainable = False
-        vgg19.save("vgg_base_model.h5")
-        model = tf.keras.models.load_model(
-            "vgg_base_model.h5",
-            custom_objects={
-                "MaxPooling2D": tf.keras.layers.AveragePooling2D()
-            })
-
-        outputs = ([model.get_layer(layer).output
-                   for layer in self.style_layers]
-                   + [model.get_layer(self.content_layer).output])
-        self.model = tf.keras.models.Model(model.input, outputs)
+        vgg = tf.keras.applications.vgg19.VGG19(include_top=False, weights='imagenet')
+        x = vgg.input
+        model_outputs = []
+        content_output = None
+        for layer in vgg.layers[1:]:
+            if "pool" in layer.name:
+                x = tf.keras.layers.AveragePooling2D(pool_size=layer.pool_size, strides=layer.strides, name=layer.name)(x)
+            else:
+                x = layer(x)
+                if layer.name in self.style_layers:
+                    model_outputs.append(x)
+                if layer.name == self.content_layer:
+                    content_output = x
+                layer.trainable = False
+        model_outputs.append(content_output)
+        model = tf.keras.models.Model(vgg.input, model_outputs)
+        self.model = model
 
     @staticmethod
     def gram_matrix(input_layer):
@@ -85,13 +84,14 @@ class NST:
         return tf.reduce_sum(tf.square(gram_style - gram_target)) / tf.square(tf.cast(nc, tf.float32))
 
     def style_cost(self, style_outputs):
-        """
-        Get the style cost
-        :param style_outputs: Style output for the generated image
-        :return: The total cost for style
-        """
         if type(style_outputs) is not list or len(style_outputs) != len(self.style_layers):
             raise TypeError('style_outputs must be a list with a length of {}'.format(len(self.style_layers)))
         J_style = tf.add_n([self.layer_style_cost(style_outputs[i], self.gram_style_features[i]) for i in range(len(style_outputs))])
         J_style /= tf.cast(len(style_outputs), tf.float32)
         return J_style
+
+    def content_cost(self, content_output):
+        if not (isinstance(content_output, tf.Tensor) or isinstance(content_output, tf.Variable)) or content_output.shape.dims != self.content_feature.shape.dims:
+            raise TypeError('content_output must be a tensor of shape {}'.format(self.content_feature.shape))
+        _, nh, nw, nc = content_output.shape.dims
+        return tf.reduce_sum(tf.square(content_output - self.content_feature)) / tf.cast(nh * nw * nc, tf.float32)
