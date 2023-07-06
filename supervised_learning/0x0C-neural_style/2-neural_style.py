@@ -105,46 +105,11 @@ class NST:
         model = tf.keras.models.Model(vgg.input, model_outputs)
         self.model = model
 
+
     @staticmethod
     def gram_matrix(input_layer):
-        """
-        Calculate the gram matrix
-        :return: The gram matrix
-        """
-        check_tensor_rank_input(input_layer, "input_layer")
-        # # Checker doesn't like this code
-
-        # coef = 1 / (input_layer.shape[1].value * input_layer.shape[2].value)
-        # batch_size, height, width, channels = input_layer.shape
-        # flattened_inputs = tf.reshape(
-        #     input_layer,
-        #     [batch_size, height * width, channels]
-        # )
-        # gram_matrix = tf.matmul(
-        #     flattened_inputs,
-        #     flattened_inputs,
-        #     transpose_a=True
-        # )
-        # return gram_matrix * coef
-
-        # Re write the code inspired of github alumni
-        batch_size, height, width, channels = input_layer.shape
-        flattened_inputs = tf.reshape(
-            input_layer,
-            [-1, channels]
-        )
-        gram_matrix = tf.matmul(
-            tf.transpose(flattened_inputs),
-            flattened_inputs,
-        ) / tf.cast(flattened_inputs.shape[0], tf.float32)
-        return tf.reshape(gram_matrix, [1, -1, channels])
-    
-        # flattened_inputs = tf.reshape(
-        #     input_layer,
-        #     [batch_size * height * width, channels]
-        # )
-        # gram_matrix = tf.matmul(
-        #     tf.transpose(flattened_inputs),
-        #     flattened_inputs,
-        # ) / tf.cast(batch_size * height * width, tf.float32)
-        # return tf.reshape(gram_matrix, [1, -1, channels])
+        if not (isinstance(input_layer, tf.Tensor) or isinstance(input_layer, tf.Variable)) or input_layer.shape.ndims != 4:
+            raise TypeError('input_layer must be a tensor of rank 4')
+        _, nh, nw, _ = input_layer.shape.dims
+        G = tf.linalg.einsum('bijc,bijd->bcd', input_layer, input_layer)
+        return G / tf.cast(nh * nw, tf.float32)
