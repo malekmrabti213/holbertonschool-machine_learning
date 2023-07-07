@@ -21,9 +21,12 @@ def grads(Y, Pij):
     :param Pij: The Pij for all ij affinities
     :return: The grads
     """
+    n, ndims = Y.shape
+
     Qij, numerator = Q_affinities(Y)
     PQij = Pij - Qij
 
-    dY = np.dot((PQij * numerator).T, Y) - np.sum(PQij * numerator[:, :, np.newaxis] * Y[np.newaxis, :, :], axis=1)
+    dY = np.dot(PQij * numerator.T, Y - np.tile(Y, (n, 1)))
 
     return -dY, Qij
+
