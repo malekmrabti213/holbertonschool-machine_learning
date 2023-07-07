@@ -10,41 +10,55 @@ cost = __import__('7-cost').cost
 
 def tsne(X, ndims=2, idims=50, perplexity=30.0, iterations=1000, lr=500):
     """
-    Compute the t-sne dimension reduction
-    :param X: Containing the dataset to be transformed by t-SNE
-    :param ndims: New dimensional representation of X
-    :param idims: Intermediate dimensional representation of X after PCA
-    :param perplexity: Is the perplexity
-    :param iterations: Is the number of iterations
-    :param lr: Is the learning rate
-    :return: Y containing the optimized low dimensional transformation of X
+    T-sne function
+    Args:
+        X: numpy.ndarray of shape (n, d) containing the dataset to be
+           transformed by t-SNE
+        ndims: the new dimensional representation of X
+        idims: the intermediate dimensional representation of X after
+                PCA
+        perplexity:  perplexity
+        iterations: number of iterations
+        lr: learning rate
+    Returns: Y, a numpy.ndarray of shape (n, ndim) containing the optimized
+             low dimensional
     """
-    momentum_coeff = 0.8
     n, d = X.shape
+    initial_momentum = 0.5
+    final_momentum = 0.8
 
-    pca_res = pca(X, idims)
-    P = P_affinities(pca_res, perplexity=perplexity)
-    P *= 4
+    # min_gain = 0.01
+    # gains = np.ones((n, ndims))
 
-    Y = []
-    y = np.random.randn(n, ndims)
-    Y.append(y)
-    Y.append(y)
+    X = pca(X, idims)
+    P = P_affinities(X, perplexity=perplexity)
+    Y = np.random.randn(n, ndims)
+    iY = Y
+    # early exaggeration
+    P = P * 4.
 
     for i in range(iterations):
-        dY, Q = grads(Y[-1], P)
-        y = Y[-1] - lr * dY + momentum_coeff * (Y[-1] - Y[-2])
-        y = y - np.tile(np.mean(y, 0), (n, 1))
-        Y.append(y)
+
+        dY, Q = grads(Y, P)
+        if i <= 20:
+            momentum = initial_momentum
+        else:
+            momentum = final_momentum
+
+        # delta-bar-delta algorithm for SDG optional
+        # gains = (gains + 0.2) * ((dY > 0.) != (iY > 0.)) + \
+        #        (gains * 0.8) * ((dY > 0.) == (iY > 0.))
+        # gains[gains < min_gain] = min_gain"""
+
+        iY = momentum * iY - lr * dY
+        Y = Y + iY
+        Y = Y - np.tile(np.mean(Y, 0), (n, 1))
 
         if (i + 1) % 100 == 0:
-            current_cost = cost(P, Q)
-            print("Cost at iteration {}: {}".format(i + 1, current_cost))
+            C = cost(P, Q)
+            print('Cost at iteration {}: {}'.format((i+1), C))
 
-        if i == 20:
-            momentum_coeff = 0.5
+        if i == 100:
+            P = P / 4.
 
-        if (i + 1) == 100:
-            P /= 4
-
-    return Y[-1]
+    return Y
