@@ -24,6 +24,6 @@ def grads(Y, Pij):
     Qij, numerator = Q_affinities(Y)
     PQij = Pij - Qij
 
-    dY = np.sum((PQij * numerator[:, :, np.newaxis]) * (Y[np.newaxis, :] - Y[:, np.newaxis]), axis=1)
+    dY = np.dot((PQij * numerator).T, Y) - np.sum(PQij * numerator[:, :, np.newaxis] * Y[np.newaxis, :, :], axis=1)
 
     return -dY, Qij
