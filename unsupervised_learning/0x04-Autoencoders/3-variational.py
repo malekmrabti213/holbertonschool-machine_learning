@@ -1,6 +1,6 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-# import tensorflow.keras as keras
+import tensorflow.keras as keras
 
 # def autoencoder(input_dims, hidden_layers, latent_dims):
 #     if hidden_layers is None:
@@ -35,11 +35,6 @@
 #     auto.compile(optimizer='adam', loss=total_loss)
 
 #     return encoder, decoder, auto
-#!/usr/bin/env python3
-""" Variational Autoencoder """
-
-import tensorflow.keras as keras
-
 
 def autoencoder(input_dims, hidden_layers, latent_dims):
     """ Function that creates a variational autoencoder
