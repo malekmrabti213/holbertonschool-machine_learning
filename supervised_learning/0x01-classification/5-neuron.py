@@ -38,7 +38,9 @@ class Neuron():
     def cost(self, Y, A):
         """Cost Function"""
         m = Y.shape[1]
-        return -1 / m * np.sum(Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        loss = - (Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A))
+        cost = np.sum(loss) / m
+        return cost
 
     def evaluate(self, X, Y):
         """Evaluate"""
