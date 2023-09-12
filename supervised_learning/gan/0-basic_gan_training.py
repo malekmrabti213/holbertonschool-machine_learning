@@ -78,3 +78,4 @@ class Simple_GAN(keras.Model):
         self.generator.optimizer.apply_gradients(
             zip(gen_gradient, self.generator.trainable_variables)
         )
+
