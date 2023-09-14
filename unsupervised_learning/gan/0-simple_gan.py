@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
 
 def output():
-    print("simplegan")
+    print("simple gan")
