@@ -4,8 +4,6 @@ import tensorflow as tf
 from tensorflow import keras
 
 def convolutional_GenDiscr() :
-  
-   # chosed_N=1
 
 
     def get_generator() :
