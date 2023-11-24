@@ -5,7 +5,7 @@ import numpy as np
 
 def pca(X, var=0.95):
     """calculates the PCA loadings
-    
+    z
     """
     _, s, vh = np.linalg.svd(X)
     total_var = np.cumsum(s) / np.sum(s)
