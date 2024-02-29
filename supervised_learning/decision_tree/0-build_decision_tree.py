@@ -51,10 +51,10 @@ class Leaf(Node):
         return self.depth
 
 
-class Decision_Tree:
+class DecisionTree:
     """ 
     """
-    
+
     def __init__(self, max_depth=10, min_pop=1, seed=0,
                  split_criterion="random", root=None):
         """
@@ -75,3 +75,4 @@ class Decision_Tree:
         """
         """
         return self.root.max_depth_below()
+
