@@ -45,7 +45,7 @@ class Leaf(Node):
         return self.depth
 
 
-class DecisionTree:
+class Decision_Tree:
     """
     """
     def __init__(self, max_depth=10, min_pop=1, seed=0,
