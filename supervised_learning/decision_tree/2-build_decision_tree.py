@@ -70,7 +70,7 @@ class Node:
         if self.is_root:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"root [feature={self.feature}, threshold={self.threshold}]\n" \
+            return f"root [feature={self.feature}, threshold={self.threshold}]\n"\
                    f"{a}{b}"
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
