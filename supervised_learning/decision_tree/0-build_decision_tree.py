@@ -75,4 +75,3 @@ class Decision_Tree:
         """
         """
         return self.root.max_depth_below()
-
