@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-
+"""
+Task 1 - Decision Tree
+"""
 import numpy as np
 
 
