@@ -51,7 +51,7 @@ class Leaf(Node):
         return self.depth
 
 
-class DecisionTree:
+class Decision_Tree:
     """ 
     """
 
