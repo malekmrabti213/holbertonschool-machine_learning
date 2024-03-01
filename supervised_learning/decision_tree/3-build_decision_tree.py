@@ -84,7 +84,9 @@ class Node:
     def get_leaves_below(self):
         """
         """
-        return self.left_child.get_leaves_below() + self.right_child.get_leaves_below()
+        sleftc=self.left_child.get_leaves_below()
+        srightc=self.right_child.get_leaves_below()
+        return sleftc + srightc
 
 
 class Leaf(Node):
