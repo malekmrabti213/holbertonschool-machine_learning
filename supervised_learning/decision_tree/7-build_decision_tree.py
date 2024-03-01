@@ -287,21 +287,25 @@ class Decision_Tree():
     def accuracy(self, test_explanatory, test_target):
         """
         """
-        return np.sum(np.equal(self.predict(test_explanatory), test_target)) / test_target.size
+        return np.sum(np.equal(self.predict(test_explanatory),
+                               test_target)) / test_target.size
 
     def fit_node(self, node):
         """
         """
         node.feature, node.threshold = self.split_criterion(node)
-        larger_crit = np.greater(self.explanatory[:, node.feature], node.threshold)
+        larger_crit = np.greater(self.explanatory[:, node.feature],
+                                 node.threshold)
 
         left_population = np.logical_and(node.sub_population, larger_crit)
-        right_population = np.logical_and(node.sub_population, np.logical_not(larger_crit))
+        right_population = np.logical_and(node.sub_population,
+                                          np.logical_not(larger_crit))
 
         # Is left node a leaf?
         is_left_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
                                        np.sum(left_population) <= self.min_pop,
-                                       np.unique(self.target[left_population]).size == 1]))
+                                       np.unique(self.target[left_population])
+                                       .size == 1]))
 
         if is_left_leaf:
             node.left_child = self.get_leaf_child(node, left_population)
@@ -312,7 +316,8 @@ class Decision_Tree():
         # Is right node a leaf?
         is_right_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
                                         np.sum(right_population) <= self.min_pop,
-                                        np.unique(self.target[right_population]).size == 1]))
+                                        np.unique(self.target[right_population])
+                                        .size == 1]))
 
         if is_right_leaf:
             node.right_child = self.get_leaf_child(node, right_population)
