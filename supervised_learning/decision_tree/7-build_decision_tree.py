@@ -315,9 +315,11 @@ class Decision_Tree():
 
         # Is right node a leaf?
         is_right_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
-                                        np.sum(right_population) <= self.min_pop,
-                                        np.unique(self.target[right_population])
-                                        .size == 1]))
+                                        np.sum(right_population) 
+                                        <= self.min_pop,
+                                        np.unique(
+                                            self.target[right_population]
+                                            ).size == 1]))
 
         if is_right_leaf:
             node.right_child = self.get_leaf_child(node, right_population)
