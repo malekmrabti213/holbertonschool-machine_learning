@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
-
+"""
+Task 11 - Random Forest
+"""
 import numpy as np
 
 Isolation_Random_Tree = __import__('10-isolation_tree').Isolation_Random_Tree
 
+
 class Isolation_Random_Forest() :
+    """
+    """
+
     def __init__(self, n_trees=100, max_depth=10, min_pop=1, seed=0) :
+        """
+        """
         self.numpy_predicts  = []
         self.target          = None
         self.numpy_preds     = None
@@ -14,10 +22,14 @@ class Isolation_Random_Forest() :
         self.seed            = seed
         
     def predict(self, explanatory):
+        """
+        """
         predictions = np.array([f(explanatory) for f in self.numpy_preds])
         return predictions.mean(axis=0)
             
     def fit(self,explanatory,n_trees=100,verbose=0) :
+        """
+        """
         self.explanatory = explanatory
         self.numpy_preds = []
         depths           = [] 
@@ -37,6 +49,8 @@ class Isolation_Random_Forest() :
     - Mean number of leaves          : { np.array(leaves).mean()      }""")
             
     def suspects(self,explanatory,n_suspects) :
+        """
+        """
         depths=self.predict(explanatory)
         U=(np.vstack([explanatory.T,np.array([depths])])).T
         U=U[U[:, -1].argsort()]
