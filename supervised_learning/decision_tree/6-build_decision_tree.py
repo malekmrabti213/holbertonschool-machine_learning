@@ -136,7 +136,7 @@ class Node:
             np.array([is_large_enough(x), is_small_enough(x)]),
             axis=0
         )
-    
+
     def pred(self, x):
         """
         """
@@ -144,6 +144,7 @@ class Node:
             return self.left_child.pred(x)
         else:
             return self.right_child.pred(x)
+
 
 class Leaf(Node):
     """
@@ -186,6 +187,7 @@ class Leaf(Node):
         """
         """
         return self.value
+
 
 class Decision_Tree():
     """
@@ -247,4 +249,3 @@ class Decision_Tree():
         vals = np.array([leaf.value for leaf in leaves])
         self.predict = lambda x: np.array(vals[np.argmax(np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
 
-# pycodestyle: end-ignore
