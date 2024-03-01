@@ -32,7 +32,7 @@ class Node:
             left_depth = self.left_child.max_depth_below()
             right_depth = self.right_child.max_depth_below()
             return max(left_depth, right_depth)
-        
+
     def count_nodes_below(self, only_leaves=False):
         """
         """
@@ -44,24 +44,26 @@ class Node:
         if self.right_child:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
-    
-    def left_child_add_prefix(self,text):
+
+    def left_child_add_prefix(self, text):
         """
         """
-        lines=text.split("\n")
-        new_text="    +--"+lines[0]+"\n"
-        for x in lines[1:] :
-            new_text+=("    |  "+x)+"\n"
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += ("    |  " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
-    def right_child_add_prefix(self,text):
+    def right_child_add_prefix(self, text):
+        """
+        """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
     def __str__(self):
         """
@@ -72,17 +74,17 @@ class Node:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
             return f"root [feature={feature}, threshold={threshold}]\n" \
-                   f"{a}{b}"        
+                   f"{a}{b}"
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"-> node [feature={feature}, threshold={threshold}]\n"\
+            return f"-> node [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
-    
+
     def get_leaves_below(self):
         """
         """
-        return self.left_child.get_leaves_below()+self.right_child.get_leaves_below()
+        return self.left_child.get_leaves_below() + self.right_child.get_leaves_below()
 
 
 class Leaf(Node):
@@ -101,24 +103,24 @@ class Leaf(Node):
         """
         """
         return self.depth
-    
+
     def count_nodes_below(self, only_leaves=False):
         """
         """
         return 1
-    
+
     def __str__(self):
         """
         """
-        return (f"-> leaf [value={self.value}] ")
-    
-    def get_leaves_below(self) :
+        return f"-> leaf [value={self.value}] "
+
+    def get_leaves_below(self):
         """
         """
         return [self]
 
 
-class Decision_Tree():
+class Decision_Tree:
     """
     """
 
@@ -142,17 +144,17 @@ class Decision_Tree():
         """
         """
         return self.root.max_depth_below()
-    
+
     def count_nodes(self, only_leaves=False):
         """
         """
         return self.root.count_nodes_below(only_leaves=only_leaves)
-    
+
     def __str__(self):
         """
         """
         return self.root.__str__()
-    
+
     def get_leaves(self):
         """
         """
