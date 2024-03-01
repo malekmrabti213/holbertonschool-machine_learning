@@ -112,21 +112,16 @@ class Node:
         for child in [self.left_child, self.right_child]:
             child.update_bounds_below()
 
-def update_indicator(self):
-    """
-    """
-    def is_large_enough(x):
+    def update_indicator(self):
         """
         """
-        return np.all(np.array([np.greater(x[:, key], self.lower[key]) for key in list(self.lower.keys())]), axis=0)
+        def is_large_enough(x):
+            return np.all(np.array([np.greater(x[:, key], self.lower[key]) for key in list(self.lower.keys())]), axis=0)
         
-    def is_small_enough(x):
-        """
-        """
-        return np.all(np.array([np.less_equal(x[:, key], self.upper[key]) for key in list(self.upper.keys())]), axis=0)
+        def is_small_enough(x):
+            return np.all(np.array([np.less_equal(x[:, key], self.upper[key]) for key in list(self.upper.keys())]), axis=0)
         
-    self.indicator = lambda x: np.all(np.array([is_large_enough(x), is_small_enough(x)]), axis=0)
-
+        self.indicator = lambda x: np.all(np.array([is_large_enough(x), is_small_enough(x)]), axis=0)
 
 
 class Leaf(Node):
