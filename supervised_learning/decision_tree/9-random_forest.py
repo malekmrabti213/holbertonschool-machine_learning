@@ -3,7 +3,9 @@
 Task 9 - Random Forest
 """
 import numpy as np
-from 8-build_decision_tree import Decision_Tree
+
+Decision_Tree = __import__('8-build_decision_tree').Decision_Tree
+
 
 class Random_Forest:
     """
