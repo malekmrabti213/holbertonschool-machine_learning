@@ -248,7 +248,8 @@ class Decision_Tree():
         for leaf in leaves:
             leaf.update_indicator()
         vals = np.array([leaf.value for leaf in leaves])
-        self.predict = lambda x: np.array(vals[np.argmax(np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
+        self.predict = lambda x: np.array(vals[np.argmax(
+            np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
 
     def np_extrema(self, arr):
         """
