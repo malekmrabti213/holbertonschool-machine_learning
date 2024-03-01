@@ -9,7 +9,7 @@ import numpy as np
 class Node:
     """
     """
-    
+
     def __init__(self, feature=None, threshold=None, left_child=None,
                  right_child=None, is_root=False, depth=0):
         """
@@ -32,7 +32,7 @@ class Node:
             left_depth = self.left_child.max_depth_below()
             right_depth = self.right_child.max_depth_below()
             return max(left_depth, right_depth)
-        
+
     def count_nodes_below(self, only_leaves=False):
         """
         """
@@ -44,7 +44,7 @@ class Node:
         if self.right_child:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
-    
+
     def left_child_add_prefix(self, text):
         """
         """
@@ -163,32 +163,32 @@ class Leaf(Node):
         """
         """
         return self.depth
-    
+
     def count_nodes_below(self, only_leaves=False):
         """
         """
         return 1
-    
+
     def __str__(self):
         """
         """
         return f"-> leaf [value={self.value}] "
-    
+
     def get_leaves_below(self):
         """
         """
         return [self]
-    
+
     def update_bounds_below(self):
         """
         """
-        pass    
-    
+        pass
+
     def pred(self, x):
         """
         """
         return self.value
-    
+
 
 class Decision_Tree():
     """
@@ -249,12 +249,12 @@ class Decision_Tree():
             leaf.update_indicator()
         vals = np.array([leaf.value for leaf in leaves])
         self.predict = lambda x: np.array(vals[np.argmax(np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
-       
+
     def np_extrema(self, arr):
         """
         """
         return np.min(arr), np.max(arr)
-    
+
     def random_split_criterion(self, node):
         """
         """
@@ -266,7 +266,7 @@ class Decision_Tree():
         x = self.rng.uniform()
         threshold = (1 - x) * feature_min + x * feature_max
         return feature, threshold
-    
+
     def get_leaf_child(self, node, sub_population):
         """
         """
@@ -288,7 +288,7 @@ class Decision_Tree():
         """
         """
         return np.sum(np.equal(self.predict(test_explanatory), test_target)) / test_target.size
-    
+
     def fit_node(self, node):
         """
         """
@@ -339,4 +339,4 @@ class Decision_Tree():
     - Depth                     : { self.depth()       }
     - Number of nodes           : { self.count_nodes() }
     - Number of leaves          : { self.count_nodes(only_leaves=True) }
-    - Accuracy on training data : { self.accuracy(self.explanatory, self.target)    }""")    
+    - Accuracy on training data : { self.accuracy(self.explanatory, self.target)    }""")
