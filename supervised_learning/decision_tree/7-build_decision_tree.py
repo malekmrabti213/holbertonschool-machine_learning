@@ -280,7 +280,7 @@ class Decision_Tree():
 
     def get_node_child(self, node, sub_population):
         """
-        """    
+        """
         n = Node()
         n.depth = node.depth + 1
         n.sub_population = sub_population
