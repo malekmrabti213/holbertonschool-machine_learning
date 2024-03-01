@@ -78,7 +78,7 @@ class Node:
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"-> node [feature={feature}, threshold={threshold}]\n"\
+            return f"-> node [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
 
     def get_leaves_below(self):
@@ -115,8 +115,6 @@ class Node:
     def update_indicator(self):
         """
         """
-        # is_large_enough = lambda x: np.all(np.array([np.greater(x[:, key], self.lower[key]) for key in list(self.lower.keys())]), axis=0)
-        # is_small_enough = lambda x: np.all(np.array([np.less_equal(x[:, key], self.upper[key]) for key in list(self.upper.keys())]), axis=0)
         def is_large_enough(x):
             return np.all(np.array([np.greater(x[:, key], self.lower[key]) for key in list(self.lower.keys())]), axis=0)
         
