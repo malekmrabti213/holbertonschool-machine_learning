@@ -273,10 +273,10 @@ class Decision_Tree():
         """
         """
         x, y = np.unique(self.target[sub_population], return_counts=True)
-        l = Leaf(x[np.argmax(y)])
-        l.depth = node.depth + 1
-        l.subpopulation = sub_population
-        return l
+        leaf_child = Leaf(x[np.argmax(y)])
+        leaf_child.depth = node.depth + 1
+        leaf_child.subpopulation = sub_population
+        return leaf_child
 
     def get_node_child(self, node, sub_population):
         """
