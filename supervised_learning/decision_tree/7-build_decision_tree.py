@@ -23,7 +23,7 @@ class Node:
         self.sub_population = None
         self.depth = depth
 
-    def max_depth_below(self) :
+    def max_depth_below(self):
         """
         """
         if self.is_leaf:
@@ -45,17 +45,17 @@ class Node:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
     
-    def left_child_add_prefix(self,text):
+    def left_child_add_prefix(self, text):
         """
         """
-        lines=text.split("\n")
-        new_text="    +--"+lines[0]+"\n"
-        for x in lines[1:] :
-            new_text+=("    |  "+x)+"\n"
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += ("    |  " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
-    def right_child_add_prefix(self,text):
+    def right_child_add_prefix(self, text):
         """
         """
         lines = text.split("\n")
@@ -63,7 +63,7 @@ class Node:
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
     def __str__(self):
         """
@@ -138,12 +138,12 @@ class Node:
             axis=0
         )
 
-    def pred(self,x) :
+    def pred(self, x):
         """
         """
-        if x[self.feature]>self.threshold :
+        if x[self.feature] > self.threshold:
             return self.left_child.pred(x)
-        else :
+        else:
             return self.right_child.pred(x)
 
 
@@ -159,12 +159,12 @@ class Leaf(Node):
         self.is_leaf = True
         self.depth = depth
 
-    def max_depth_below(self) :
+    def max_depth_below(self):
         """
         """
         return self.depth
     
-    def count_nodes_below(self, only_leaves=False) :
+    def count_nodes_below(self, only_leaves=False):
         """
         """
         return 1
@@ -172,19 +172,19 @@ class Leaf(Node):
     def __str__(self):
         """
         """
-        return (f"-> leaf [value={self.value}] ")
+        return f"-> leaf [value={self.value}] "
     
-    def get_leaves_below(self) :
+    def get_leaves_below(self):
         """
         """
         return [self]
     
-    def update_bounds_below(self) :
+    def update_bounds_below(self):
         """
         """
         pass    
     
-    def pred(self,x) :
+    def pred(self, x):
         """
         """
         return self.value
@@ -210,135 +210,133 @@ class Decision_Tree():
         self.split_criterion = split_criterion
         self.predict = None
 
-    def depth(self) :
+    def depth(self):
         """
         """
         return self.root.max_depth_below()
-    
-    def count_nodes(self, only_leaves=False) :
+
+    def count_nodes(self, only_leaves=False):
         """
         """
         return self.root.count_nodes_below(only_leaves=only_leaves)
-    
+
     def __str__(self):
         """
         """
         return self.root.__str__()
-    
-    def get_leaves(self) :
+
+    def get_leaves(self):
         """
         """
         return self.root.get_leaves_below()
-    
-    def update_bounds(self) :
-        """
-        """
-        self.root.update_bounds_below() 
 
-    def pred(self,x) :
-            """
-            """
-            return self.root.pred(x)
-    def update_predict(self) :
+    def update_bounds(self):
+        """
+        """
+        self.root.update_bounds_below()
+
+    def pred(self, x):
+        """
+        """
+        return self.root.pred(x)
+
+    def update_predict(self):
         """
         """
         self.update_bounds()
-        leaves=self.get_leaves()
-        for leaf in leaves :
+        leaves = self.get_leaves()
+        for leaf in leaves:
             leaf.update_indicator()
-        #self.clear_bounds()
         vals = np.array([leaf.value for leaf in leaves])
-        self.predict = lambda x: np.array(vals[np.argmax(
-            np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
+        self.predict = lambda x: np.array(vals[np.argmax(np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
        
-    def np_extrema(self,arr):
+    def np_extrema(self, arr):
         """
         """
         return np.min(arr), np.max(arr)
     
-    def random_split_criterion(self,node) :
+    def random_split_criterion(self, node):
         """
         """
-        diff=0
-        while diff==0 :
-            feature=self.rng.integers(0,self.explanatory.shape[1])
-            feature_min,feature_max=self.np_extrema(self.explanatory[:,feature][node.sub_population])
-            diff=feature_max-feature_min
-        x=self.rng.uniform()
-        threshold= (1-x)*feature_min + x*feature_max
-        return feature,threshold
+        diff = 0
+        while diff == 0:
+            feature = self.rng.integers(0, self.explanatory.shape[1])
+            feature_min, feature_max = self.np_extrema(self.explanatory[:, feature][node.sub_population])
+            diff = feature_max - feature_min
+        x = self.rng.uniform()
+        threshold = (1 - x) * feature_min + x * feature_max
+        return feature, threshold
     
-    def get_leaf_child(self, node, sub_population) :
+    def get_leaf_child(self, node, sub_population):
         """
         """
-        x,y = np.unique(self.target[sub_population],return_counts=True)
-        l= Leaf( x[np.argmax(y)] )
-        l.depth=node.depth+1
-        l.subpopulation=sub_population
+        x, y = np.unique(self.target[sub_population], return_counts=True)
+        l = Leaf(x[np.argmax(y)])
+        l.depth = node.depth + 1
+        l.subpopulation = sub_population
         return l
 
-    def get_node_child(self, node, sub_population) :
-            """
-            """        
-            n= Node()
-            n.depth=node.depth+1
-            n.sub_population=sub_population
-            return n
+    def get_node_child(self, node, sub_population):
+        """
+        """        
+        n = Node()
+        n.depth = node.depth + 1
+        n.sub_population = sub_population
+        return n
 
-    def accuracy(self, test_explanatory , test_target) :
-            """
-            """
-            return np.sum(np.equal(self.predict(test_explanatory),
-                                   test_target))/test_target.size
-    def fit_node(self,node) :
+    def accuracy(self, test_explanatory, test_target):
+        """
+        """
+        return np.sum(np.equal(self.predict(test_explanatory), test_target)) / test_target.size
+    
+    def fit_node(self, node):
         """
         """
         node.feature, node.threshold = self.split_criterion(node)
-        larger_crit=np.greater(self.explanatory[:,node.feature],node.threshold)
+        larger_crit = np.greater(self.explanatory[:, node.feature], node.threshold)
 
         left_population = np.logical_and(node.sub_population, larger_crit)
         right_population = np.logical_and(node.sub_population, np.logical_not(larger_crit))
 
-        # Is left node a leaf ?
-        is_left_leaf = np.any(np.array([node.depth+1 == self.max_depth,
-                                   np.sum(left_population)<=self.min_pop,
-                                   np.unique(self.target[left_population]).size==1]))
+        # Is left node a leaf?
+        is_left_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
+                                       np.sum(left_population) <= self.min_pop,
+                                       np.unique(self.target[left_population]).size == 1]))
 
-        if is_left_leaf :
-            node.left_child = self.get_leaf_child(node,left_population)
-        else :
-            node.left_child = self.get_node_child(node,left_population)
+        if is_left_leaf:
+            node.left_child = self.get_leaf_child(node, left_population)
+        else:
+            node.left_child = self.get_node_child(node, left_population)
             self.fit_node(node.left_child)
 
-        # Is right node a leaf ?
-        is_right_leaf = np.any(np.array([node.depth+1 == self.max_depth,
-                                   np.sum(right_population)<=self.min_pop,
-                                   np.unique(self.target[right_population]).size==1]))
+        # Is right node a leaf?
+        is_right_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
+                                        np.sum(right_population) <= self.min_pop,
+                                        np.unique(self.target[right_population]).size == 1]))
 
-        if is_right_leaf :
-            node.right_child = self.get_leaf_child(node,right_population)
-        else :
-            node.right_child = self.get_node_child(node,right_population)
+        if is_right_leaf:
+            node.right_child = self.get_leaf_child(node, right_population)
+        else:
+            node.right_child = self.get_node_child(node, right_population)
             self.fit_node(node.right_child)
 
-
-    def fit(self,explanatory, target,verbose=0) :
+    def fit(self, explanatory, target, verbose=0):
         """
         """
-        if self.split_criterion == "random" :
+        if self.split_criterion == "random":
             self.split_criterion = self.random_split_criterion
-        else :
+        else:
             self.split_criterion = self.Gini_split_criterion
         self.explanatory = explanatory
-        self.target      = target
-        self.root.sub_population=np.ones_like(self.target,dtype='bool')
+        self.target = target
+        self.root.sub_population = np.ones_like(self.target, dtype='bool')
 
         self.fit_node(self.root)
         self.update_predict()
 
-        if verbose==1 :
+        if verbose == 1:
             print(f"""  Training finished.
     - Depth                     : { self.depth()       }
     - Number of nodes           : { self.count_nodes() }
     - Number of leaves          : { self.count_nodes(only_leaves=True) }
-    - Accuracy on training data : { self.accuracy(self.explanatory,self.target)    }""")    
+    - Accuracy on training data : { self.accuracy(self.explanatory, self.target)    }""")    
