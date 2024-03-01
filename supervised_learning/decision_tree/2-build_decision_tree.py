@@ -80,6 +80,7 @@ class Node:
             return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
+
 class Leaf(Node):
     """
     """
