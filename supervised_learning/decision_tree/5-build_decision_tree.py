@@ -119,7 +119,7 @@ class Node:
             """
             """
             return np.all(
-                np.array([np.greater(x[:, key], self.lower[key])
+                np.array([np.greater(x[:, key], self.lower[key]) \
                         for key in self.lower]),
                 axis=0
             )
@@ -128,7 +128,7 @@ class Node:
             """
             """
             return np.all(
-                np.array([np.less_equal(x[:, key], self.upper[key])
+                np.array([np.less_equal(x[:, key], self.upper[key]) \
                         for key in self.upper]),
                 axis=0
             )
