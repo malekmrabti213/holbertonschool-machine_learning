@@ -82,11 +82,11 @@ class Node:
 
 class Leaf(Node):
     """class Leaf"""
-    
+
     def __init__(self, value, depth=None):
-        """
-        """
         super().__init__()
+        """
+        """
         self.value = value
         self.is_leaf = True
         self.depth = depth
