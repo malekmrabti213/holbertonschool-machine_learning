@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+Task 2 - Decision Tree
 """
 
 import numpy as np
@@ -82,8 +83,7 @@ class Node:
 
 
 class Leaf(Node):
-    """
-    """
+    """ Leaf """
 
     def __init__(self, value, depth=None):
         super().__init__()
