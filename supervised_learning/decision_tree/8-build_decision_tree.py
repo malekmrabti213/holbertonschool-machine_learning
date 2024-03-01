@@ -372,11 +372,11 @@ class Decision_Tree():
         left_classes = np.logical_and(classes_ind[:, :, None],
                                       filter_left[:, None, :])
         Gini_left = 1 - np.sum(np.square(np.sum(left_classes, axis=0)),
-                              axis=0) / (np.sum(filter_left, axis=0)) / n
+                               axis=0) / (np.sum(filter_left, axis=0)) / n
         right_classes = np.logical_and(classes_ind[:, :, None],
-                                        filter_right[:, None, :])
+                                       filter_right[:, None, :])
         Gini_right = 1 - np.sum(np.square(np.sum(right_classes, axis=0)),
-                               axis=0) / (np.sum(filter_right, axis=0)) / n
+                                axis=0) / (np.sum(filter_right, axis=0)) / n
         Gini_sum = Gini_left + Gini_right
         Gini_argmin = np.argmin(Gini_sum)
         return np.array([thresholds[Gini_argmin], Gini_sum[Gini_argmin]])
