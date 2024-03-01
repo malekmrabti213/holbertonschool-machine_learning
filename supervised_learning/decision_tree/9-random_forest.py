@@ -29,7 +29,8 @@ class Random_Forest:
         for tree_predict in self.numpy_preds:
             tree_predictions = tree_predict(explanatory)
             predictions.append(tree_predictions)
-        mode_predictions = np.apply_along_axis(lambda x: np.bincount(x).argmax(), axis=0, arr=np.array(predictions))
+        mode_predictions = np.apply_along_axis(lambda x: np.bincount(x).argmax(),
+                                               axis=0, arr=np.array(predictions))
         return mode_predictions
 
     def fit(self, explanatory, target, n_trees=100, verbose=0):
@@ -57,9 +58,11 @@ class Random_Forest:
     - Mean number of nodes           : {np.array(nodes).mean()}
     - Mean number of leaves          : {np.array(leaves).mean()}
     - Mean accuracy on training data : {np.array(accuracies).mean()}
-    - Accuracy of the forest on td   : {self.accuracy(self.explanatory, self.target)}""")
+    - Accuracy of the forest on td   : {self.accuracy(self.explanatory,
+                                                      self.target)}""")
 
     def accuracy(self, test_explanatory, test_target):
         """
         """
-        return np.sum(np.equal(self.predict(test_explanatory), test_target)) / test_target.size
+        return np.sum(np.equal(self.predict(test_explanatory),
+                               test_target)) / test_target.size
