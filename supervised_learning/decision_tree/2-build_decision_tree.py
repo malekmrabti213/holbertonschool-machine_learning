@@ -80,8 +80,9 @@ class Node:
             return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
-class Leaf(Node): 
-    """class Leaf"""
+class Leaf(Node):
+    """
+    """
 
     def __init__(self, value, depth=None):
         super().__init__()
