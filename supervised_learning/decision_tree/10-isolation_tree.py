@@ -100,15 +100,16 @@ class Isolation_Random_Tree:
         """
         node.feature, node.threshold = self.random_split_criterion(node)
         larger_crit = np.greater(self.explanatory[:, node.feature],
-                                node.threshold)
+                                 node.threshold)
 
         left_population = np.logical_and(node.sub_population, larger_crit)
         right_population = np.logical_and(node.sub_population,
-                                           np.logical_not(larger_crit))
+                                          np.logical_not(larger_crit))
 
         # Is left node a leaf ?
         is_left_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
-                                        np.sum(left_population) <= self.min_pop]))
+                                        np.sum(left_population)
+                                        <= self.min_pop]))
 
         if is_left_leaf:
             node.left_child = self.get_leaf_child(node, left_population)
@@ -118,7 +119,8 @@ class Isolation_Random_Tree:
 
         # Is right node a leaf ?
         is_right_leaf = np.any(np.array([node.depth + 1 == self.max_depth,
-                                         np.sum(right_population) <= self.min_pop]))
+                                         np.sum(right_population)
+                                         <= self.min_pop]))
 
         if is_right_leaf:
             node.right_child = self.get_leaf_child(node, right_population)
