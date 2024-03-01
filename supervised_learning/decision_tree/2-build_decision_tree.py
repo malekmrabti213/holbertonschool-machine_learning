@@ -67,17 +67,17 @@ class Node:
     def __str__(self):
         """
         """
+        feature = self.feature
+        threshold = self.threshold
         if self.is_root:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            fe = self.feature
-            td = self.threshold
-            return f"root [feature={fe}, threshold={td}]\n" \
+            return f"root [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"-> node [feature={fe}, threshold={td}]\n"\
+            return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
 class Leaf(Node):
