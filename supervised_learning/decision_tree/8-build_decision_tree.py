@@ -23,7 +23,7 @@ class Node:
         self.sub_population = None
         self.depth = depth
 
-    def max_depth_below(self) :
+    def max_depth_below(self):
         """
         """
         if self.is_leaf:
@@ -32,7 +32,7 @@ class Node:
             left_depth = self.left_child.max_depth_below()
             right_depth = self.right_child.max_depth_below()
             return max(left_depth, right_depth)
-        
+
     def count_nodes_below(self, only_leaves=False):
         """
         """
@@ -44,18 +44,18 @@ class Node:
         if self.right_child:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
-    
-    def left_child_add_prefix(self,text):
+
+    def left_child_add_prefix(self, text):
         """
         """
-        lines=text.split("\n")
-        new_text="    +--"+lines[0]+"\n"
-        for x in lines[1:] :
-            new_text+=("    |  "+x)+"\n"
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += ("    |  " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
-    def right_child_add_prefix(self,text):
+    def right_child_add_prefix(self, text):
         """
         """
         lines = text.split("\n")
@@ -63,7 +63,7 @@ class Node:
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
     def __str__(self):
         """
@@ -137,13 +137,13 @@ class Node:
             np.array([is_large_enough(x), is_small_enough(x)]),
             axis=0
         )
-   
-    def pred(self,x) :
+
+    def pred(self, x):
         """
         """
-        if x[self.feature]>self.threshold :
+        if x[self.feature] > self.threshold:
             return self.left_child.pred(x)
-        else :
+        else:
             return self.right_child.pred(x)
 
 
@@ -152,39 +152,39 @@ class Leaf(Node):
     """
 
     def __init__(self, value, depth=None):
+        """
+        """
         super().__init__()
-        """
-        """
         self.value = value
         self.is_leaf = True
         self.depth = depth
 
-    def max_depth_below(self) :
+    def max_depth_below(self):
         """
         """
         return self.depth
-    
-    def count_nodes_below(self, only_leaves=False) :
+
+    def count_nodes_below(self, only_leaves=False):
         """
         """
         return 1
-    
+
     def __str__(self):
         """
         """
         return (f"-> leaf [value={self.value}] ")
-    
-    def get_leaves_below(self) :
+
+    def get_leaves_below(self):
         """
         """
         return [self]
-    
-    def update_bounds_below(self) :
+
+    def update_bounds_below(self):
         """
         """
-        pass    
-    
-    def pred(self,x) :
+        pass
+
+    def pred(self, x):
         """
         """
         return self.value
@@ -210,36 +210,36 @@ class Decision_Tree():
         self.split_criterion = split_criterion
         self.predict = None
 
-    def depth(self) :
+    def depth(self):
         """
         """
         return self.root.max_depth_below()
-    
-    def count_nodes(self, only_leaves=False) :
+
+    def count_nodes(self, only_leaves=False):
         """
         """
         return self.root.count_nodes_below(only_leaves=only_leaves)
-    
+
     def __str__(self):
         """
         """
         return self.root.__str__()
-    
-    def get_leaves(self) :
+
+    def get_leaves(self):
         """
         """
         return self.root.get_leaves_below()
-    
-    def update_bounds(self) :
-        """
-        """
-        self.root.update_bounds_below() 
 
-    def pred(self,x) :
+    def update_bounds(self):
+        """
+        """
+        self.root.update_bounds_below()
+
+    def pred(self, x):
         """
         """
         return self.root.pred(x)
-    
+
     def update_predict(self):
         """
         """
@@ -250,46 +250,46 @@ class Decision_Tree():
         vals = np.array([leaf.value for leaf in leaves])
         self.predict = lambda x: np.array(vals[np.argmax(
             np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
-       
-    def np_extrema(self,arr):
+
+    def np_extrema(self, arr):
         """
         """
         return np.min(arr), np.max(arr)
-    
-    def random_split_criterion(self,node) :
+
+    def random_split_criterion(self, node):
         """
         """
-        diff=0
-        while diff==0 :
-            feature=self.rng.integers(0,self.explanatory.shape[1])
-            feature_min,feature_max=self.np_extrema(
-                self.explanatory[:,feature][node.sub_population])
-            diff=feature_max-feature_min
-        x=self.rng.uniform()
-        threshold= (1-x)*feature_min + x*feature_max
-        return feature,threshold
-    
-    def get_leaf_child(self, node, sub_population) :
-        x,y = np.unique(self.target[sub_population],return_counts=True)
-        l= Leaf( x[np.argmax(y)] )
-        l.depth=node.depth+1
-        l.subpopulation=sub_population
+        diff = 0
+        while diff == 0:
+            feature = self.rng.integers(0, self.explanatory.shape[1])
+            feature_min, feature_max = self.np_extrema(
+                self.explanatory[:, feature][node.sub_population])
+            diff = feature_max - feature_min
+        x = self.rng.uniform()
+        threshold = (1 - x) * feature_min + x * feature_max
+        return feature, threshold
+
+    def get_leaf_child(self, node, sub_population):
+        x, y = np.unique(self.target[sub_population], return_counts=True)
+        l = Leaf(x[np.argmax(y)])
+        l.depth = node.depth + 1
+        l.subpopulation = sub_population
         return l
 
-    def get_node_child(self, node, sub_population) : 
-            """
-            """       
-            n= Node()
-            n.depth=node.depth+1
-            n.sub_population=sub_population
-            return n
+    def get_node_child(self, node, sub_population):
+        """
+        """
+        n = Node()
+        n.depth = node.depth + 1
+        n.sub_population = sub_population
+        return n
 
-    def accuracy(self, test_explanatory , test_target) :
-            """
-            """
-            return np.sum(np.equal(self.predict(test_explanatory),
-                                   test_target))/test_target.size
-    
+    def accuracy(self, test_explanatory, test_target):
+        """
+        """
+        return np.sum(np.equal(self.predict(test_explanatory),
+                               test_target)) / test_target.size
+
     def fit_node(self, node):
         """
         """
@@ -349,39 +349,39 @@ class Decision_Tree():
     - Accuracy on training data : { self.accuracy(self.explanatory,
                                                   self.target)}""")
 
-    def possible_thresholds(self,node,feature) :
+    def possible_thresholds(self, node, feature):
         """
         """
-        values = np.unique((self.explanatory[:,feature])[node.sub_population])
-        return (values[1:]+values[:-1])/2
+        values = np.unique((self.explanatory[:, feature])[node.sub_population])
+        return (values[1:] + values[:-1]) / 2
 
-    def Gini_split_criterion_one_feature(self,node,feature) :
+    def Gini_split_criterion_one_feature(self, node, feature):
         """
         """
-        thresholds         = self.possible_thresholds(node,feature)
-        indices            = np.arange(0,self.explanatory.shape[0])[node.sub_population]
-        n                  = indices.size
-        feat_vals          = (self.explanatory[:,feature])[node.sub_population]
-        filter_left        = np.greater(feat_vals[:,None],thresholds[None,:])
-        filter_right       = np.logical_not(filter_left)
-        target_reduced     = self.target[indices]
-        classes            = np.unique(self.target)
-        classes_ind        = np.equal(target_reduced[:,None],classes)
-        left_classes       = np.logical_and(classes_ind[:,:,None],filter_left[:,None,:])
-        Gini_left          = 1-np.sum(np.square(np.sum(left_classes,axis=0)),
-                                      axis=0)/(np.sum(filter_left,axis=0))/n
-        right_classes      = np.logical_and(classes_ind[:,:,None],
-                                            filter_right[:,None,:])
-        Gini_right         = 1-np.sum(np.square(np.sum(right_classes,axis=0)),
-                                      axis=0)/(np.sum(filter_right,axis=0))/n
-        Gini_sum           = Gini_left+Gini_right
-        Gini_argmin        = np.argmin(Gini_sum)
+        thresholds = self.possible_thresholds(node, feature)
+        indices = np.arange(0, self.explanatory.shape[0])[node.sub_population]
+        n = indices.size
+        feat_vals = (self.explanatory[:, feature])[node.sub_population]
+        filter_left = np.greater(feat_vals[:, None], thresholds[None, :])
+        filter_right = np.logical_not(filter_left)
+        target_reduced = self.target[indices]
+        classes = np.unique(self.target)
+        classes_ind = np.equal(target_reduced[:, None], classes)
+        left_classes = np.logical_and(classes_ind[:, :, None], filter_left[:, None, :])
+        Gini_left = 1 - np.sum(np.square(np.sum(left_classes, axis=0)),
+                              axis=0) / (np.sum(filter_left, axis=0)) / n
+        right_classes = np.logical_and(classes_ind[:, :, None],
+                                        filter_right[:, None, :])
+        Gini_right = 1 - np.sum(np.square(np.sum(right_classes, axis=0)),
+                               axis=0) / (np.sum(filter_right, axis=0)) / n
+        Gini_sum = Gini_left + Gini_right
+        Gini_argmin = np.argmin(Gini_sum)
         return np.array([thresholds[Gini_argmin], Gini_sum[Gini_argmin]])
 
-    def Gini_split_criterion(self,node) :
+    def Gini_split_criterion(self, node):
         """
         """
-        X=np.array([self.Gini_split_criterion_one_feature(node,i)
-                    for i in range(self.explanatory.shape[1])])
-        i =np.argmin(X[:,1])
-        return i, X[i,0] 
+        X = np.array([self.Gini_split_criterion_one_feature(node, i)
+                      for i in range(self.explanatory.shape[1])])
+        i = np.argmin(X[:, 1])
+        return i, X[i, 0]
