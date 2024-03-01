@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Task 6 - Decision Tree
+"""
 
 import numpy as np
 
@@ -19,7 +22,7 @@ class Node:
         self.sub_population = None
         self.depth = depth
 
-    def max_depth_below(self) :
+    def max_depth_below(self):
         """
         """
         if self.is_leaf:
@@ -28,7 +31,7 @@ class Node:
             left_depth = self.left_child.max_depth_below()
             right_depth = self.right_child.max_depth_below()
             return max(left_depth, right_depth)
-        
+
     def count_nodes_below(self, only_leaves=False):
         """
         """
@@ -40,18 +43,18 @@ class Node:
         if self.right_child:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
-    
-    def left_child_add_prefix(self,text):
+
+    def left_child_add_prefix(self, text):
         """
         """
-        lines=text.split("\n")
-        new_text="    +--"+lines[0]+"\n"
-        for x in lines[1:] :
-            new_text+=("    |  "+x)+"\n"
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += ("    |  " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
-    def right_child_add_prefix(self,text):
+    def right_child_add_prefix(self, text):
         """
         """
         lines = text.split("\n")
@@ -59,7 +62,7 @@ class Node:
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
 
-        return (new_text)
+        return new_text
 
     def __str__(self):
         """
@@ -134,14 +137,14 @@ class Node:
             axis=0
         )
     
-    def pred(self,x) :
+    def pred(self, x):
         """
         """
-        if x[self.feature]>self.threshold :
+        if x[self.feature] > self.threshold:
             return self.left_child.pred(x)
-        else :
+        else:
             return self.right_child.pred(x)
-        
+
 class Leaf(Node):
     """
     """
@@ -154,38 +157,40 @@ class Leaf(Node):
         self.is_leaf = True
         self.depth = depth
 
-    def max_depth_below(self) :
+    def max_depth_below(self):
         """
         """
         return self.depth
-    
-    def count_nodes_below(self, only_leaves=False) :
+
+    def count_nodes_below(self, only_leaves=False):
         """
         """
         return 1
-    
+
     def __str__(self):
         """
         """
-        return (f"-> leaf [value={self.value}] ")
-    
-    def get_leaves_below(self) :
+        return f"-> leaf [value={self.value}] "
+
+    def get_leaves_below(self):
+        """
+        """
         return [self]
-    
-    def update_bounds_below(self) :
+
+    def update_bounds_below(self):
         """
         """
-        pass    
-    
-    def pred(self,x) :
+        pass
+
+    def pred(self, x):
         """
         """
         return self.value
-    
+
 class Decision_Tree():
     """
     """
-    
+
     def __init__(self, max_depth=10, min_pop=1, seed=0,
                  split_criterion="random", root=None):
         """
@@ -202,42 +207,44 @@ class Decision_Tree():
         self.split_criterion = split_criterion
         self.predict = None
 
-    def depth(self) :
+    def depth(self):
         """
         """
         return self.root.max_depth_below()
-    
-    def count_nodes(self, only_leaves=False) :
+
+    def count_nodes(self, only_leaves=False):
         """
         """
         return self.root.count_nodes_below(only_leaves=only_leaves)
-    
+
     def __str__(self):
         """
         """
         return self.root.__str__()
-    
-    def get_leaves(self) :
+
+    def get_leaves(self):
         """
         """
         return self.root.get_leaves_below()
-    
-    def update_bounds(self) :
-        """
-        """
-        self.root.update_bounds_below() 
 
-    def pred(self,x) :
-            """
-            """
-            return self.root.pred(x)
-    def update_predict(self) :
+    def update_bounds(self):
+        """
+        """
+        self.root.update_bounds_below()
+
+    def pred(self, x):
+        """
+        """
+        return self.root.pred(x)
+
+    def update_predict(self):
         """
         """
         self.update_bounds()
-        leaves=self.get_leaves()
-        for leaf in leaves :
+        leaves = self.get_leaves()
+        for leaf in leaves:
             leaf.update_indicator()
-        #self.clear_bounds()
         vals = np.array([leaf.value for leaf in leaves])
-        self.predict = lambda x: np.array(vals[np.argmax(np.array([leaf.indicator(x) for leaf in leaves]),axis=0)])
+        self.predict = lambda x: np.array(vals[np.argmax(np.array([leaf.indicator(x) for leaf in leaves]), axis=0)])
+
+# pycodestyle: end-ignore
