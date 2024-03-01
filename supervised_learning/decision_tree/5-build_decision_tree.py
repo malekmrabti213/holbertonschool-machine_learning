@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
+"""
+Task 5 - Decision Tree
+"""
 
 import numpy as np
 
 
 class Node:
-    def __init__(self, feature=None, threshold=None, left_child=None, right_child=None, is_root=False, depth=0):
+    """
+    """
+
+    def __init__(self, feature=None, threshold=None, left_child=None,
+                 right_child=None, is_root=False, depth=0):
+        """
+        """
         self.feature = feature
         self.threshold = threshold
         self.left_child = left_child
@@ -15,6 +24,8 @@ class Node:
         self.depth = depth
 
     def max_depth_below(self):
+        """
+        """
         if self.is_leaf:
             return self.depth
         else:
@@ -23,6 +34,8 @@ class Node:
             return max(left_depth, right_depth)
 
     def count_nodes_below(self, only_leaves=False):
+        """
+        """
         count = 0
         if not only_leaves:
             count += 1
@@ -33,6 +46,8 @@ class Node:
         return count
 
     def left_child_add_prefix(self, text):
+        """
+        """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
@@ -41,6 +56,8 @@ class Node:
         return new_text
 
     def right_child_add_prefix(self, text):
+        """
+        """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
