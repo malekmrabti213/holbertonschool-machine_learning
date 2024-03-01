@@ -29,8 +29,10 @@ class Random_Forest:
         for tree_predict in self.numpy_preds:
             tree_predictions = tree_predict(explanatory)
             predictions.append(tree_predictions)
-        mode_predictions = np.apply_along_axis(lambda x: np.bincount(x).argmax(),
-                                               axis=0, arr=np.array(predictions))
+        mode_predictions = np.apply_along_axis(lambda x:
+                                               np.bincount(x).argmax(),
+                                               axis=0,
+                                               arr=np.array(predictions))
         return mode_predictions
 
     def fit(self, explanatory, target, n_trees=100, verbose=0):
