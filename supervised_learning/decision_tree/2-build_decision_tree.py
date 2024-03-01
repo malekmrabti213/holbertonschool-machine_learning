@@ -70,14 +70,14 @@ class Node:
         if self.is_root:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            f = self.feature
-            t = self.threshold
-            return f"root [feature={f}, threshold={t}]\n" \
+            fe = self.feature
+            td = self.threshold
+            return f"root [feature={fe}, threshold={td}]\n" \
                    f"{a}{b}"
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"-> node [feature={f}, threshold={t}]\n"\
+            return f"-> node [feature={fe}, threshold={td}]\n"\
                    f"{a}{b}"
 
 class Leaf(Node):
