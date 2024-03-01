@@ -113,9 +113,9 @@ class Decision_Tree:
 
     def __init__(self, max_depth=10, min_pop=1, seed=0,
                  split_criterion="random", root=None):
+        """
+        """
         self.rng = np.random.default_rng(seed)
-        """
-        """
         if root:
             self.root = root
         else:
