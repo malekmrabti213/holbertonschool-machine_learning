@@ -270,11 +270,13 @@ class Decision_Tree():
         return feature, threshold
 
     def get_leaf_child(self, node, sub_population):
+        """
+        """
         x, y = np.unique(self.target[sub_population], return_counts=True)
-        l = Leaf(x[np.argmax(y)])
-        l.depth = node.depth + 1
-        l.subpopulation = sub_population
-        return l
+        leaf_child = Leaf(x[np.argmax(y)])
+        leaf_child.depth = node.depth + 1
+        leaf_child.subpopulation = sub_population
+        return leaf_child
 
     def get_node_child(self, node, sub_population):
         """
@@ -367,7 +369,8 @@ class Decision_Tree():
         target_reduced = self.target[indices]
         classes = np.unique(self.target)
         classes_ind = np.equal(target_reduced[:, None], classes)
-        left_classes = np.logical_and(classes_ind[:, :, None], filter_left[:, None, :])
+        left_classes = np.logical_and(classes_ind[:, :, None],
+                                      filter_left[:, None, :])
         Gini_left = 1 - np.sum(np.square(np.sum(left_classes, axis=0)),
                               axis=0) / (np.sum(filter_left, axis=0)) / n
         right_classes = np.logical_and(classes_ind[:, :, None],
