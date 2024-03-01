@@ -78,7 +78,7 @@ class Node:
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"-> node [feature={feature}, threshold={threshold}]\n" \
+            return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
     def get_leaves_below(self):
