@@ -81,9 +81,8 @@ class Node:
                    f"{a}{b}"
 
 class Leaf(Node):
-    """ 
-    """    
-    
+    """class Leaf"""
+
     def __init__(self, value, depth=None):
         """
         """
