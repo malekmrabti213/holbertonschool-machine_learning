@@ -65,9 +65,26 @@ if len(auto.layers) == 3:
 #     print(auto.layers[0].input_shape == (None, 784))
 #     print(auto.layers[1] is encoder)
 #     print(auto.layers[2] is decoder)
+def compare(val1, val2, threshold):
 
-with open('1-test', 'w+') as f:
+    result = True
+
+    if val1==0:
+        diff = abs(val1 - val2)
+    else:
+        diff = abs((val1 - val2)/val1)
+
+        if diff > threshold:
+            result = False
+
+    return result
+
+with open('1-test', 'w+') as f:   
     x_test = np.load("MNIST.npz")["X_test"]
     x_test = x_test[:256].reshape((-1, 784))
-    f.write(np.format_float_scientific(auto.evaluate(x_test, x_test, verbose=False), precision=6) + '\n')
+    reference = 5.437645e+02
+    eval=auto.evaluate(x_test, x_test, verbose=False)
+    threshold=0.001
+    result=compare(eval,reference,threshold)
+    f.write(str(result)+ '\n')
     f.write(auto.optimizer.__class__.__name__ + '\n')
