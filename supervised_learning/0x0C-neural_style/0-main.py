@@ -65,7 +65,7 @@ if __name__ == '__main__':
       style_image = np.random.uniform(0, 256, size=(1000, 1000, 3))
       content_image = np.random.uniform(0, 256, size=(500, 1000, 3))
       try:
-            nst = NST(style_image, content_image, alpha='2')
+            nst = NST(style_image, content_image, alpha=2)
       except TypeError as e:
             print(str(e))
       try:
