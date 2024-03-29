@@ -84,7 +84,8 @@ class Simple_GAN(keras.Model):
                 # get a fake sample:
                 fake_sample = self.get_fake_sample(training=True)
 
-                # compute the loss of the discriminator on real and fake samples
+                # compute the loss of the discriminator on real 
+                #and fake samples
                 self.discr_return_on_fake = self.discriminator(fake_sample,
                                                                training=True)
                 self.discr_return_on_real = self.discriminator(real_sample,
@@ -112,7 +113,8 @@ class Simple_GAN(keras.Model):
             gen_loss = self.generator.loss(self.discr_return_on_fake_g)
 
         # apply gradient descent to the discriminator
-        gen_gradient = tape.gradient(gen_loss, self.generator.trainable_variables)
+        gen_gradient = tape.gradient(gen_loss,
+                                     self.generator.trainable_variables)
         self.generator.optimizer.apply_gradients(
             zip(gen_gradient, self.generator.trainable_variables))
 
