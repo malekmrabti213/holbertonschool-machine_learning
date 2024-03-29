@@ -30,7 +30,8 @@ class WGAN_clip(keras.Model):
         # Define the generator loss and optimizer:
         self.generator.loss = lambda x: -tf.reduce_mean(x)
         self.generator.optimizer = keras.optimizers.Adam(
-            learning_rate=self.learning_rate, beta_1=self.beta_1, beta_2=self.beta_2)
+            learning_rate=self.learning_rate, beta_1=self.beta_1,
+            beta_2=self.beta_2)
         self.generator.compile(optimizer=self.generator.optimizer,
                                loss=self.generator.loss)
 
@@ -82,7 +83,8 @@ class WGAN_clip(keras.Model):
                                                      discr_return_on_fake)
 
             # Apply gradient descent to the discriminator
-            discr_gradient = tape.gradient(discr_loss, self.discriminator.trainable_variables)
+            discr_gradient = tape.gradient(discr_loss,
+                                           self.discriminator.trainable_variables)
             self.discriminator.optimizer.apply_gradients(
                 zip(discr_gradient, self.discriminator.trainable_variables))
 
@@ -98,13 +100,14 @@ class WGAN_clip(keras.Model):
             fake_sample = self.get_fake_sample(training=True)
 
             # Compute the loss of the generator on this fake samples
-            discr_return_on_fake = self.discriminator(fake_sample, training=True)
+            discr_return_on_fake = self.discriminator(fake_sample,
+                                                      training=True)
             gen_loss = self.generator.loss(discr_return_on_fake)
 
         # Apply gradient descent to the generator
-        gen_gradient = tape.gradient(gen_loss, self.generator.trainable_variables)
+        gen_gradient = tape.gradient(gen_loss,
+                                     self.generator.trainable_variables)
         self.generator.optimizer.apply_gradients(
             zip(gen_gradient, self.generator.trainable_variables))
 
         return {"discr_loss": discr_loss, "gen_loss": gen_loss}
-    
