@@ -47,7 +47,8 @@ class WGAN_clip(keras.Model):
         """
         if not size:
             size = self.batch_size
-        return self.generator(self.latent_generator(size), training=training)
+        return self.generator(self.latent_generator(size),
+                              training=training)
 
     # Generator of fake samples of size batch_size
     def get_real_sample(self, size=None):
@@ -77,12 +78,13 @@ class WGAN_clip(keras.Model):
                 # Compute the loss of the discriminator on real and fake samples
                 discr_return_on_fake = self.discriminator(fake_sample, training=True)
                 discr_return_on_real = self.discriminator(real_sample, training=True)
-                discr_loss = self.discriminator.loss(discr_return_on_real, discr_return_on_fake)
+                discr_loss = self.discriminator.loss(discr_return_on_real,
+                                                     discr_return_on_fake)
 
             # Apply gradient descent to the discriminator
             discr_gradient = tape.gradient(discr_loss, self.discriminator.trainable_variables)
-            self.discriminator.optimizer.apply_gradients(zip(discr_gradient,
-                                                             self.discriminator.trainable_variables))
+            self.discriminator.optimizer.apply_gradients(
+                zip(discr_gradient, self.discriminator.trainable_variables))
 
             # Clip the weights of the discriminator
             for w in self.discriminator.trainable_variables:
@@ -101,7 +103,8 @@ class WGAN_clip(keras.Model):
 
         # Apply gradient descent to the generator
         gen_gradient = tape.gradient(gen_loss, self.generator.trainable_variables)
-        self.generator.optimizer.apply_gradients(zip(gen_gradient,self.generator.trainable_variables))
+        self.generator.optimizer.apply_gradients(
+            zip(gen_gradient, self.generator.trainable_variables))
 
         return {"discr_loss": discr_loss, "gen_loss": gen_loss}
     
