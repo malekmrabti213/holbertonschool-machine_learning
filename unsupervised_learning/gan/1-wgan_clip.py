@@ -38,7 +38,8 @@ class WGAN_clip(keras.Model):
         # Define the discriminator loss and optimizer:
         self.discriminator.loss = lambda x, y: -tf.reduce_mean(x) + tf.reduce_mean(y)
         self.discriminator.optimizer = keras.optimizers.Adam(
-            learning_rate=self.learning_rate, beta_1=self.beta_1, beta_2=self.beta_2)
+            learning_rate=self.learning_rate, beta_1=self.beta_1,
+            beta_2=self.beta_2)
         self.discriminator.compile(optimizer=self.discriminator.optimizer,
                                    loss=self.discriminator.loss)
 
@@ -76,21 +77,24 @@ class WGAN_clip(keras.Model):
                 # Get a fake sample:
                 fake_sample = self.get_fake_sample(training=True)
 
-                # Compute the loss of the discriminator on real and fake samples
-                discr_return_on_fake = self.discriminator(fake_sample, training=True)
-                discr_return_on_real = self.discriminator(real_sample, training=True)
+                # the loss of the discriminator on real & fake samples
+                discr_return_on_fake = self.discriminator(fake_sample,
+                                                          training=True)
+                discr_return_on_real = self.discriminator(real_sample,
+                                                          training=True)
                 discr_loss = self.discriminator.loss(discr_return_on_real,
                                                      discr_return_on_fake)
 
             # Apply gradient descent to the discriminator
-            discr_gradient = tape.gradient(discr_loss,
-                                           self.discriminator.trainable_variables)
+            discr_gradient = tape.gradient(
+                discr_loss, self.discriminator.trainable_variables)
             self.discriminator.optimizer.apply_gradients(
                 zip(discr_gradient, self.discriminator.trainable_variables))
 
             # Clip the weights of the discriminator
             for w in self.discriminator.trainable_variables:
-                w.assign(tf.clip_by_value(w, -self.clip_const, self.clip_const))
+                w.assign(tf.clip_by_value(w, -self.clip_const,
+                                          self.clip_const))
 
         # Training of the generator
         with tf.GradientTape() as tape:
