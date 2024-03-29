@@ -96,6 +96,8 @@ class WGAN_GP(keras.Model):
 
     # overloading train_step()
     def train_step(self, useless_argument):
+        """
+        """
 
         # ---> training of the discriminator
         for _ in range(self.disc_iter):
