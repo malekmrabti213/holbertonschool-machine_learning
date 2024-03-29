@@ -72,7 +72,7 @@ class Simple_GAN(keras.Model):
     def train_step(self, useless_argument, show=False):
         """
         """
-        # ---> training of the discriminator
+        # --> training of the discriminator
         for _ in range(self.disc_iter):
             with tf.GradientTape() as tape:
                 # watch the discriminator's trainable variables
