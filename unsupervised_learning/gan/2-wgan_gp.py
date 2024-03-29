@@ -6,6 +6,7 @@ Task 2
 import tensorflow as tf
 from tensorflow import keras
 
+
 class WGAN_GP(keras.Model):
     """
     """
@@ -87,8 +88,8 @@ class WGAN_GP(keras.Model):
         """
         """
         with tf.GradientTape() as gp_tape:
-                gp_tape.watch(interpolated_sample)
-                pred = self.discriminator(interpolated_sample, training=True)
+            gp_tape.watch(interpolated_sample)
+            pred = self.discriminator(interpolated_sample, training=True)
         grads = gp_tape.gradient(pred, [interpolated_sample])[0]
         norm = tf.sqrt(tf.reduce_sum(tf.square(grads), axis=self.axis))
         return tf.reduce_mean((norm - 1.0) ** 2)
