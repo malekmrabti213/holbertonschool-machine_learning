@@ -36,7 +36,9 @@ class WGAN_clip(keras.Model):
                                loss=self.generator.loss)
 
         # Define the discriminator loss and optimizer:
-        self.discriminator.loss = lambda x, y: -tf.reduce_mean(x) + tf.reduce_mean(y)
+        self.discriminator.loss = lambda x, y: (
+            -tf.reduce_mean(x) + tf.reduce_mean(y)
+            )
         self.discriminator.optimizer = keras.optimizers.Adam(
             learning_rate=self.learning_rate, beta_1=self.beta_1,
             beta_2=self.beta_2)
