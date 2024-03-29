@@ -26,17 +26,23 @@ class Simple_GAN(keras.Model):
         self.beta_2 = 0.9
 
         # define the generator loss and optimizer:
-        self.generator.loss = lambda x: (tf.keras.losses.MeanSquaredError()(x, tf.ones(x.shape)))
-        self.generator.optimizer = keras.optimizers.Adam(learning_rate=self.learning_rate, 
-                                                         beta_1=self.beta_1, beta_2=self.beta_2)
-        self.generator.compile(optimizer=self.generator.optimizer, loss=self.generator.loss)
+        self.generator.loss = lambda x: (
+            tf.keras.losses.MeanSquaredError()(x, tf.ones(x.shape)))
+        self.generator.optimizer = keras.optimizers.Adam(
+            learning_rate=self.learning_rate, 
+            beta_1=self.beta_1, beta_2=self.beta_2)
+        self.generator.compile(
+            optimizer=self.generator.optimizer, loss=self.generator.loss)
 
         # define the discriminator loss and optimizer:
-        self.discriminator.loss = lambda x, y: (tf.keras.losses.MeanSquaredError()(x, tf.ones(x.shape)) + 
-                                                tf.keras.losses.MeanSquaredError()(y, -1 * tf.ones(y.shape)))
-        self.discriminator.optimizer = keras.optimizers.Adam(learning_rate=self.learning_rate, 
-                                                             beta_1=self.beta_1, beta_2=self.beta_2)
-        self.discriminator.compile(optimizer=self.discriminator.optimizer, loss=self.discriminator.loss)
+        self.discriminator.loss = lambda x, y: (
+            tf.keras.losses.MeanSquaredError()(x, tf.ones(x.shape)) + 
+            tf.keras.losses.MeanSquaredError()(y, -1 * tf.ones(y.shape)))
+        self.discriminator.optimizer = keras.optimizers.Adam(
+            learning_rate=self.learning_rate, 
+            beta_1=self.beta_1, beta_2=self.beta_2)
+        self.discriminator.compile(
+            optimizer=self.discriminator.optimizer, loss=self.discriminator.loss)
         self.discr_return_on_real = None
         self.discr_return_on_fake = None
         self.discr_return_on_fake_g = None
@@ -78,11 +84,14 @@ class Simple_GAN(keras.Model):
                 # compute the loss of the discriminator on real and fake samples
                 self.discr_return_on_fake = self.discriminator(fake_sample, training=True)
                 self.discr_return_on_real = self.discriminator(real_sample, training=True)
-                discr_loss = self.discriminator.loss(self.discr_return_on_real, self.discr_return_on_fake)
+                discr_loss = self.discriminator.loss(
+                    self.discr_return_on_real, self.discr_return_on_fake)
 
             # apply gradient descent to the discriminator
-            discr_gradient = tape.gradient(discr_loss, self.discriminator.trainable_variables)
-            self.discriminator.optimizer.apply_gradients(zip(discr_gradient, self.discriminator.trainable_variables))
+            discr_gradient = tape.gradient(
+                discr_loss, self.discriminator.trainable_variables)
+            self.discriminator.optimizer.apply_gradients(
+                zip(discr_gradient, self.discriminator.trainable_variables))
 
         # ---> training of the generator
         with tf.GradientTape() as tape:
@@ -98,6 +107,7 @@ class Simple_GAN(keras.Model):
 
         # apply gradient descent to the discriminator
         gen_gradient = tape.gradient(gen_loss, self.generator.trainable_variables)
-        self.generator.optimizer.apply_gradients(zip(gen_gradient, self.generator.trainable_variables))
+        self.generator.optimizer.apply_gradients(
+            zip(gen_gradient, self.generator.trainable_variables))
 
         return {"discr_loss": discr_loss, "gen_loss": gen_loss}
