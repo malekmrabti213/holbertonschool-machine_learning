@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Task 3
+Task 4
 """
 import tensorflow as tf
 from tensorflow import keras
 
 
 class WGAN_GP(keras.Model):
+    """
+    """
     def __init__(self, generator, discriminator,
                  latent_generator, real_examples,
                  batch_size=200, disc_iter=2,
