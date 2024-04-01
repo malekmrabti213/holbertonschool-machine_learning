@@ -130,8 +130,8 @@ class WGAN_GP(keras.Model):
                 new_discr_loss = discr_loss + gp * self.lambda_gp
 
             # apply gradient descent to the discriminator
-            discr_gradient = tape.gradient(new_discr_loss,
-                                           self.discriminator.trainable_variables)
+            discr_gradient = tape.gradient(
+                new_discr_loss,self.discriminator.trainable_variables)
             self.discriminator.optimizer.apply_gradients(
                 zip(discr_gradient, self.discriminator.trainable_variables))
 
