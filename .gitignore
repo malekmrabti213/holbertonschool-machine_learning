@@ -16,3 +16,12 @@ unsupervised_learning/gan/0-task.py
 unsupervised_learning/gan/1-task.py
 unsupervised_learning/gan/3-task.py
 unsupervised_learning/gan/4-task.py
+all_analysis_data.txt
+labels.txt
+sample_analysis_data.txt
+math/0x01-plotting/test.py
+math/0x01-plotting/0-check.py
+math/0x01-plotting/__pycache__/0-line.cpython-36.pyc
+reference.png
+student.png
+math/0x01-plotting/0-main.py
