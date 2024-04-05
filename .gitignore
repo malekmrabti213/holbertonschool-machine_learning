@@ -25,3 +25,6 @@ math/0x01-plotting/__pycache__/0-line.cpython-36.pyc
 reference.png
 student.png
 math/0x01-plotting/0-main.py
+math/plotting/__pycache__/0-line.cpython-36.pyc
+math/plotting/0-main.py
+math/plotting/0-check.py
