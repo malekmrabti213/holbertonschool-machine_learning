@@ -28,3 +28,7 @@ math/0x01-plotting/0-main.py
 math/plotting/__pycache__/0-line.cpython-36.pyc
 math/plotting/0-main.py
 math/plotting/0-check.py
+math/plotting/1-main.py
+math/plotting/1-check.py
+math/plotting/__pycache__/1-scatter.cpython-36.pyc
+reference1.png
