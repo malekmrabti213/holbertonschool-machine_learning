@@ -42,3 +42,9 @@ math/plotting/4-check.py
 math/plotting/4-main.py
 4-frequency.png
 math/plotting/__pycache__/4-frequency.cpython-36.pyc
+math/plotting/5-main.py
+math/plotting/5-check.py
+math/plotting/__pycache__/4-frequency.cpython-311.pyc
+math/plotting/__pycache__/5-all_in_one.cpython-36.pyc
+math/plotting/__pycache__/5-all_in_one.cpython-39.pyc
+math/plotting/__pycache__/5-all_in_one.cpython-311.pyc
