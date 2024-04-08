@@ -12,6 +12,7 @@ def frequency():
     """
     np.random.seed(5)
     student_grades = np.random.normal(68, 15, 50)
+    plt.figure(figsize=(6.4, 4.8))
 
     plt.hist(student_grades, bins=[10*x for x in range(0, 11)], edgecolor="k")
     plt.xlabel("Grades")

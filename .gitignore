@@ -48,3 +48,10 @@ math/plotting/__pycache__/4-frequency.cpython-311.pyc
 math/plotting/__pycache__/5-all_in_one.cpython-36.pyc
 math/plotting/__pycache__/5-all_in_one.cpython-39.pyc
 math/plotting/__pycache__/5-all_in_one.cpython-311.pyc
+math/plotting/6-check.py
+math/plotting/6-main.py
+math/plotting/__pycache__/0-line.cpython-311.pyc
+math/plotting/__pycache__/1-scatter.cpython-311.pyc
+math/plotting/__pycache__/2-change_scale.cpython-311.pyc
+math/plotting/__pycache__/3-two.cpython-311.pyc
+math/plotting/__pycache__/6-bars.cpython-311.pyc
