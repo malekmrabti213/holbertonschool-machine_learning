@@ -38,3 +38,7 @@ math/plotting/2-check.py
 math/plotting/3-check.py
 math/plotting/3-main.py
 math/plotting/__pycache__/3-two.cpython-36.pyc
+math/plotting/4-check.py
+math/plotting/4-main.py
+4-frequency.png
+math/plotting/__pycache__/4-frequency.cpython-36.pyc
