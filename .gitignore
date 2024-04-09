@@ -61,3 +61,8 @@ math/plotting/__pycache__/100-gradient.cpython-38.pyc
 math/plotting/100-check.py
 math/plotting/100-main.py
 pca.npz.zip
+math/plotting/__pycache__/101-pca.cpython-38.pyc
+math/plotting/101-main.py
+math/plotting/101-check.py
+math/plotting/test101.py
+pca.npz
