@@ -58,3 +58,6 @@ math/plotting/__pycache__/6-bars.cpython-311.pyc
 math/plotting/__pycache__/4-frequency.cpython-38.pyc
 math/plotting/__pycache__/5-all_in_one.cpython-38.pyc
 math/plotting/__pycache__/100-gradient.cpython-38.pyc
+math/plotting/100-check.py
+math/plotting/100-main.py
+pca.npz.zip
