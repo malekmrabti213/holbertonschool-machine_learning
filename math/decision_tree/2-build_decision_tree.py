@@ -63,7 +63,7 @@ class Node:
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
 
-        return new_text
+        return (new_text.rstrip())
 
     def __str__(self):
         """
@@ -71,16 +71,15 @@ class Node:
         feature = self.feature
         threshold = self.threshold
         if self.is_root:
-            a = self.left_child_add_prefix(f"{self.left_child}"[:])
-            b = self.right_child_add_prefix(f"{self.right_child}"[:])
+            a = self.left_child_add_prefix(str(self.left_child))
+            b = self.right_child_add_prefix(str(self.right_child))
             return f"root [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
         else:
-            a = self.left_child_add_prefix(f"{self.left_child}"[:])
-            b = self.right_child_add_prefix(f"{self.right_child}"[:])
-            return f"-> node [feature={feature}, threshold={threshold}]\n"\
+            a = self.left_child_add_prefix(str(self.left_child))
+            b = self.right_child_add_prefix(str(self.right_child))
+            return f"-> node [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
-
 
 class Leaf(Node):
     """ Leaf """
