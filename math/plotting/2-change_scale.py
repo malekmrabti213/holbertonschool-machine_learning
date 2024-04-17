@@ -14,7 +14,6 @@ def change_scale():
     r = np.log(0.5)
     t = 5730
     y = np.exp((r / t) * x)
-    plt.figure(figsize=(6.4, 4.8))
 
     # your code here
     # plt.xlabel('Time (years)')
