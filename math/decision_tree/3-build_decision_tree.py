@@ -62,19 +62,22 @@ class Node:
                 + self.right_child.count_nodes_below(only_leaves=only_leaves)\
                 + (not only_leaves)
 
+
     def __str__(self):
         """
-        Prints string representation of the node and its children.
         """
-
+        feature = self.feature
+        threshold = self.threshold
         if self.is_root:
-            s = "root"
+            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
+            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            return f"root [feature={feature}, threshold={threshold}]\n" \
+                   f"{a}{b}"
         else:
-            s = "-> node"
-
-        return f"{s} [feature={self.feature}, threshold={self.threshold}]\n"\
-            + self.left_child_add_prefix(str(self.left_child))\
-            + self.right_child_add_prefix(str(self.right_child))
+            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
+            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            return f"-> node [feature={feature}, threshold={threshold}]\n"\
+                   f"{a}{b}"
 
     def left_child_add_prefix(self, text):
         """
