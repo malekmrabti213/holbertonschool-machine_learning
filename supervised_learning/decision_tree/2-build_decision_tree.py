@@ -45,30 +45,14 @@ class Node:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
 
-    def __str__(self):
-        """
-        """
-        feature = self.feature
-        threshold = self.threshold
-        if self.is_root:
-            a = self.left_child_add_prefix(f"{self.left_child}"[:])
-            b = self.right_child_add_prefix(f"{self.right_child}"[:])
-            return f"root [feature={feature}, threshold={threshold}]\n" \
-                   f"{a}{b}"
-        else:
-            a = self.left_child_add_prefix(f"{self.left_child}"[:])
-            b = self.right_child_add_prefix(f"{self.right_child}"[:])
-            return f"-> node [feature={feature}, threshold={threshold}]\n"\
-                   f"{a}{b}"
-
     def left_child_add_prefix(self, text):
         """
-        Adds the string representation of the left child to the given text
         """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
             new_text += ("    |  " + x) + "\n"
+
         return new_text
 
     def right_child_add_prefix(self, text):
@@ -79,7 +63,23 @@ class Node:
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
 
-        return new_text.rstrip()
+        return new_text
+
+    def __str__(self):
+        """
+        """
+        feature = self.feature
+        threshold = self.threshold
+        if self.is_root:
+            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
+            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            return f"root [feature={feature}, threshold={threshold}]\n" \
+                   f"{a}{b}"
+        else:
+            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
+            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            return f"-> node [feature={feature}, threshold={threshold}]\n"\
+                   f"{a}{b}"
 
 class Leaf(Node):
     """ Leaf """

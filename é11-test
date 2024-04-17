@@ -4,28 +4,42 @@ root [feature=0, threshold=7.5]
     |      |      +---> node [feature=0, threshold=14.5]
     |      |      |      +---> leaf [value=15]
     |      |      |      +---> leaf [value=14]
+    |      |      |  
     |      |      +---> node [feature=0, threshold=12.5]
     |      |             +---> leaf [value=13]
     |      |             +---> leaf [value=12]
+    |      |         
+    |      |  
     |      +---> node [feature=0, threshold=9.5]
     |             +---> node [feature=0, threshold=10.5]
     |             |      +---> leaf [value=11]
     |             |      +---> leaf [value=10]
+    |             |  
     |             +---> node [feature=0, threshold=8.5]
     |                    +---> leaf [value=9]
     |                    +---> leaf [value=8]
+    |                
+    |         
+    |  
     +---> node [feature=0, threshold=3.5]
            +---> node [feature=0, threshold=5.5]
            |      +---> node [feature=0, threshold=6.5]
            |      |      +---> leaf [value=7]
            |      |      +---> leaf [value=6]
+           |      |  
            |      +---> node [feature=0, threshold=4.5]
            |             +---> leaf [value=5]
            |             +---> leaf [value=4]
+           |         
+           |  
            +---> node [feature=0, threshold=1.5]
                   +---> node [feature=0, threshold=2.5]
                   |      +---> leaf [value=3]
                   |      +---> leaf [value=2]
+                  |  
                   +---> node [feature=0, threshold=0.5]
                          +---> leaf [value=1]
                          +---> leaf [value=0]
+                     
+              
+       
