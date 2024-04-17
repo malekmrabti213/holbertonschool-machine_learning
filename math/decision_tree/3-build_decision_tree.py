@@ -81,26 +81,23 @@ class Node:
 
     def left_child_add_prefix(self, text):
         """
-        Adds the string representation of the left child to the given text
         """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
             new_text += ("    |  " + x) + "\n"
-        return (new_text)
+
+        return new_text
 
     def right_child_add_prefix(self, text):
         """
-        Adds the string representation of the right child to the given text
         """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
-        # NOTE Had to strip the extra newline after right node
-        # There may be better alternatives
-        return (new_text.rstrip())
 
+        return new_text
     def get_leaves_below(self):
         """
         Returns the list of all leaves below this one.
