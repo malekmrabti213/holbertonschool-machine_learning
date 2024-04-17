@@ -74,9 +74,7 @@ Binary_Dev.npz
 Binary_Train.npz
 math/decision_tree/0-build_decision_tree.py
 math/decision_tree/0-main.py
-math/decision_tree/1-build_decision_tree.py
 math/decision_tree/1-main.py
-math/decision_tree/2-build_decision_tree.py
 math/decision_tree/2-main.py
 math/decision_tree/3-build_decision_tree.py
 math/decision_tree/3-main.py
@@ -119,3 +117,4 @@ math/plotting/2-change_scale.py
 .vscode/settings.json
 math/plotting/2-change_scale.py
 math/plotting/2-change_scale.py
+math/decision_tree/check2.py
