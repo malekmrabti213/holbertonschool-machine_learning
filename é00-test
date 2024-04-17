@@ -1,0 +1,5 @@
+root [feature=0, threshold=0.5]
+    +---> leaf [value=0]
+    +---> node [feature=1, threshold=30000]
+           +---> leaf [value=0]
+           +---> leaf [value=1]
