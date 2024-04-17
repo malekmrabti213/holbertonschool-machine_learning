@@ -81,6 +81,7 @@ class Node:
             return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
+
     def get_leaves_below(self):
         """
         """
@@ -114,7 +115,7 @@ class Leaf(Node):
     def __str__(self):
         """
         """
-        return f"-> leaf [value={self.value} ] "
+        return f"-> leaf [value={self.value}] "
 
     def get_leaves_below(self):
         """
