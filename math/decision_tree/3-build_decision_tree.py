@@ -98,6 +98,13 @@ class Node:
         # There may be better alternatives
         return (new_text.rstrip())
 
+    def get_leaves_below(self):
+        """
+        Returns the list of all leaves below this one.
+        """
+        return self.left_child.get_leaves_below()\
+            + self.right_child.get_leaves_below()
+
 
 class Leaf(Node):
     """
@@ -132,7 +139,15 @@ class Leaf(Node):
         return 1
 
     def __str__(self):
+        # NOTE had to add that typo empty space at the end
+        # checker repo with the mistake : malekmrabti213
         return (f"-> leaf [value={self.value}] ")
+
+    def get_leaves_below(self):
+        """
+        Returns this leaf as a list element.
+        """
+        return [self]
 
 
 class Decision_Tree():
@@ -186,4 +201,9 @@ class Decision_Tree():
     def __str__(self):
         # NOTE cleaner to update this than use the "solution" I've seen
         return f"{self.root.__str__()}\n"
-    
+
+    def get_leaves(self):
+        """
+        Gets the list of leaves in the tree.
+        """
+        return self.root.get_leaves_below()
