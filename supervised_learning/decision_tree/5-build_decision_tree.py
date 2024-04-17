@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Task 3 - Decision Tree
+Task 5 - Decision Tree
 """
 
 import numpy as np
@@ -78,7 +78,7 @@ class Node:
         else:
             a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
             b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
-            return f"-> node [feature={feature}, threshold={threshold}]\n"\
+            return f"-> node [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
 
     def get_leaves_below(self):
@@ -87,6 +87,56 @@ class Node:
         sleftc = self.left_child.get_leaves_below()
         srightc = self.right_child.get_leaves_below()
         return sleftc + srightc
+
+    def update_bounds_below(self):
+        """
+        """
+        if self.is_root:
+            self.upper = {0: np.inf}
+            self.lower = {0: -1 * np.inf}
+
+        for child in [self.left_child, self.right_child]:
+            child.upper = self.upper.copy()
+            child.lower = self.lower.copy()
+        if self.feature in self.left_child.lower.keys():
+            self.left_child.lower[self.feature] = \
+                max(self.threshold, self.left_child.lower[self.feature])
+        else:
+            self.left_child.lower[self.feature] = self.threshold
+        if self.feature in self.right_child.upper.keys():
+            self.right_child.upper[self.feature] = \
+                min(self.threshold, self.right_child.upper[self.feature])
+        else:
+            self.right_child.upper[self.feature] = self.threshold
+
+        for child in [self.left_child, self.right_child]:
+            child.update_bounds_below()
+
+    def update_indicator(self):
+        """
+        """
+        def is_large_enough(x):
+            """
+            """
+            return np.all(
+                np.array([np.greater(x[:, key], self.lower[key])
+                          for key in self.lower]),
+                axis=0
+            )
+
+        def is_small_enough(x):
+            """
+            """
+            return np.all(
+                np.array([np.less_equal(x[:, key], self.upper[key])
+                          for key in self.upper]),
+                axis=0
+            )
+
+        self.indicator = lambda x: np.all(
+            np.array([is_large_enough(x), is_small_enough(x)]),
+            axis=0
+        )
 
 
 class Leaf(Node):
@@ -120,6 +170,11 @@ class Leaf(Node):
         """
         """
         return [self]
+
+    def update_bounds_below(self):
+        """
+        """
+        pass
 
 
 class Decision_Tree:
@@ -161,3 +216,8 @@ class Decision_Tree:
         """
         """
         return self.root.get_leaves_below()
+
+    def update_bounds(self):
+        """
+        """
+        self.root.update_bounds_below()

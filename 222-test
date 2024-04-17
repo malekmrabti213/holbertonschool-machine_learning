@@ -2,93 +2,97 @@
 
 
 ------------------------------------------------------------------------------------tree_of_the_intro ( example 0) )------------------------------------------------------------------------------------root [feature=0, threshold=0.5]
-    +---> leaf [value=0]
+    +---> leaf [value=0
     +---> node [feature=1, threshold=30000]
-           +---> leaf [value=0]
-           +---> leaf [value=1]
+           +---> leaf [value=0
+           +---> leaf [value=1
+
 
 
 ------------------------------------------------------------------------------------rounding_tree     ( example 1(4) )------------------------------------------------------------------------------------root [feature=0, threshold=7.5]
     +---> node [feature=0, threshold=11.5]
     |      +---> node [feature=0, threshold=13.5]
     |      |      +---> node [feature=0, threshold=14.5]
-    |      |      |      +---> leaf [value=15]
-    |      |      |      +---> leaf [value=14]
+    |      |      |      +---> leaf [value=15
+    |      |      |      +---> leaf [value=14
     |      |      +---> node [feature=0, threshold=12.5]
-    |      |             +---> leaf [value=13]
-    |      |             +---> leaf [value=12]
+    |      |             +---> leaf [value=13
+    |      |             +---> leaf [value=12
     |      +---> node [feature=0, threshold=9.5]
     |             +---> node [feature=0, threshold=10.5]
-    |             |      +---> leaf [value=11]
-    |             |      +---> leaf [value=10]
+    |             |      +---> leaf [value=11
+    |             |      +---> leaf [value=10
     |             +---> node [feature=0, threshold=8.5]
-    |                    +---> leaf [value=9]
-    |                    +---> leaf [value=8]
+    |                    +---> leaf [value=9
+    |                    +---> leaf [value=8
     +---> node [feature=0, threshold=3.5]
            +---> node [feature=0, threshold=5.5]
            |      +---> node [feature=0, threshold=6.5]
-           |      |      +---> leaf [value=7]
-           |      |      +---> leaf [value=6]
+           |      |      +---> leaf [value=7
+           |      |      +---> leaf [value=6
            |      +---> node [feature=0, threshold=4.5]
-           |             +---> leaf [value=5]
-           |             +---> leaf [value=4]
+           |             +---> leaf [value=5
+           |             +---> leaf [value=4
            +---> node [feature=0, threshold=1.5]
                   +---> node [feature=0, threshold=2.5]
-                  |      +---> leaf [value=3]
-                  |      +---> leaf [value=2]
+                  |      +---> leaf [value=3
+                  |      +---> leaf [value=2
                   +---> node [feature=0, threshold=0.5]
-                         +---> leaf [value=1]
-                         +---> leaf [value=0]
+                         +---> leaf [value=1
+                         +---> leaf [value=0
+
 
 
 ------------------------------------------------------------------------------------random_tree number 1------------------------------------------------------------------------------------root [feature=1, threshold=-46.04]
     +---> node [feature=1, threshold=-40.06]
     |      +---> node [feature=0, threshold=62.65]
-    |      |      +---> leaf [value=0]
-    |      |      +---> leaf [value=1]
+    |      |      +---> leaf [value=0
+    |      |      +---> leaf [value=1
     |      +---> node [feature=1, threshold=-42.41]
-    |             +---> leaf [value=1]
-    |             +---> leaf [value=1]
+    |             +---> leaf [value=1
+    |             +---> leaf [value=1
     +---> node [feature=1, threshold=-49.54]
            +---> node [feature=1, threshold=-46.68]
-           |      +---> leaf [value=1]
-           |      +---> leaf [value=0]
+           |      +---> leaf [value=1
+           |      +---> leaf [value=0
            +---> node [feature=0, threshold=-93.28]
-                  +---> leaf [value=1]
-                  +---> leaf [value=1]
+                  +---> leaf [value=1
+                  +---> leaf [value=1
+
 
 
 ------------------------------------------------------------------------------------random_tree number 2------------------------------------------------------------------------------------root [feature=1, threshold=90.09]
     +---> node [feature=1, threshold=91.52]
     |      +---> node [feature=2, threshold=-37.63]
     |      |      +---> node [feature=2, threshold=20.63]
-    |      |      |      +---> leaf [value=0]
-    |      |      |      +---> leaf [value=2]
+    |      |      |      +---> leaf [value=0
+    |      |      |      +---> leaf [value=2
     |      |      +---> node [feature=0, threshold=9.92]
-    |      |             +---> leaf [value=1]
-    |      |             +---> leaf [value=0]
+    |      |             +---> leaf [value=1
+    |      |             +---> leaf [value=0
     |      +---> node [feature=0, threshold=50.7]
     |             +---> node [feature=2, threshold=-34.05]
-    |             |      +---> leaf [value=1]
-    |             |      +---> leaf [value=1]
+    |             |      +---> leaf [value=1
+    |             |      +---> leaf [value=1
     |             +---> node [feature=2, threshold=-39.36]
-    |                    +---> leaf [value=0]
-    |                    +---> leaf [value=1]
+    |                    +---> leaf [value=0
+    |                    +---> leaf [value=1
     +---> node [feature=2, threshold=-19.38]
            +---> node [feature=0, threshold=-59.31]
            |      +---> node [feature=1, threshold=42.64]
-           |      |      +---> leaf [value=0]
-           |      |      +---> leaf [value=0]
+           |      |      +---> leaf [value=0
+           |      |      +---> leaf [value=0
            |      +---> node [feature=0, threshold=-80.26]
-           |             +---> leaf [value=0]
-           |             +---> leaf [value=2]
+           |             +---> leaf [value=0
+           |             +---> leaf [value=2
            +---> node [feature=2, threshold=-41.57]
                   +---> node [feature=2, threshold=-29.56]
-                  |      +---> leaf [value=2]
-                  |      +---> leaf [value=0]
+                  |      +---> leaf [value=2
+                  |      +---> leaf [value=0
                   +---> node [feature=2, threshold=-43.33]
-                         +---> leaf [value=0]
-                         +---> leaf [value=1]
+                         +---> leaf [value=0
+                         +---> leaf [value=1
+
 
 
 ------------------------------------------------------------------------------------random_tree number 3------------------------------------------------------------------------------------root [feature=3, threshold=-40.3]
@@ -96,64 +100,65 @@
     |      +---> node [feature=1, threshold=85.14]
     |      |      +---> node [feature=0, threshold=45.71]
     |      |      |      +---> node [feature=3, threshold=-32.56]
-    |      |      |      |      +---> leaf [value=0]
-    |      |      |      |      +---> leaf [value=2]
+    |      |      |      |      +---> leaf [value=0
+    |      |      |      |      +---> leaf [value=2
     |      |      |      +---> node [feature=1, threshold=94.91]
-    |      |      |             +---> leaf [value=1]
-    |      |      |             +---> leaf [value=2]
+    |      |      |             +---> leaf [value=1
+    |      |      |             +---> leaf [value=2
     |      |      +---> node [feature=1, threshold=72.49]
     |      |             +---> node [feature=0, threshold=33.86]
-    |      |             |      +---> leaf [value=3]
-    |      |             |      +---> leaf [value=1]
+    |      |             |      +---> leaf [value=3
+    |      |             |      +---> leaf [value=1
     |      |             +---> node [feature=0, threshold=93.49]
-    |      |                    +---> leaf [value=2]
-    |      |                    +---> leaf [value=3]
+    |      |                    +---> leaf [value=2
+    |      |                    +---> leaf [value=3
     |      +---> node [feature=2, threshold=-21.68]
     |             +---> node [feature=0, threshold=-30.81]
     |             |      +---> node [feature=0, threshold=36.04]
-    |             |      |      +---> leaf [value=2]
-    |             |      |      +---> leaf [value=3]
+    |             |      |      +---> leaf [value=2
+    |             |      |      +---> leaf [value=3
     |             |      +---> node [feature=3, threshold=4.34]
-    |             |             +---> leaf [value=3]
-    |             |             +---> leaf [value=3]
+    |             |             +---> leaf [value=3
+    |             |             +---> leaf [value=3
     |             +---> node [feature=3, threshold=25.77]
     |                    +---> node [feature=2, threshold=-91.6]
-    |                    |      +---> leaf [value=2]
-    |                    |      +---> leaf [value=1]
+    |                    |      +---> leaf [value=2
+    |                    |      +---> leaf [value=1
     |                    +---> node [feature=0, threshold=-59.62]
-    |                           +---> leaf [value=1]
-    |                           +---> leaf [value=3]
+    |                           +---> leaf [value=1
+    |                           +---> leaf [value=3
     +---> node [feature=2, threshold=69.85]
            +---> node [feature=2, threshold=89.28]
            |      +---> node [feature=1, threshold=3.32]
            |      |      +---> node [feature=1, threshold=60.69]
-           |      |      |      +---> leaf [value=1]
-           |      |      |      +---> leaf [value=3]
+           |      |      |      +---> leaf [value=1
+           |      |      |      +---> leaf [value=3
            |      |      +---> node [feature=0, threshold=78.45]
-           |      |             +---> leaf [value=1]
-           |      |             +---> leaf [value=1]
+           |      |             +---> leaf [value=1
+           |      |             +---> leaf [value=1
            |      +---> node [feature=2, threshold=85.96]
            |             +---> node [feature=1, threshold=38.5]
-           |             |      +---> leaf [value=1]
-           |             |      +---> leaf [value=2]
+           |             |      +---> leaf [value=1
+           |             |      +---> leaf [value=2
            |             +---> node [feature=1, threshold=4.57]
-           |                    +---> leaf [value=0]
-           |                    +---> leaf [value=0]
+           |                    +---> leaf [value=0
+           |                    +---> leaf [value=0
            +---> node [feature=1, threshold=-92.28]
                   +---> node [feature=0, threshold=40.39]
                   |      +---> node [feature=2, threshold=52.48]
-                  |      |      +---> leaf [value=1]
-                  |      |      +---> leaf [value=1]
+                  |      |      +---> leaf [value=1
+                  |      |      +---> leaf [value=1
                   |      +---> node [feature=3, threshold=-77.01]
-                  |             +---> leaf [value=2]
-                  |             +---> leaf [value=3]
+                  |             +---> leaf [value=2
+                  |             +---> leaf [value=3
                   +---> node [feature=3, threshold=-54.28]
                          +---> node [feature=2, threshold=-30.84]
-                         |      +---> leaf [value=1]
-                         |      +---> leaf [value=0]
+                         |      +---> leaf [value=1
+                         |      +---> leaf [value=0
                          +---> node [feature=3, threshold=-91.72]
-                                +---> leaf [value=0]
-                                +---> leaf [value=3]
+                                +---> leaf [value=0
+                                +---> leaf [value=3
+
 
 
 ------------------------------------------------------------------------------------random_tree number 4------------------------------------------------------------------------------------root [feature=4, threshold=-52.64]
@@ -162,124 +167,124 @@
     |      |      +---> node [feature=2, threshold=-13.37]
     |      |      |      +---> node [feature=3, threshold=-68.05]
     |      |      |      |      +---> node [feature=2, threshold=69.91]
-    |      |      |      |      |      +---> leaf [value=0]
-    |      |      |      |      |      +---> leaf [value=0]
+    |      |      |      |      |      +---> leaf [value=0
+    |      |      |      |      |      +---> leaf [value=0
     |      |      |      |      +---> node [feature=2, threshold=45.21]
-    |      |      |      |             +---> leaf [value=1]
-    |      |      |      |             +---> leaf [value=2]
+    |      |      |      |             +---> leaf [value=1
+    |      |      |      |             +---> leaf [value=2
     |      |      |      +---> node [feature=2, threshold=-49.17]
     |      |      |             +---> node [feature=0, threshold=98.26]
-    |      |      |             |      +---> leaf [value=3]
-    |      |      |             |      +---> leaf [value=3]
+    |      |      |             |      +---> leaf [value=3
+    |      |      |             |      +---> leaf [value=3
     |      |      |             +---> node [feature=1, threshold=29.71]
-    |      |      |                    +---> leaf [value=3]
-    |      |      |                    +---> leaf [value=3]
+    |      |      |                    +---> leaf [value=3
+    |      |      |                    +---> leaf [value=3
     |      |      +---> node [feature=4, threshold=-52.62]
     |      |             +---> node [feature=1, threshold=94.69]
     |      |             |      +---> node [feature=4, threshold=-48.11]
-    |      |             |      |      +---> leaf [value=1]
-    |      |             |      |      +---> leaf [value=0]
+    |      |             |      |      +---> leaf [value=1
+    |      |             |      |      +---> leaf [value=0
     |      |             |      +---> node [feature=4, threshold=-44.22]
-    |      |             |             +---> leaf [value=1]
-    |      |             |             +---> leaf [value=2]
+    |      |             |             +---> leaf [value=1
+    |      |             |             +---> leaf [value=2
     |      |             +---> node [feature=0, threshold=61.46]
     |      |                    +---> node [feature=3, threshold=41.39]
-    |      |                    |      +---> leaf [value=2]
-    |      |                    |      +---> leaf [value=1]
+    |      |                    |      +---> leaf [value=2
+    |      |                    |      +---> leaf [value=1
     |      |                    +---> node [feature=1, threshold=32.1]
-    |      |                           +---> leaf [value=0]
-    |      |                           +---> leaf [value=2]
+    |      |                           +---> leaf [value=0
+    |      |                           +---> leaf [value=2
     |      +---> node [feature=4, threshold=-21.01]
     |             +---> node [feature=3, threshold=-40.37]
     |             |      +---> node [feature=3, threshold=63.75]
     |             |      |      +---> node [feature=1, threshold=-56.26]
-    |             |      |      |      +---> leaf [value=3]
-    |             |      |      |      +---> leaf [value=1]
+    |             |      |      |      +---> leaf [value=3
+    |             |      |      |      +---> leaf [value=1
     |             |      |      +---> node [feature=4, threshold=58.57]
-    |             |      |             +---> leaf [value=0]
-    |             |      |             +---> leaf [value=3]
+    |             |      |             +---> leaf [value=0
+    |             |      |             +---> leaf [value=3
     |             |      +---> node [feature=1, threshold=-14.29]
     |             |             +---> node [feature=4, threshold=70.8]
-    |             |             |      +---> leaf [value=1]
-    |             |             |      +---> leaf [value=4]
+    |             |             |      +---> leaf [value=1
+    |             |             |      +---> leaf [value=4
     |             |             +---> node [feature=1, threshold=-27.17]
-    |             |                    +---> leaf [value=0]
-    |             |                    +---> leaf [value=3]
+    |             |                    +---> leaf [value=0
+    |             |                    +---> leaf [value=3
     |             +---> node [feature=1, threshold=-4.06]
     |                    +---> node [feature=1, threshold=68.62]
     |                    |      +---> node [feature=0, threshold=-53.21]
-    |                    |      |      +---> leaf [value=3]
-    |                    |      |      +---> leaf [value=4]
+    |                    |      |      +---> leaf [value=3
+    |                    |      |      +---> leaf [value=4
     |                    |      +---> node [feature=0, threshold=-9.97]
-    |                    |             +---> leaf [value=1]
-    |                    |             +---> leaf [value=1]
+    |                    |             +---> leaf [value=1
+    |                    |             +---> leaf [value=1
     |                    +---> node [feature=1, threshold=-41.2]
     |                           +---> node [feature=4, threshold=-46.94]
-    |                           |      +---> leaf [value=0]
-    |                           |      +---> leaf [value=0]
+    |                           |      +---> leaf [value=0
+    |                           |      +---> leaf [value=0
     |                           +---> node [feature=3, threshold=50.44]
-    |                                  +---> leaf [value=1]
-    |                                  +---> leaf [value=2]
+    |                                  +---> leaf [value=1
+    |                                  +---> leaf [value=2
     +---> node [feature=4, threshold=-90.25]
            +---> node [feature=4, threshold=-58.25]
            |      +---> node [feature=2, threshold=92.87]
            |      |      +---> node [feature=0, threshold=24.74]
            |      |      |      +---> node [feature=4, threshold=-52.81]
-           |      |      |      |      +---> leaf [value=3]
-           |      |      |      |      +---> leaf [value=3]
+           |      |      |      |      +---> leaf [value=3
+           |      |      |      |      +---> leaf [value=3
            |      |      |      +---> node [feature=3, threshold=57.98]
-           |      |      |             +---> leaf [value=4]
-           |      |      |             +---> leaf [value=0]
+           |      |      |             +---> leaf [value=4
+           |      |      |             +---> leaf [value=0
            |      |      +---> node [feature=2, threshold=-83.63]
            |      |             +---> node [feature=1, threshold=-61.29]
-           |      |             |      +---> leaf [value=3]
-           |      |             |      +---> leaf [value=1]
+           |      |             |      +---> leaf [value=3
+           |      |             |      +---> leaf [value=1
            |      |             +---> node [feature=3, threshold=-74.65]
-           |      |                    +---> leaf [value=4]
-           |      |                    +---> leaf [value=0]
+           |      |                    +---> leaf [value=4
+           |      |                    +---> leaf [value=0
            |      +---> node [feature=1, threshold=-1.43]
            |             +---> node [feature=1, threshold=96.47]
            |             |      +---> node [feature=4, threshold=-67.59]
-           |             |      |      +---> leaf [value=0]
-           |             |      |      +---> leaf [value=1]
+           |             |      |      +---> leaf [value=0
+           |             |      |      +---> leaf [value=1
            |             |      +---> node [feature=3, threshold=41.19]
-           |             |             +---> leaf [value=2]
-           |             |             +---> leaf [value=4]
+           |             |             +---> leaf [value=2
+           |             |             +---> leaf [value=4
            |             +---> node [feature=0, threshold=35.98]
            |                    +---> node [feature=3, threshold=17.94]
-           |                    |      +---> leaf [value=1]
-           |                    |      +---> leaf [value=0]
+           |                    |      +---> leaf [value=1
+           |                    |      +---> leaf [value=0
            |                    +---> node [feature=3, threshold=33.83]
-           |                           +---> leaf [value=0]
-           |                           +---> leaf [value=2]
+           |                           +---> leaf [value=0
+           |                           +---> leaf [value=2
            +---> node [feature=1, threshold=-60.37]
                   +---> node [feature=2, threshold=-0.96]
                   |      +---> node [feature=3, threshold=-3.85]
                   |      |      +---> node [feature=0, threshold=7.25]
-                  |      |      |      +---> leaf [value=3]
-                  |      |      |      +---> leaf [value=3]
+                  |      |      |      +---> leaf [value=3
+                  |      |      |      +---> leaf [value=3
                   |      |      +---> node [feature=2, threshold=1.02]
-                  |      |             +---> leaf [value=1]
-                  |      |             +---> leaf [value=3]
+                  |      |             +---> leaf [value=1
+                  |      |             +---> leaf [value=3
                   |      +---> node [feature=2, threshold=-79.67]
                   |             +---> node [feature=0, threshold=-22.26]
-                  |             |      +---> leaf [value=3]
-                  |             |      +---> leaf [value=4]
+                  |             |      +---> leaf [value=3
+                  |             |      +---> leaf [value=4
                   |             +---> node [feature=1, threshold=85.48]
-                  |                    +---> leaf [value=0]
-                  |                    +---> leaf [value=1]
+                  |                    +---> leaf [value=0
+                  |                    +---> leaf [value=1
                   +---> node [feature=0, threshold=-30.4]
                          +---> node [feature=1, threshold=-80.95]
                          |      +---> node [feature=0, threshold=40.9]
-                         |      |      +---> leaf [value=0]
-                         |      |      +---> leaf [value=0]
+                         |      |      +---> leaf [value=0
+                         |      |      +---> leaf [value=0
                          |      +---> node [feature=4, threshold=-94.51]
-                         |             +---> leaf [value=3]
-                         |             +---> leaf [value=3]
+                         |             +---> leaf [value=3
+                         |             +---> leaf [value=3
                          +---> node [feature=0, threshold=-41.39]
                                 +---> node [feature=4, threshold=-92.75]
-                                |      +---> leaf [value=0]
-                                |      +---> leaf [value=4]
+                                |      +---> leaf [value=0
+                                |      +---> leaf [value=4
                                 +---> node [feature=4, threshold=-97.53]
-                                       +---> leaf [value=4]
-                                       +---> leaf [value=2]
+                                       +---> leaf [value=4
+                                       +---> leaf [value=2

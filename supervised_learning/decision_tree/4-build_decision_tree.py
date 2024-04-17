@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Task 2 - Decision Tree
+Task 4 - Decision Tree
 """
 
 import numpy as np
@@ -45,6 +45,26 @@ class Node:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
 
+    def left_child_add_prefix(self, text):
+        """
+        """
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += ("    |  " + x) + "\n"
+
+        return new_text
+
+    def right_child_add_prefix(self, text):
+        """
+        """
+        lines = text.split("\n")
+        new_text = "    +--" + lines[0] + "\n"
+        for x in lines[1:]:
+            new_text += ("       " + x) + "\n"
+
+        return new_text
+
     def __str__(self):
         """
         """
@@ -61,28 +81,41 @@ class Node:
             return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
-    def left_child_add_prefix(self, text):
+    def get_leaves_below(self):
         """
-        Adds the string representation of the left child to the given text
         """
-        lines = text.split("\n")
-        new_text = "    +--" + lines[0] + "\n"
-        for x in lines[1:]:
-            new_text += ("    |  " + x) + "\n"
-        return new_text
+        sleftc = self.left_child.get_leaves_below()
+        srightc = self.right_child.get_leaves_below()
+        return sleftc + srightc
 
-    def right_child_add_prefix(self, text):
+    def update_bounds_below(self):
         """
         """
-        lines = text.split("\n")
-        new_text = "    +--" + lines[0] + "\n"
-        for x in lines[1:]:
-            new_text += ("       " + x) + "\n"
+        if self.is_root:
+            self.upper = {0: np.inf}
+            self.lower = {0: -1 * np.inf}
 
-        return new_text
+        for child in [self.left_child, self.right_child]:
+            child.upper = self.upper.copy()
+            child.lower = self.lower.copy()
+        if self.feature in self.left_child.lower.keys():
+            self.left_child.lower[self.feature] = \
+                max(self.threshold, self.left_child.lower[self.feature])
+        else:
+            self.left_child.lower[self.feature] = self.threshold
+        if self.feature in self.right_child.upper.keys():
+            self.right_child.upper[self.feature] = \
+                min(self.threshold, self.right_child.upper[self.feature])
+        else:
+            self.right_child.upper[self.feature] = self.threshold
+
+        for child in [self.left_child, self.right_child]:
+            child.update_bounds_below()
+
 
 class Leaf(Node):
-    """ Leaf """
+    """
+    """
 
     def __init__(self, value, depth=None):
         super().__init__()
@@ -105,7 +138,17 @@ class Leaf(Node):
     def __str__(self):
         """
         """
-        return (f"-> leaf [value={self.value}]")
+        return f"-> leaf [value={self.value}] "
+
+    def get_leaves_below(self):
+        """
+        """
+        return [self]
+
+    def update_bounds_below(self):
+        """
+        """
+        pass
 
 
 class Decision_Tree:
@@ -142,3 +185,13 @@ class Decision_Tree:
         """
         """
         return self.root.__str__()
+
+    def get_leaves(self):
+        """
+        """
+        return self.root.get_leaves_below()
+
+    def update_bounds(self):
+        """
+        """
+        self.root.update_bounds_below()
