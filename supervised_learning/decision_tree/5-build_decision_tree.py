@@ -45,41 +45,41 @@ class Node:
             count += self.right_child.count_nodes_below(only_leaves)
         return count
 
-    def __str__(self):
-        """
-        Prints string representation of the node and its children.
-        """
-
-        if self.is_root:
-            s = "root"
-        else:
-            s = "-> node"
-
-        return f"{s} [feature={self.feature}, threshold={self.threshold}]\n"\
-            + self.left_child_add_prefix(str(self.left_child))\
-            + self.right_child_add_prefix(str(self.right_child))
-
     def left_child_add_prefix(self, text):
         """
-        Adds the string representation of the left child to the given text
         """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
             new_text += ("    |  " + x) + "\n"
-        return (new_text)
+
+        return new_text
 
     def right_child_add_prefix(self, text):
         """
-        Adds the string representation of the right child to the given text
         """
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
             new_text += ("       " + x) + "\n"
-        # NOTE Had to strip the extra newline after right node
-        # There may be better alternatives
-        return (new_text.rstrip())
+
+        return new_text
+
+    def __str__(self):
+        """
+        """
+        feature = self.feature
+        threshold = self.threshold
+        if self.is_root:
+            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
+            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            return f"root [feature={feature}, threshold={threshold}]\n" \
+                   f"{a}{b}"
+        else:
+            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
+            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            return f"-> node [feature={feature}, threshold={threshold}]\n" \
+                   f"{a}{b}"
 
     def get_leaves_below(self):
         """
