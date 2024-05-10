@@ -553,3 +553,5 @@ supervised_learning/optimization/__pycache__/13-batch_norm.cpython-39.pyc
 supervised_learning/optimization/__pycache__/14-batch_norm.cpython-39.pyc
 12-output_khaled
 supervised_learning/optimization/clean.py
+supervised_learning/optimization/6-checkmainV2_1.py
+supervised_learning/optimization/6-checkmainV2_0.py

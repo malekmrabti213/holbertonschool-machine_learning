@@ -11,4 +11,3 @@ def create_momentum_op(alpha, beta1):
     """
     optimizer = tf.keras.optimizers.SGD(learning_rate=alpha, momentum=beta1)
     return optimizer
-
