@@ -518,7 +518,7 @@ network1.h5
 supervised_learning/optimization/6-checkmainV2.py
 supervised_learning/optimization/6-main.py
 supervised_learning/optimization/6-mainV2.py
-supervised_learning/optimization/6-momentum.py
+
 supervised_learning/optimization/7-main.py
 supervised_learning/optimization/7-RMSProp.py
 supervised_learning/optimization/8-checkmainV2.py
@@ -552,3 +552,4 @@ supervised_learning/optimization/__pycache__/12-learning_rate_decay.cpython-39.p
 supervised_learning/optimization/__pycache__/13-batch_norm.cpython-39.pyc
 supervised_learning/optimization/__pycache__/14-batch_norm.cpython-39.pyc
 12-output_khaled
+supervised_learning/optimization/clean.py
