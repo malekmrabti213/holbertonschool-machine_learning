@@ -13,7 +13,6 @@ def learning_rate_decay(alpha, decay_rate, decay_step):
         initial_learning_rate=alpha,
         decay_rate=decay_rate,
         decay_steps=decay_step,
-        staircase=True) 
-    
+        staircase=True)
+
     return lr_schedule
- 
