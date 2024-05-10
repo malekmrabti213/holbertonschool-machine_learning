@@ -398,17 +398,17 @@ supervised_learning/decision_tree/__pycache__/9-random_forest.cpython-39.pyc
 supervised_learning/decision_tree/__pycache__/10-isolation_tree.cpython-39.pyc
 supervised_learning/decision_tree/__pycache__/11-isolation_forest.cpython-39.pyc
 supervised_learning/optimization/0-main.py
-supervised_learning/optimization/0-norm_constants.py
+
 supervised_learning/optimization/1-main.py
-supervised_learning/optimization/1-normalize.py
+
 supervised_learning/optimization/2-main.py
-supervised_learning/optimization/2-shuffle_data.py
+
 supervised_learning/optimization/3-main.py
-supervised_learning/optimization/3-mini_batch.py
+
 supervised_learning/optimization/4-main.py
-supervised_learning/optimization/4-moving_average.py
+
 supervised_learning/optimization/5-main.py
-supervised_learning/optimization/5-momentum.py
+
 supervised_learning/optimization/trying.py
 supervised_learning/optimization/__pycache__/0-norm_constants.cpython-39.pyc
 supervised_learning/optimization/__pycache__/1-normalize.cpython-39.pyc
@@ -520,7 +520,7 @@ supervised_learning/optimization/6-main.py
 supervised_learning/optimization/6-mainV2.py
 
 supervised_learning/optimization/7-main.py
-supervised_learning/optimization/7-RMSProp.py
+
 supervised_learning/optimization/8-checkmainV2.py
 supervised_learning/optimization/8-main.py
 supervised_learning/optimization/8-mainV2.py
@@ -530,14 +530,13 @@ supervised_learning/optimization/9-main.py
 
 supervised_learning/optimization/10-main.py
 supervised_learning/optimization/10-mainV2.py
-supervised_learning/optimization/11-learning_rate_decay.py
+
 supervised_learning/optimization/11-main.py
 
 supervised_learning/optimization/12-main.py
 supervised_learning/optimization/12-mainV2.py
-supervised_learning/optimization/13-batch_norm.py
+
 supervised_learning/optimization/13-main.py
-supervised_learning/optimization/14-batch_norm.py
 supervised_learning/optimization/14-main.py
 supervised_learning/optimization/14-mainV2.py
 supervised_learning/optimization/model.py
@@ -563,3 +562,12 @@ supervised_learning/optimization/__pycache__/10-Adam.cpython-39.pyc
 supervised_learning/optimization/10-checkmainV2_1.py
 supervised_learning/optimization/12-checkmainV2_1.py
 supervised_learning/optimization/12-checkmainV2_0.py
+supervised_learning/optimization/0-norm_constants.py
+supervised_learning/optimization/1-normalize.py
+supervised_learning/optimization/2-shuffle_data.py
+supervised_learning/optimization/3-mini_batch.py
+supervised_learning/optimization/4-moving_average.py
+supervised_learning/optimization/5-momentum.py
+supervised_learning/optimization/7-RMSProp.py
+supervised_learning/optimization/11-learning_rate_decay.py
+supervised_learning/optimization/13-batch_norm.py
