@@ -524,7 +524,7 @@ supervised_learning/optimization/7-RMSProp.py
 supervised_learning/optimization/8-checkmainV2.py
 supervised_learning/optimization/8-main.py
 supervised_learning/optimization/8-mainV2.py
-supervised_learning/optimization/8-RMSProp.py
+
 supervised_learning/optimization/9-Adam.py
 supervised_learning/optimization/9-main.py
 supervised_learning/optimization/10-Adam.py
@@ -555,3 +555,5 @@ supervised_learning/optimization/__pycache__/14-batch_norm.cpython-39.pyc
 supervised_learning/optimization/clean.py
 supervised_learning/optimization/6-checkmainV2_1.py
 supervised_learning/optimization/6-checkmainV2_0.py
+supervised_learning/optimization/8-checkmainV2_0.py
+supervised_learning/optimization/8-checkmainV2_1.py
