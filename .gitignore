@@ -632,7 +632,7 @@ supervised_learning/regularization/3-mainV2.py
 supervised_learning/regularization/3-l2_reg_create_layer.py
 supervised_learning/regularization/2-mainV2.py
 supervised_learning/regularization/2-main.py
-supervised_learning/regularization/2-l2_reg_cost.py
+
 supervised_learning/regularization/1-main.py
 supervised_learning/regularization/1-l2_reg_gradient_descent.py
 supervised_learning/regularization/0-main.py
@@ -656,3 +656,8 @@ labels_logits.npz
 1-output
 0-test
 0-output
+supervised_learning/regularization/7-main.py
+supervised_learning/regularization/7-early_stopping.py
+supervised_learning/regularization/2-main_checker_1.py
+supervised_learning/regularization/2-main_checker_0.py
+supervised_learning/regularization/__pycache__/7-early_stopping.cpython-39.pyc
