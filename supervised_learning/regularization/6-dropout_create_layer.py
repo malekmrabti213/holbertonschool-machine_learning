@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-task 6
+
 """
 import tensorflow as tf
+
 
 def dropout_create_layer(prev, n, activation, keep_prob, training=True):
     """
