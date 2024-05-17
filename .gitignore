@@ -650,7 +650,6 @@ supervised_learning/regularization/__pycache__/6-dropout_create_layer.cpython-39
 .gitignore
 weights_results1.txt
 weights_results.txt
-model_reg.h5
 labels_logits.npz
 1-test
 1-output
