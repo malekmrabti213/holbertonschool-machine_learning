@@ -2,7 +2,6 @@
 """
 Task 5
 """
-import tensorflow as tf
 from tensorflow import keras as K
 
 def lenet5(X):
