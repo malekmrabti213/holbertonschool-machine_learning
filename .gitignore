@@ -762,7 +762,7 @@ supervised_learning/cnn/3-pool_backward.py
 supervised_learning/cnn/4-lenet5.py
 supervised_learning/cnn/4-main_check.py
 supervised_learning/cnn/4-main.py
-supervised_learning/cnn/5-lenet5.py
+
 supervised_learning/cnn/5-main_checker.py
 supervised_learning/cnn/5-main.py
 supervised_learning/cnn/README.md
