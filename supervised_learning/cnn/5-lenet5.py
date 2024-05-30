@@ -4,12 +4,11 @@ Task 5
 """
 from tensorflow import keras as K
 
+
 def lenet5(X):
     """
-   
     """ 
     he_normal = K.initializers.HeNormal(seed=0)
-    
     A1 = K.layers.Conv2D(6, 5, activation='relu',
                          kernel_initializer=he_normal, padding='same')(X)
     A2 = K.layers.MaxPooling2D()(A1)
@@ -23,7 +22,6 @@ def lenet5(X):
                         kernel_initializer=he_normal)(A6)
     Y = K.layers.Dense(10, activation='softmax',
                        kernel_initializer=he_normal)(A7)
-    
     model = K.Model(inputs=X, outputs=Y)
     model.compile(optimizer=K.optimizers.Adam(),
                   loss='categorical_crossentropy', metrics=['accuracy'])
