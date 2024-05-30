@@ -7,7 +7,7 @@ from tensorflow import keras as K
 
 def lenet5(X):
     """
-    """ 
+    """
     he_normal = K.initializers.HeNormal(seed=0)
     A1 = K.layers.Conv2D(6, 5, activation='relu',
                          kernel_initializer=he_normal, padding='same')(X)
