@@ -12,10 +12,12 @@ def inception_network():
     """
     inputs = K.Input(shape=(224, 224, 3))
 
-    X = K.layers.Conv2D(64, 7, strides=(2, 2), padding='same', activation='relu')(inputs)
+    X = K.layers.Conv2D(64, 7, strides=(2, 2), padding='same',
+                        activation='relu')(inputs)
     X = K.layers.MaxPool2D(pool_size=(3, 3), strides=(2, 2), padding='same')(X)
     X = K.layers.Conv2D(64, 1, strides=(1, 1), activation='relu')(X)
-    X = K.layers.Conv2D(192, 3, strides=(1, 1), padding='same', activation='relu')(X)
+    X = K.layers.Conv2D(192, 3, strides=(1, 1), padding='same',
+                        activation='relu')(X)
     X = K.layers.MaxPool2D(pool_size=(3, 3), strides=(2, 2), padding='same')(X)
 
     X = inception_block(X, [64, 96, 128, 16, 32, 32])
