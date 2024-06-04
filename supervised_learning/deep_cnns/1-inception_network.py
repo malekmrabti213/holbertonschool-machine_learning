@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-
-# import tensorflow.keras as K
-
-import tensorflow as tf
+"""
+Task 1
+"""
 from tensorflow import keras as K
 
 
 inception_block = __import__('0-inception_block').inception_block
 
 def inception_network():
-
+    """
+    """
     inputs = K.Input(shape=(224, 224, 3))
 
     X = K.layers.Conv2D(64, 7, strides=(2, 2), padding='same', activation='relu')(inputs)
