@@ -838,3 +838,6 @@ unsupervised_learning/gan/__pycache__/2-wgan_gp.cpython-39.pyc
 wgan_clip.png
 0-test
 supervised_learning/cnn/2-main_checker0.py
+supervised_learning/deep_cnns/4-resnet50(1).py
+supervised_learning/deep_cnns/3-projection_block(1).py
+supervised_learning/deep_cnns/2-identity_block(1).py
