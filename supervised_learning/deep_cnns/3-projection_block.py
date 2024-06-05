@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-
+"""
+Task 3
+"""
 from tensorflow import keras as K
 
 
 def projection_block(A_prev, filters, s=2):
-
+    """
+    """
     F11, F3, F12 = filters
     he_norm = K.initializers.he_normal(seed=0)
 
