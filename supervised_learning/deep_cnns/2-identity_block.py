@@ -25,5 +25,5 @@ def identity_block(A_prev, filters):
 
     X = K.layers.Add()([X, A_prev])
     X = K.layers.Activation('relu')(X)
-    
+
     return X
