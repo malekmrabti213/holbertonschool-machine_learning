@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-
-# import tensorflow.keras as K
-
-import tensorflow as tf
+"""
+Task 4
+"""
 from tensorflow import keras as K
-
 identity_block = __import__('2-identity_block').identity_block
 projection_block = __import__('3-projection_block').projection_block
 
+
 def resnet50():
+    """
+    """
     inputs = K.Input(shape=(224, 224, 3))
 
     X = K.layers.Conv2D(64, (7, 7), strides=(2, 2), padding='same', kernel_initializer=K.initializers.he_normal())(inputs)
