@@ -7,23 +7,34 @@ from tensorflow import keras as K
 
 def identity_block(A_prev, filters):
     """
+    Create the identity block form the ResNet Model
+    :param A_prev: The previous layer output
+    :param filters: An array of the conv-filter-size
+    :return: The identity module
     """
-    F11, F3, F12 = filters
-    he_norm = K.initializers.he_normal(seed=0)
+    init = K.initializers.he_normal(seed=0)
+    f11, f3, f12 = filters
 
-    X = K.layers.Conv2D(F11, (1, 1), kernel_initializer=he_norm)(A_prev)
-    X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    conv_f11 = K.layers.Conv2D(filters=f11,
+                               kernel_size=(1, 1),
+                               padding="same",
+                               kernel_initializer=init)(A_prev)
+    norm_1 = K.layers.BatchNormalization(axis=3)(conv_f11)
+    act_1 = K.layers.ReLU()(norm_1)
 
-    X = K.layers.Conv2D(F3, (3, 3), padding='same',
-                        kernel_initializer=he_norm)(X)
-    X = K.layers.BatchNormalization(axis=3)(X)
-    X = K.layers.Activation('relu')(X)
+    conv_f3 = K.layers.Conv2D(filters=f3,
+                              kernel_size=(3, 3),
+                              padding="same",
+                              kernel_initializer=init)(act_1)
+    norm_2 = K.layers.BatchNormalization(axis=3)(conv_f3)
+    act_2 = K.layers.ReLU()(norm_2)
 
-    X = K.layers.Conv2D(F12, (1, 1), kernel_initializer=he_norm)(X)
-    X = K.layers.BatchNormalization(axis=3)(X)
+    conv_f12 = K.layers.Conv2D(filters=f12,
+                               kernel_size=(1, 1),
+                               padding="same",
+                               kernel_initializer=init)(act_2)
+    norm_3 = K.layers.BatchNormalization(axis=3)(conv_f12)
 
-    X = K.layers.Add()([X, A_prev])
-    X = K.layers.Activation('relu')(X)
+    add = K.layers.Add()([norm_3, A_prev])
 
-    return X
+    return K.layers.ReLU()(add)
