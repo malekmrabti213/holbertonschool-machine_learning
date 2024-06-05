@@ -11,7 +11,7 @@ def resnet50():
     Create the ResNet50 Model
     :return: The ResNet50 model
     """
-    init = K.initializers.he_normal()
+    init = K.initializers.he_normal(seed=0)
     input = K.Input(shape=(224, 224, 3))
 
     conv_1 = K.layers.Conv2D(filters=64,
