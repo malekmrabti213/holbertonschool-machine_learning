@@ -844,3 +844,4 @@ supervised_learning/deep_cnns/2-identity_block(1).py
 supervised_learning/deep_cnns/5-dense_block(1).py
 supervised_learning/deep_cnns/6-transition_layer(1).py
 supervised_learning/deep_cnns/__pycache__/6-transition_layer.cpython-39.pyc
+supervised_learning/deep_cnns/7-densenet121(1).py
