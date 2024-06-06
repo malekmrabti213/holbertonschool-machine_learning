@@ -842,3 +842,5 @@ supervised_learning/deep_cnns/4-resnet50(1).py
 supervised_learning/deep_cnns/3-projection_block(1).py
 supervised_learning/deep_cnns/2-identity_block(1).py
 supervised_learning/deep_cnns/5-dense_block(1).py
+supervised_learning/deep_cnns/6-transition_layer(1).py
+supervised_learning/deep_cnns/__pycache__/6-transition_layer.cpython-39.pyc
