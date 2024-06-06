@@ -841,3 +841,4 @@ supervised_learning/cnn/2-main_checker0.py
 supervised_learning/deep_cnns/4-resnet50(1).py
 supervised_learning/deep_cnns/3-projection_block(1).py
 supervised_learning/deep_cnns/2-identity_block(1).py
+supervised_learning/deep_cnns/5-dense_block(1).py
