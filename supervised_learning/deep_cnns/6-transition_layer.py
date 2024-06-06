@@ -4,6 +4,7 @@ Task 6
 """
 from tensorflow import keras as K
 
+
 def transition_layer(X, nb_filters, compression):
     """
     """
