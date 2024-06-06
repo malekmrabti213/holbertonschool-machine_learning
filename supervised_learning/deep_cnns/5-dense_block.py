@@ -1,33 +1,33 @@
 #!/usr/bin/env python3
-"""
-Task 5
-"""
+
+"""Useless comment"""
 from tensorflow import keras as K
 
 
 def dense_block(X, nb_filters, growth_rate, layers):
     """
+    Create the dense block of the DenseNet-b
+    :param X: The output of the previous layer
+    :param nb_filters: The number of filter from the previous
+    :param growth_rate: The growth rate
+    :param layers: The number of layer in the dense block
+    :return: The dense block module
     """
-    he_normal = K.initializers.he_normal(seed=0)
-    H = X
-
+    init = K.initializers.he_normal(seed=0)
+    input_data = X
     for _ in range(layers):
-        # 1x1 conv
-        X = K.layers.BatchNormalization(axis=3)(H)
-        X = K.layers.Activation('relu')(X)
-        X = K.layers.Conv2D(growth_rate * 4, (1, 1),
-                            padding='same',
-                            kernel_initializer=he_normal)(X)
+        norm = K.layers.BatchNormalization()(input_data)
+        act = K.layers.ReLU()(norm)
+        conv_1x1 = K.layers.Conv2D(filters=4 * growth_rate,
+                                   kernel_size=(1, 1),
+                                   kernel_initializer=init)(act)
+        norm = K.layers.BatchNormalization()(conv_1x1)
+        act = K.layers.ReLU()(norm)
+        conv_3x3 = K.layers.Conv2D(filters=growth_rate,
+                                   kernel_size=(3, 3),
+                                   strides=(1, 1),
+                                   padding="same",
+                                   kernel_initializer=init)(act)
+        input_data = K.layers.Concatenate()([input_data, conv_3x3])
 
-        # 3x3 conv
-        X = K.layers.BatchNormalization(axis=3)(X)
-        X = K.layers.Activation('relu')(X)
-        X = K.layers.Conv2D(growth_rate, (3, 3),
-                            padding='same',
-                            kernel_initializer=he_normal)(X)
-
-        # concatenate all outputs of dense block
-        H = K.layers.Concatenate(axis=3)([H, X])
-        nb_filters += growth_rate
-
-    return H, nb_filters
+    return input_data, (growth_rate * layers) + nb_filters
