@@ -1,106 +1,135 @@
 #!/usr/bin/env python3
 """
-Initialize Yolo
+    Initialize Yolo
 """
-
-
-import tensorflow.keras as K
+import tensorflow as tf
 import numpy as np
 
 
 class Yolo:
     """
-    Yolo class
+        Class Yolo uses the Yolo v3 algorithm to perform object detection
     """
+
     def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
-        self.model = K.models.load_model(model_path)
-        with open(classes_path, 'r') as classes_file:
-            self.class_names = [
-                line.strip() for line in classes_file.readlines()
-                ]
+        """
+            Class constructor of Yolo class
+
+            :param model_path: path where Darknet Keras model is stored
+            :param classes_path:path where list of class names,
+                in order of index
+            :param class_t: float, box score threshold
+                for initial filtering step
+            :param nms_t: float, IOU threshold for non-max suppression
+            :param anchors: ndarray, shape(outputs, anchor_boxes, 2)
+                all anchor boxes
+                outputs: number of outputs (prediction) made by Darknet model
+                anchor_boxes: number of anchor boxes used for each prediction
+                2: [anchor_box_width, anchor_box_height]
+
+        """
+        self.model = tf.keras.models.load_model(model_path)
+        self.class_names = []
+        with open(classes_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                self.class_names.append(line)
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
 
     def process_outputs(self, outputs, image_size):
         """
-        outputs -- list of numpy.ndarrays containing the predictions from the
-        Darknet model for a single image:
-            Each output will have the shape (grid_height, grid_width,
-            anchor_boxes, 4 + 1 + classes)
-                grid_height & grid_width => the height and width of the grid
-                used for the output
-                anchor_boxes => the number of anchor boxes used
+            Function to process outputs
+
+        :param outputs: list of ndarray, predictions from a single image
+                each output,
+                shape(grid_height, grid_width, anchor_boxes, 4+1+classes)
+                grid_height, grid_width: height and width of grid
+                 used for the output
+                anchor_boxes: number of anchor boxes used
                 4 => (t_x, t_y, t_w, t_h)
                 1 => box_confidence
-                classes => class probabilities for all classes
-        image_size -- numpy.ndarray containing the image’s original size
-        [image_height, image_width]
-        Returns a tuple of (boxes, box_confidences, box_class_probs):
-            boxes: a list of numpy.ndarrays of shape (grid_height, grid_width,
-            anchor_boxes, 4) containing the processed boundary boxes for each
-            output, respectively:
-                4 => (x1, y1, x2, y2)
-                (x1, y1, x2, y2) should represent the boundary box relative to
-                original image
-            box_confidences: a list of numpy.ndarrays of shape (grid_height,
-            grid_width, anchor_boxes, 1) containing the box confidences for
-            each output, respectively
-            box_class_probs: a list of numpy.ndarrays of shape (grid_height,
-            grid_width, anchor_boxes, classes) containing the box's class
-            probabilities for each output, respectively
+                classes => classes probabilities for all classes
+        :param image_size: ndarray,
+               image's original size [image_height, image_width]
+
+        :return: tuple (boxes, box_confidences, box_class_probs):
+                boxes: list of ndarrays,
+                       shape(grid_height, grid_width, anchor_boxes, 4)
+                        processed boundary boxes for each output
+                        4 => (x1,y1, x2, y2)
+                boxe_confidences: list ndarray,
+                    shape(grid_height, grid_width, anchor_boxes, 1)
+                    boxe confidences for each output
+                box_class_probs: list ndarray,
+                    shape(grid_height, grid_width, anchor_boxes, classes)
+                    box's class probabilities for each output
         """
+        # extract image size
+        image_height, image_height = image_size
+
         boxes = []
         box_confidences = []
         box_class_probs = []
-        ih, iw = image_size
 
-        for i, output in enumerate(outputs):
-            # Get dimensions of the current output
-            gh, gw, anchorBoxes, _ = output.shape
+        # process for each output
+        for idx, output in enumerate(outputs):
 
-            # Create an empty array to store processed boundary boxes
-            box = np.zeros(output[:, :, :, :4].shape)
+            # extract height, width, number of anchor box for current output
+            grid_height, grid_width, nbr_anchor, _ = output.shape
 
-            # Extract predicted coordinates and dimensions of boundary boxes
-            tx = output[:, :, :, 0]
-            ty = output[:, :, :, 1]
-            tw = output[:, :, :, 2]
-            th = output[:, :, :, 3]
+            # extract coordinate of output NN
+            t_x = output[:, :, :, 0]
+            t_y = output[:, :, :, 1]
+            t_w = output[:, :, :, 2]
+            t_h = output[:, :, :, 3]
 
-            # Get anchor box widths and heights for each grid cell
-            pwTotal = self.anchors[:, :, 0]
-            phTotal = self.anchors[:, :, 1]
+            # grid coordinate
+            grid_x, grid_y = np.meshgrid(np.arange(grid_width),
+                                         np.arange(grid_height))
 
-            # Reshape anchor box widths and heights to match grid dimensions
-            pw = np.tile(pwTotal[i], gw).reshape(gw, 1, len(pwTotal[i]))
-            ph = np.tile(phTotal[i], gh).reshape(gh, 1, len(phTotal[i]))
+            # Repeat grid coordinate for each anchor box
+            grid_x = np.expand_dims(grid_x, axis=-1)
+            grid_y = np.expand_dims(grid_y, axis=-1)
 
-            # Create grid coordinates for positioning boundary boxes
-            cx = np.tile(np.arange(gw), gh).reshape(gw, gw, 1)
-            cy = np.tile(np.arange(gw),
-                         gh).reshape(gh, gh).T.reshape(gh, gh, 1)
+            # extract anchor_box_width, anchor_box_height
+            p_w = self.anchors[idx, :, 0]
+            p_h = self.anchors[idx, :, 1]
 
-            # Compute absolute coordinates and dimensions of boundary boxes
-            bx = (1 / (1 + np.exp(-tx)) + cx) / gw
-            by = (1 / (1 + np.exp(-ty)) + cy) / gh
-            bw = (np.exp(tw) * pw) / self.model.input.shape[1].value
-            bh = (np.exp(th) * ph) / self.model.input.shape[2].value
+            # size image
+            image_height, image_width = image_size
 
-            # Update box array with computed box coordinates and dimensions
-            box[:, :, :, 0] = (bx - (bw / 2)) * iw
-            box[:, :, :, 1] = (by - (bh / 2)) * ih
-            box[:, :, :, 2] = (bx + (bw / 2)) * iw
-            box[:, :, :, 3] = (by + (bh / 2)) * ih
+            # sigmoid : grid scale (value between 0 and 1)
+            # + c_x or c_y : coordinate of cells in the grid
+            b_x = ((1.0 / (1.0 + np.exp(-t_x))) + grid_x) / grid_width
+            b_y = ((1.0 / (1.0 + np.exp(-t_y))) + grid_y) / grid_height
+            # exp for predicted height and width
+            b_w = p_w * np.exp(t_w)
+            b_w /= self.model.input.shape[1]
+            b_h = p_h * np.exp(t_h)
+            b_h /= self.model.input.shape[2]
+
+            # conv in pixel : absolute coordinate
+            x1 = (b_x - b_w / 2) * image_width
+            y1 = (b_y - b_h / 2) * image_height
+            x2 = (b_w / 2 + b_x) * image_width
+            y2 = (b_h / 2 + b_y) * image_height
+
+            # Update box array with box coordinates and dimensions
+            box = np.zeros((grid_height, grid_width, nbr_anchor, 4))
+            box[:, :, :, 0] = x1
+            box[:, :, :, 1] = y1
+            box[:, :, :, 2] = x2
+            box[:, :, :, 3] = y2
             boxes.append(box)
 
-            # Compute box confidences and reshape to match grid dimensions
-            temp = output[:, :, :, 4]
-            sigmoid = (1 / (1 + np.exp(-temp)))
-            box_confidences.append(sigmoid.reshape(gh, gw, anchorBoxes, 1))
+            confidences = output[:, :, :, 4:5]
+            sigmoid_confidence = 1 / (1 + np.exp(-confidences))
+            class_probs = output[:, :, :, 5:]
+            sigmoid_class_probs = 1 / (1 + np.exp(-class_probs))
 
-            # Compute box class probabilities
-            temp = output[:, :, :, 5:]
-            box_class_probs.append((1 / (1 + np.exp(-temp))))
+            box_confidences.append(sigmoid_confidence)
+            box_class_probs.append(sigmoid_class_probs)
 
         return boxes, box_confidences, box_class_probs
