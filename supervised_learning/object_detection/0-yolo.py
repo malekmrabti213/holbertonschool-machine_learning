@@ -4,8 +4,7 @@ Initialize Yolo
 """
 
 
-import tensorflow.keras as K
-
+from tensorflow import keras as K
 
 class Yolo:
     """
