@@ -846,3 +846,5 @@ supervised_learning/deep_cnns/6-transition_layer(1).py
 supervised_learning/deep_cnns/__pycache__/6-transition_layer.cpython-39.pyc
 supervised_learning/deep_cnns/7-densenet121(1).py
 reinforcement-learning/q_learning/mahdi.py
+yolo.h5
+supervised_learning/object_detection/__pycache__/0-yolo.cpython-39.pyc
