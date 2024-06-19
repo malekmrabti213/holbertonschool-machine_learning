@@ -862,3 +862,5 @@ test.txt
 supervised_learning/object_detection/4-checker.py
 supervised_learning/object_detection/4-main.py
 1-test
+supervised_learning/object_detection/5-main.py
+supervised_learning/object_detection/5-checker.py
