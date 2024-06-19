@@ -848,3 +848,17 @@ supervised_learning/deep_cnns/7-densenet121(1).py
 reinforcement-learning/q_learning/mahdi.py
 yolo.h5
 supervised_learning/object_detection/__pycache__/0-yolo.cpython-39.pyc
+yolo_images/yolo/dog.jpg
+yolo_images/yolo/eagle.jpg
+yolo_images/yolo/giraffe.jpg
+yolo_images/yolo/horses.jpg
+yolo_images/yolo/person.jpg
+yolo_images/yolo/takagaki.jpg
+1-test
+test.h5
+test.txt
+1-test
+1-test
+supervised_learning/object_detection/4-checker.py
+supervised_learning/object_detection/4-main.py
+1-test
