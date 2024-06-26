@@ -904,3 +904,7 @@ supervised_learning/neural_style_transfer/2-main.py
 supervised_learning/neural_style_transfer/3-main.py
 vgg_base.keras
 vgg_base.keras
+supervised_learning/neural_style_transfer/3-main_checker1.py
+supervised_learning/neural_style_transfer/3-main_checker2.py
+supervised_learning/neural_style_transfer/3-main_checker3.py
+supervised_learning/neural_style_transfer/3-main_checker4.py
