@@ -1,1 +1,1 @@
-('yolo_images/yolo/dog.jpg', 'yolo_images/yolo/eagle.jpg', 'yolo_images/yolo/giraffe.jpg', 'yolo_images/yolo/horses.jpg', 'yolo_images/yolo/person.jpg', 'yolo_images/yolo/takagaki.jpg')
+['yolo_images/yolo\\dog.jpg', 'yolo_images/yolo\\eagle.jpg', 'yolo_images/yolo\\giraffe.jpg', 'yolo_images/yolo\\horses.jpg', 'yolo_images/yolo\\person.jpg', 'yolo_images/yolo\\takagaki.jpg']
