@@ -908,3 +908,9 @@ supervised_learning/neural_style_transfer/3-main_checker1.py
 supervised_learning/neural_style_transfer/3-main_checker2.py
 supervised_learning/neural_style_transfer/3-main_checker3.py
 supervised_learning/neural_style_transfer/3-main_checker4.py
+base_model/fingerprint.pb
+base_model/keras_metadata.pb
+base_model/saved_model.pb
+base_model/variables/variables.data-00000-of-00001
+base_model/variables/variables.index
+supervised_learning/neural_style_transfer/4-main.py
