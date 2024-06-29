@@ -329,4 +329,4 @@ class NST:
         # using gradient method of tape
         grad = tape.gradient(J_total, generated_image)
 
-        return grad, J_total, J_content, J_style       
+        return grad, J_total, J_content, J_style
