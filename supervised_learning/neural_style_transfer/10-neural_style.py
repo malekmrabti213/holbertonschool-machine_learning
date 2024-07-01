@@ -17,32 +17,31 @@ class NST:
                     'block5_conv1']
     content_layer = 'block5_conv2'
 
-    def __init__(self, style_image, content_image,
-                 alpha=1e4, beta=1, var=10):
+    def __init__(self, style_image, content_image, alpha=1e4, beta=1):
         """
         """
 
-        if (type(style_image) is not np.ndarray or
-            style_image.ndim != 3 or style_image.shape[2] != 3):
+        if not isinstance(style_image, np.ndarray
+                          ) or len(style_image.shape
+                                   ) != 3 or style_image.shape[2] != 3:
             raise TypeError(
-                'style_image must be a numpy.ndarray with shape (h, w, 3)')
-        if (type(content_image) is not np.ndarray or
-            content_image.ndim != 3 or
-            content_image.shape[2] != 3):
+                "style_image must be a numpy.ndarray with shape (h, w, 3)")
+        if not isinstance(content_image, np.ndarray
+                          ) or len(content_image.shape
+                                   ) != 3 or content_image.shape[2] != 3:
             raise TypeError(
-                'content_image must be a numpy.ndarray with shape (h, w, 3)')
-        if ((type(alpha) is not int and type(alpha) is not float) or
-            alpha < 0):
-            raise TypeError('alpha must be a non-negative number')
-        if (type(beta) is not int and type(beta) is not float) or beta < 0:
-            raise TypeError('beta must be a non-negative number')
-        if (type(var) is not int and type(var) is not float) or var < 0:
-            raise TypeError('var must be a non-negative number')
+                "content_image must be a numpy.ndarray with shape (h, w, 3)")
+        if not isinstance(alpha, float) and not isinstance(alpha, int
+                                                           ) or alpha < 0:
+            raise TypeError("alpha must be a non-negative number")
+        if not isinstance(beta, float) and not isinstance(beta, int
+                                                          ) or beta < 0:
+            raise TypeError("beta must be a non-negative number")
+
         self.style_image = self.scale_image(style_image)
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
-        self.var = var
         self.load_model()
         self.generate_features()
 
@@ -50,9 +49,8 @@ class NST:
     def scale_image(image):
         """
         """
-
-        if (type(image) is not np.ndarray or image.ndim != 3 or
-            image.shape[2] != 3):
+        check = (image.shape[2] != 3)
+        if type(image) is not np.ndarray or image.ndim != 3 or check:
             raise TypeError(
                 'image must be a numpy.ndarray with shape (h, w, 3)')
         max_dims = 512
@@ -94,7 +92,7 @@ class NST:
     def gram_matrix(input_layer):
         """
         """
-        check =(input_layer.shape.ndims != 4)
+        check = (input_layer.shape.ndims != 4)
         if not (isinstance(input_layer, tf.Tensor) or
                 isinstance(input_layer, tf.Variable)) or check:
             raise TypeError('input_layer must be a tensor of rank 4')
@@ -125,8 +123,7 @@ class NST:
         m, _, _, nc = style_output.shape.dims
         check1 = (gram_target.shape.dims != [m, nc, nc])
         if not (isinstance(gram_target, tf.Tensor) or
-                isinstance(gram_target, tf.Variable)) or check1:
-                 
+                isinstance(gram_target, tf.Variable)) or check1:      
             raise TypeError(
                 'gram_target must be a tensor of shape [{}, {}, {}]'.
                 format(m, nc, nc))
@@ -137,9 +134,8 @@ class NST:
     def style_cost(self, style_outputs):
         """
         """
-
-        if (type(style_outputs) is not list or
-            len(style_outputs) != len(self.style_layers)):
+        check = (len(style_outputs) != len(self.style_layers))
+        if type(style_outputs) is not list or check:
             raise TypeError(
                 'style_outputs must be a list with a length of {}'.
                 format(len(self.style_layers)))
@@ -253,9 +249,9 @@ class NST:
                 best_cost = J.numpy()
                 best_image = generated_image.numpy()[0]
             optimizer.apply_gradients([(grads, generated_image)])
-            generated_image.assign(
-                tf.clip_by_value
-                (generated_image, clip_value_min=0.0, clip_value_max=1.0))      
+            generated_image.assign(tf.clip_by_value(
+                generated_image, clip_value_min=0.0,
+                clip_value_max=1.0))      
         _, J, J_content, J_style, J_var = self.compute_grads(generated_image)
         if J < best_cost:
             best_cost = J.numpy()
