@@ -165,8 +165,9 @@ class NST:
         """
         """
 
-        if not (isinstance(image, tf.Tensor) or isinstance(image, tf.Variable)) or \
-        not (3 <= image.shape.ndims <= 4):
+        if not (isinstance(image, tf.Tensor) or isinstance(image, tf.Variable)):
+            raise TypeError('image must be a tensor of rank 3 or 4')
+        if not 3 <= image.shape.ndims <= 4:
             raise TypeError('image must be a tensor of rank 3 or 4')
         return tf.reduce_sum(tf.image.total_variation(image))
 
