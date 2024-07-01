@@ -143,9 +143,13 @@ class NST:
         check = (len(style_outputs) != len(self.style_layers))
         if type(style_outputs) is not list or check:
             raise TypeError('style_outputs must be a list with a length of {}'.
-                            format(len(self.style_layers))) 
+                            format(len(self.style_layers)))
         J_style = tf.add_n(
-            [self.layer_style_cost(style_outputs[i], self.gram_style_features[i]) for i in range(len(style_outputs))])
+            [
+                self.layer_style_cost(style_outputs[i],
+                                      self.gram_style_features[i])
+                                      for i in range(len(style_outputs))
+                                      ])
         J_style /= tf.cast(len(style_outputs), tf.float32)
         return J_style
 
@@ -183,7 +187,7 @@ class NST:
         """
         """
         check = (generated_image.shape.dims != self.content_image.shape.dims)
-        if not (isinstance(generated_image, tf.Tensor) or 
+        if not (isinstance(generated_image, tf.Tensor) or
                 isinstance(generated_image, tf.Variable)) or check:
             raise TypeError('generated_image must be a tensor of shape {}'.
                             format(self.content_image.shape))
