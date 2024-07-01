@@ -17,31 +17,32 @@ class NST:
                     'block5_conv1']
     content_layer = 'block5_conv2'
 
-    def __init__(self, style_image, content_image, alpha=1e4, beta=1):
+    def __init__(self, style_image, content_image,
+                 alpha=1e4, beta=1, var=10):
         """
         """
 
-        if not isinstance(style_image, np.ndarray
-                          ) or len(style_image.shape
-                                   ) != 3 or style_image.shape[2] != 3:
+        if (type(style_image) is not np.ndarray or
+            style_image.ndim != 3 or style_image.shape[2] != 3):
             raise TypeError(
-                "style_image must be a numpy.ndarray with shape (h, w, 3)")
-        if not isinstance(content_image, np.ndarray
-                          ) or len(content_image.shape
-                                   ) != 3 or content_image.shape[2] != 3:
+                'style_image must be a numpy.ndarray with shape (h, w, 3)')
+        if (type(content_image) is not np.ndarray or
+            content_image.ndim != 3 or
+            content_image.shape[2] != 3):
             raise TypeError(
-                "content_image must be a numpy.ndarray with shape (h, w, 3)")
-        if not isinstance(alpha, float) and not isinstance(alpha, int
-                                                           ) or alpha < 0:
-            raise TypeError("alpha must be a non-negative number")
-        if not isinstance(beta, float) and not isinstance(beta, int
-                                                          ) or beta < 0:
-            raise TypeError("beta must be a non-negative number")
-
+                'content_image must be a numpy.ndarray with shape (h, w, 3)')
+        if ((type(alpha) is not int and type(alpha) is not float) or
+            alpha < 0):
+            raise TypeError('alpha must be a non-negative number')
+        if (type(beta) is not int and type(beta) is not float) or beta < 0:
+            raise TypeError('beta must be a non-negative number')
+        if (type(var) is not int and type(var) is not float) or var < 0:
+            raise TypeError('var must be a non-negative number')
         self.style_image = self.scale_image(style_image)
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
+        self.var = var
         self.load_model()
         self.generate_features()
 
