@@ -145,10 +145,9 @@ class NST:
             raise TypeError('style_outputs must be a list with a length of {}'.
                             format(len(self.style_layers)))
         J_style = tf.add_n(
-            [
-                self.layer_style_cost(style_outputs[i],
-                                      self.gram_style_features[i]) 
-                                      for i in range(len(style_outputs))])
+            [self.layer_style_cost(style_outputs[i],
+                                   self.gram_style_features[i]) 
+            for i in range(len(style_outputs))])
         J_style /= tf.cast(len(style_outputs), tf.float32)
         return J_style
 
