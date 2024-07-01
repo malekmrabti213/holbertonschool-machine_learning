@@ -124,7 +124,7 @@ class NST:
         m, _, _, nc = style_output.shape.dims
         check1 = (gram_target.shape.dims != [m, nc, nc])
         if not (isinstance(gram_target, tf.Tensor) or
-                isinstance(gram_target, tf.Variable)) or check1:  
+                isinstance(gram_target, tf.Variable)) or check1:
             raise TypeError(
                 'gram_target must be a tensor of shape [{}, {}, {}]'.
                 format(m, nc, nc))
@@ -164,9 +164,9 @@ class NST:
     def variational_cost(image):
         """
         """
-      
+        var = image.shape.ndims
         if not (isinstance(image, tf.Tensor) or
-                isinstance(image, tf.Variable)) or not 3 <= image.shape.ndims <= 4:
+                isinstance(image, tf.Variable)) or not 3 <= var <= 4:
             raise TypeError('image must be a tensor of rank 3 or 4')
         return tf.reduce_sum(tf.image.total_variation(image))
 
