@@ -21,18 +21,18 @@ class NST:
                  alpha=1e4, beta=1, var=10):
         """
         """
-
-        if (type(style_image) is not np.ndarray or
-            style_image.ndim != 3 or style_image.shape[2] != 3):
+        c1 = (style_image.ndim != 3)
+        c2 = (style_image.shape[2] != 3)
+        if type(style_image) is not np.ndarray or c1 or c2:
             raise TypeError(
                 'style_image must be a numpy.ndarray with shape (h, w, 3)')
-        if (type(content_image) is not np.ndarray or
-            content_image.ndim != 3 or
-            content_image.shape[2] != 3):
+        c3 = (content_image.ndim != 3)
+        c4 = (content_image.shape[2] != 3)
+        if type(content_image) is not np.ndarray or c3 or c4:
             raise TypeError(
                 'content_image must be a numpy.ndarray with shape (h, w, 3)')
-        if ((type(alpha) is not int and type(alpha) is not float) or
-            alpha < 0):
+        c5 = (alpha < 0)
+        if (type(alpha) is not int and type(alpha) is not float) or c5:
             raise TypeError('alpha must be a non-negative number')
         if (type(beta) is not int and type(beta) is not float) or beta < 0:
             raise TypeError('beta must be a non-negative number')
@@ -124,7 +124,7 @@ class NST:
         m, _, _, nc = style_output.shape.dims
         check1 = (gram_target.shape.dims != [m, nc, nc])
         if not (isinstance(gram_target, tf.Tensor) or
-                isinstance(gram_target, tf.Variable)) or check1:      
+                isinstance(gram_target, tf.Variable)) or check1:   
             raise TypeError(
                 'gram_target must be a tensor of shape [{}, {}, {}]'.
                 format(m, nc, nc))
@@ -252,7 +252,7 @@ class NST:
             optimizer.apply_gradients([(grads, generated_image)])
             generated_image.assign(tf.clip_by_value(
                 generated_image, clip_value_min=0.0,
-                clip_value_max=1.0))      
+                clip_value_max=1.0))     
         _, J, J_content, J_style, J_var = self.compute_grads(generated_image)
         if J < best_cost:
             best_cost = J.numpy()
