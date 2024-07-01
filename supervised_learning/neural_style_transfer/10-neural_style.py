@@ -124,7 +124,7 @@ class NST:
         m, _, _, nc = style_output.shape.dims
         check1 = (gram_target.shape.dims != [m, nc, nc])
         if not (isinstance(gram_target, tf.Tensor) or
-                isinstance(gram_target, tf.Variable)) or check1:   
+                isinstance(gram_target, tf.Variable)) or check1:  
             raise TypeError(
                 'gram_target must be a tensor of shape [{}, {}, {}]'.
                 format(m, nc, nc))
@@ -164,9 +164,9 @@ class NST:
     def variational_cost(image):
         """
         """
-
+        check = (3 <= image.shape.ndims <= 4)
         if not (isinstance(image, tf.Tensor) or
-                isinstance(image, tf.Variable)) or not 3 <= image.shape.ndims <= 4:
+                isinstance(image, tf.Variable)) or not check:
             raise TypeError('image must be a tensor of rank 3 or 4')
         return tf.reduce_sum(tf.image.total_variation(image))
 
@@ -252,7 +252,7 @@ class NST:
             optimizer.apply_gradients([(grads, generated_image)])
             generated_image.assign(tf.clip_by_value(
                 generated_image, clip_value_min=0.0,
-                clip_value_max=1.0))     
+                clip_value_max=1.0))
         _, J, J_content, J_style, J_var = self.compute_grads(generated_image)
         if J < best_cost:
             best_cost = J.numpy()
