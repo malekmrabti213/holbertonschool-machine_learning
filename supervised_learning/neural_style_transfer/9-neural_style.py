@@ -147,9 +147,8 @@ class NST:
         J_style = tf.add_n(
             [
                 self.layer_style_cost(style_outputs[i],
-                                      self.gram_style_features[i])
-                                      for i in range(len(style_outputs))
-                                      ])
+                                      self.gram_style_features[i]) 
+                                      for i in range(len(style_outputs))])
         J_style /= tf.cast(len(style_outputs), tf.float32)
         return J_style
 
