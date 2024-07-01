@@ -99,9 +99,9 @@ class NST:
         """
         """
 
-        check1 = input_layer.shape.ndims != 4
-        if not (isinstance(input_layer, tf.Tensor) 
-                or isinstance(input_layer, tf.Variable)) or check1:
+        if (not (isinstance(input_layer, tf.Tensor)
+                or isinstance(input_layer, tf.Variable))
+                or input_layer.shape.ndims != 4):
             raise TypeError('input_layer must be a tensor of rank 4')
         _, nh, nw, _ = input_layer.shape.dims
         G = tf.linalg.einsum('bijc,bijd->bcd', input_layer, input_layer)
@@ -117,32 +117,33 @@ class NST:
                           vgg19.preprocess_input(self.content_image * 255))
         style_features = self.model(preprocessed_s)[:-1]
         self.content_feature = self.model(preprocessed_c)[-1]
-        self.gram_style_features = ([self.gram_matrix(style_feature) 
+        self.gram_style_features = ([self.gram_matrix(style_feature)
                                      for style_feature in style_features])
-    
+
     def layer_style_cost(self, style_output, gram_target):
         """
         """
 
-        if (not (isinstance(style_output, tf.Tensor) 
-                or isinstance(style_output, tf.Variable)) 
-                or style_output.shape.ndims != 4):
+        if (not (isinstance(style_output, tf.Tensor)
+                 or isinstance(style_output, tf.Variable))
+                 or style_output.shape.ndims != 4):
             raise TypeError('style_output must be a tensor of rank 4')
         m, _, _, nc = style_output.shape.dims
-        if (not (isinstance(gram_target, tf.Tensor) 
-                or isinstance(gram_target, tf.Variable)) 
-                or gram_target.shape.dims != [m, nc, nc]):
-            raise TypeError('gram_target must be a tensor of shape [{}, {}, {}]'
-                            .format(m, nc, nc))
+        if (not (isinstance(gram_target, tf.Tensor)
+                 or isinstance(gram_target, tf.Variable))
+                 or gram_target.shape.dims != [m, nc, nc]):
+            raise TypeError(
+                'gram_target must be a tensor of shape [{}, {}, {}]'
+                .format(m, nc, nc))
         gram_style = self.gram_matrix(style_output)
-        return (tf.reduce_sum(tf.square(gram_style - gram_target)) 
+        return (tf.reduce_sum(tf.square(gram_style - gram_target))
                 / tf.square(tf.cast(nc, tf.float32)))
 
     def style_cost(self, style_outputs):
         """
         """
-
-        if (type(style_outputs) is not list 
+        
+        if (type(style_outputs) is not list
             or len(style_outputs) != len(self.style_layers)):
             raise TypeError('style_outputs must be a list with a length of {}'.
                             format(len(self.style_layers)))
@@ -157,22 +158,24 @@ class NST:
         """
         """
 
-        if (not (isinstance(content_output, tf.Tensor) 
-                 or isinstance(content_output, tf.Variable)) 
-                 or content_output.shape.dims != self.content_feature.shape.dims):
+        if (not (isinstance(content_output, tf.Tensor)
+                 or isinstance(content_output, tf.Variable))
+                 or (content_output.shape.dims !=
+                     self.content_feature.shape.dims)):
             raise TypeError('content_output must be a tensor of shape {}'.
                             format(self.content_feature.shape))
         _, nh, nw, nc = content_output.shape.dims
-        return (tf.reduce_sum(tf.square(content_output - self.content_feature)) 
+        return (tf.reduce_sum(tf.square(content_output - self.content_feature))
                 / tf.cast(nh * nw * nc, tf.float32))
 
     def total_cost(self, generated_image):
         """
         """
 
-        if (not (isinstance(generated_image, tf.Tensor) 
-                 or isinstance(generated_image, tf.Variable)) 
-                 or generated_image.shape.dims != self.content_image.shape.dims):
+        if (not (isinstance(generated_image, tf.Tensor)
+                 or isinstance(generated_image, tf.Variable))
+                 or (generated_image.shape.dims !=
+                     self.content_image.shape.dims)):
             raise TypeError('generated_image must be a tensor of shape {}'.
                             format(self.content_image.shape))
         preprocessed = (tf.keras.applications.
@@ -189,9 +192,10 @@ class NST:
         """
         """
 
-        if (not (isinstance(generated_image, tf.Tensor) 
-                 or isinstance(generated_image, tf.Variable)) 
-                 or generated_image.shape.dims != self.content_image.shape.dims):
+        if (not (isinstance(generated_image, tf.Tensor)
+                 or isinstance(generated_image, tf.Variable))
+                 or (generated_image.shape.dims !=
+                     self.content_image.shape.dims)):
             raise TypeError('generated_image must be a tensor of shape {}'.
                             format(self.content_image.shape))
         with tf.GradientTape() as tape:
