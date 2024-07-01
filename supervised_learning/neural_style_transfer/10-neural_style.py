@@ -163,12 +163,14 @@ class NST:
     @staticmethod
     def variational_cost(image):
         """
+        Calculates the total variation cost for the given image.
         """
 
         if not (isinstance(image, tf.Tensor) or
                 isinstance(image, tf.Variable)) or \
             not 3 <= image.shape.ndims <= 4:
             raise TypeError('image must be a tensor of rank 3 or 4')
+        
         return tf.reduce_sum(tf.image.total_variation(image))
 
     def total_cost(self, generated_image):
