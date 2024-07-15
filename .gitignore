@@ -960,3 +960,5 @@ supervised_learning/neural_style_transfer/__pycache__/9-neural_style.cpython-39.
 supervised_learning/neural_style_transfer/__pycache__/10-neural_style.cpython-39.pyc
 supervised_learning/neural_style_transfer/9-neural_style.py
 supervised_learning/neural_style_transfer/10-neural_style.py
+reinforcement-learning/temporal_difference/2-sarsa_lambtha.py
+reinforcement-learning/temporal_difference/README.md
