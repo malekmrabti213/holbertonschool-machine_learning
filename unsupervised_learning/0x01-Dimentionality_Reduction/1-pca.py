@@ -23,7 +23,10 @@ def pca(X, ndim):
     # reduction dimension r
     if ndim >= d:
         ndim = d
-    Ur = V[:, 0:ndim]
-    Sr = np.diag(S[0:ndim])
-    T = Ur @ Sr
+    # Use V to project the data onto the principal components
+    W = V[:ndim].T  # Transpose to get the correct shape
+
+    # Apply the transformation to X
+    T = X @ W
+
     return T
