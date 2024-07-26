@@ -82,6 +82,7 @@ def backward(Observation, Emission, Transition, Initial):
     P = np.sum(Initial[:, 0] * Emission[:, Observation[0]] * beta_t[:, 0])
     return P, beta_t
 
+
 def baum_welch(Observations, Transition, Emission, Initial, iterations=1000):
     """Performs the Baum-Welch algorithm for a hidden markov model:
 
