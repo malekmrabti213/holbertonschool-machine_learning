@@ -18,12 +18,12 @@ def pca(X, ndim):
     X = X - np.mean(X, axis=0)
 
     # decompose X into SVD
-    U, S, _ = np.linalg.svd(X)
+    U, S, V = np.linalg.svd(X)
 
     # reduction dimension r
     if ndim >= d:
         ndim = d
-    Ur = U[:, 0:ndim]
+    Ur = V[:, 0:ndim]
     Sr = np.diag(S[0:ndim])
     T = Ur @ Sr
     return T
