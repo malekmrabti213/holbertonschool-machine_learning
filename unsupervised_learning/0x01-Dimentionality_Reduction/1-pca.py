@@ -1,11 +1,29 @@
 #!/usr/bin/env python3
-
+"""
+Project Dimensionality reduction
+By Ced+
+"""
 import numpy as np
 
 
 def pca(X, ndim):
-    """calculates pca for a specific number of dims"""
+    """
+    Takes X a matrix,
+    return Tr( reduction score)
+    """
+    n = X.shape[0]  # number of data points
+    d = X.shape[1]  # number of dimensions
+
+    # normalize X
     X = X - np.mean(X, axis=0)
-    _, _, Vh = np.linalg.svd(X)
-    W = Vh[:ndim].T
-    return np.matmul(X, W)
+
+    # decompose X into SVD
+    U, S, _ = np.linalg.svd(X)
+
+    # reduction dimension r
+    if ndim >= d:
+        ndim = d
+    Ur = U[:, 0:ndim]
+    Sr = np.diag(S[0:ndim])
+    T = Ur @ Sr
+    return T
