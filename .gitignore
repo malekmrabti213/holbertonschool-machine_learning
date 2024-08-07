@@ -378,14 +378,9 @@ supervised_learning/0x06-keras/__pycache__/0-sequential.cpython-311.pyc
 supervised_learning/0x06-keras/__pycache__/1-input.cpython-311.pyc
 supervised_learning/decision_tree/0-build_decision_tree.py
 supervised_learning/decision_tree/1-build_decision_tree.py
-supervised_learning/decision_tree/2-build_decision_tree.py
-supervised_learning/decision_tree/3-build_decision_tree.py
-supervised_learning/decision_tree/4-build_decision_tree.py
-supervised_learning/decision_tree/5-build_decision_tree.py
-supervised_learning/decision_tree/6-build_decision_tree.py
-supervised_learning/decision_tree/7-build_decision_tree.py
+
 supervised_learning/decision_tree/7-main_2.py
-supervised_learning/decision_tree/8-build_decision_tree.py
+
 supervised_learning/decision_tree/8-main_2.py
 supervised_learning/decision_tree/9-main_2.py
 supervised_learning/decision_tree/9-random_forest.py
@@ -979,3 +974,7 @@ unsupervised_learning/clustering/12-agglomerative.py
 unsupervised_learning/clustering/12-main.py
 unsupervised_learning/clustering/12-checker.py
 unsupervised_learning/clustering/README.md
+supervised_learning/decision_tree/2-checker.py
+supervised_learning/decision_tree/2-main.py
+supervised_learning/decision_tree/3-checker.py
+supervised_learning/decision_tree/3-main.py
