@@ -164,7 +164,7 @@ class Leaf(Node):
     def __str__(self):
         """
         """
-        return f"-> leaf [value={self.value}] "
+        return f"-> leaf [value={self.value}]"
 
     def get_leaves_below(self):
         """
