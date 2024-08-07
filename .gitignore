@@ -383,9 +383,7 @@ supervised_learning/decision_tree/7-main_2.py
 
 supervised_learning/decision_tree/8-main_2.py
 supervised_learning/decision_tree/9-main_2.py
-supervised_learning/decision_tree/9-random_forest.py
-supervised_learning/decision_tree/10-isolation_tree.py
-supervised_learning/decision_tree/11-isolation_forest.py
+
 supervised_learning/decision_tree/README.md
 supervised_learning/decision_tree/__pycache__/7-build_decision_tree.cpython-39.pyc
 supervised_learning/decision_tree/__pycache__/8-build_decision_tree.cpython-39.pyc
