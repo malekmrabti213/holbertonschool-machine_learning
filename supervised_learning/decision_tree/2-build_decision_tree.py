@@ -71,13 +71,13 @@ class Node:
         feature = self.feature
         threshold = self.threshold
         if self.is_root:
-            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
-            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            a = self.left_child_add_prefix(f"{self.left_child}".rstrip("\n"))
+            b = self.right_child_add_prefix(f"{self.right_child}".rstrip("\n"))
             return f"root [feature={feature}, threshold={threshold}]\n" \
                    f"{a}{b}"
         else:
-            a = self.left_child_add_prefix(f"{self.left_child}"[:-1])
-            b = self.right_child_add_prefix(f"{self.right_child}"[:-1])
+            a = self.left_child_add_prefix(f"{self.left_child}".rstrip("\n"))
+            b = self.right_child_add_prefix(f"{self.right_child}".rstrip("\n"))
             return f"-> node [feature={feature}, threshold={threshold}]\n"\
                    f"{a}{b}"
 
@@ -106,7 +106,7 @@ class Leaf(Node):
     def __str__(self):
         """
         """
-        return (f"-> leaf [value={self.value}] ")
+        return (f"-> leaf [value={self.value}]")
 
 
 class Decision_Tree:
