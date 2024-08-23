@@ -5,11 +5,4 @@ fasttext_model = __import__('4-fasttext').fasttext_model
 
 print(common_texts[:2])
 ft = fasttext_model(common_texts, min_count=1)
-
 print(ft.wv["computer"])
-
-
-
-
-
-

@@ -1,30 +1,37 @@
 #!/usr/bin/env python3
+"""
+NLP --WE --Task 4
+"""
 
 import gensim
 
-def fasttext_model(sentences, size=100, min_count=5, window=5, negative=5, cbow=True,
-             iterations=5, seed=0, workers=1):
-    """
-    Create and train a FastText model using gensim.
 
-    Args:
-    sentences (list of list of str): List of sentences to be trained on.
-    size (int): Dimensionality of the embedding layer.
-    min_count (int): Minimum number of occurrences of a word for use in training.
-    window (int): Maximum distance between the current and predicted word within a sentence.
-    negative (int): Size of negative sampling.
-    cbow (bool): True for CBOW, False for Skip-gram.
-    iterations (int): Number of iterations to train over.
-    seed (int): Seed for the random number generator.
-    workers (int): Number of worker threads to train the model.
-
-    Returns:
-    gensim.models.FastText: Trained FastText model.
+def fasttext_model(sentences, vector_size=100, min_count=5,
+                   window=5, negative=5, cbow=True,
+                   epochs=5, seed=0, workers=1):
     """
-        
-    if not cbow:
-        sg = 1
-    else:
-        sg = 0
-    model = gensim.models.FastText(sentences=sentences, size=size, min_count=min_count, window=window, negative=negative, sg=sg, seed=seed, iter=iterations, workers=workers)
+    """      
+    # Set the training algorithm based on cbow parameter
+    sg = 0 if cbow else 1
+
+    # Create the FastText model
+    model = gensim.models.FastText(
+        sentences=sentences,
+        vector_size=vector_size,
+        min_count=min_count,
+        window=window,
+        negative=negative,
+        sg=sg,
+        epochs=epochs,
+        seed=seed,
+        workers=workers
+        )
+
+    # prepare the model vocabulary
+    model.build_vocab(sentences)
+
+    # Train the model
+    model.train(sentences, total_examples=model.corpus_count,
+                epochs=model.epochs)
+
     return model
