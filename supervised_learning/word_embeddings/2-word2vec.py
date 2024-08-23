@@ -8,6 +8,21 @@ from gensim.models import Word2Vec
 def word2vec_model(sentences, vector_size=100, min_count=5, window=5,
                    negative=5, cbow=True, epochs=5, seed=0, workers=1):
     """
+            creates and trains a gensim word2vec model
+
+    :param sentences: list of sentences to be trained on
+    :param vector_size: dimensionality of the embedding layer
+    :param min_count: minimum number of occurrences of a word
+        for use in training
+    :param window: maximum distance between the current and predicted
+    word within a sentence
+    :param negative: size of negative sampling
+    :param cbow: boolean to determine training type: True=CBOW, False=Skip-gram
+    :param epochs: number of iterations to train over
+    :param seed: seed for the random number generator
+    :param workers: number of worker threads to train the model
+
+    :return: trained model
     """
     if cbow is True:
         sg = 0
