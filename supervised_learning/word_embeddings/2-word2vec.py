@@ -15,13 +15,13 @@ def word2vec_model(sentences, vector_size=100, min_count=5, window=5,
     :type sentences: list of list of str
     :param vector_size: dimensionality of the embedding layer
     :type vector_size: int
-    :param min_count: minimum number of occurrences of a word for use in training
+    :param min_count: min number of occurrences of a word in training
     :type min_count: int
-    :param window: maximum distance between the current and predicted word within a sentence
+    :param window: max distance between the current and predicted word
     :type window: int
     :param negative: size of negative sampling
     :type negative: int
-    :param cbow: boolean to determine training type; True for CBOW, False for Skip-gram
+    :param cbow: boolean to determine training type
     :type cbow: bool
     :param epochs: number of iterations to train over
     :type epochs: int
