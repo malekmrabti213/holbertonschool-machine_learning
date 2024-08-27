@@ -2,6 +2,7 @@
 
 import tensorflow as tf
 
+
 class RNNEncoder(tf.keras.layers.Layer):
     def __init__(self, vocab, embedding, units, batch):
         super(RNNEncoder, self).__init__()
