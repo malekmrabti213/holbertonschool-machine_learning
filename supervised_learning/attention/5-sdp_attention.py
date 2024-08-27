@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-
+"""
+Task 5
+"""
 import tensorflow as tf
 
+
 def sdp_attention(Q, K, V, mask=None):
+    """
+    """
     QK = tf.matmul(Q, K, transpose_b=True)
     dk = tf.cast(tf.shape(K)[-1], tf.float32)
     attention = QK / tf.sqrt(dk)
