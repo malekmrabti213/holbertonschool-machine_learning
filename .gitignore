@@ -993,3 +993,5 @@ supervised_learning/attention/1-main.py
 supervised_learning/attention/1-checker.py
 supervised_learning/attention/2-main.py
 supervised_learning/attention/2-checker.py
+supervised_learning/attention/4-checker.py
+supervised_learning/attention/4-main.py
