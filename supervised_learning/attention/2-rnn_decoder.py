@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-
+"""
+Task 1
+"""
 import tensorflow as tf
 SelfAttention = __import__('1-self_attention').SelfAttention
 
+
 class RNNDecoder(tf.keras.layers.Layer):
+    """
+    """
     def __init__(self, vocab, embedding, units, batch):
         super(RNNDecoder, self).__init__()
+        """
+        """
         self.embedding = tf.keras.layers.Embedding(vocab, embedding)
         self.gru = tf.keras.layers.GRU(units,
                                        return_sequences=True,
@@ -15,6 +22,8 @@ class RNNDecoder(tf.keras.layers.Layer):
         self.attention = SelfAttention(units)
 
     def call(self, x, s_prev, hidden_states):
+        """
+        """
         context, _ = self.attention(s_prev, hidden_states)
         x = self.embedding(x)
         x = tf.concat([tf.expand_dims(context, 1), x], axis=-1)
