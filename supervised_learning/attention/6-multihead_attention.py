@@ -65,8 +65,6 @@ class MultiHeadAttention(tf.keras.layers.Layer):
             weights: tensor with its last three dimensions as
                 (..., h, seq_len_q, seq_len_v) containing the attention weights
         """
-
-
         batch = tf.shape(Q)[0]
 
         Q = self.Wq(Q)
@@ -79,7 +77,7 @@ class MultiHeadAttention(tf.keras.layers.Layer):
 
         output, weights = sdp_attention(Q, K, V, mask)
         output = tf.transpose(output, perm=[0, 2, 1, 3])
-        attention_output = tf.reshape(output,(batch, -1, self.dm))
+        attention_output = tf.reshape(output, (batch, -1, self.dm))
 
         output = self.linear(attention_output)
 
