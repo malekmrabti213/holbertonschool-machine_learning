@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
-
+"""
+"""
 import tensorflow_datasets as tfds
 import transformers
 
+
 class Dataset:
+    """
+    """
     def __init__(self):
+        """
+        """
         # Load the dataset
         self.data_train, self.data_valid = tfds.load(
             'ted_hrlr_translate/pt_to_en',
@@ -16,6 +22,8 @@ class Dataset:
         self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(self.data_train)
 
     def tokenize_dataset(self, data):
+        """
+        """
         # Create lists to hold sentences for training tokenizers
         pt_sentences = []
         en_sentences = []
