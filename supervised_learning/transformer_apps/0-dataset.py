@@ -17,9 +17,10 @@ class Dataset:
             split=['train', 'validation'],
             as_supervised=True
         )
-        
+
         # Initialize tokenizers
-        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(self.data_train)
+        self.tokenizer_pt,
+        self.tokenizer_en = self.tokenize_dataset(self.data_train)
 
     def tokenize_dataset(self, data):
         """
@@ -34,12 +35,16 @@ class Dataset:
             en_sentences.append(en.numpy().decode('utf-8'))
 
         # Load a pre-trained tokenizer and adapt it
-        tokenizer_pt = transformers.AutoTokenizer.from_pretrained('neuralmind/bert-base-portuguese-cased', use_fast=True, clean_up_tokenization_spaces=True)
-        tokenizer_en = transformers.AutoTokenizer.from_pretrained('bert-base-uncased', use_fast=True, clean_up_tokenization_spaces=True )
+        tokenizer_pt = transformers.AutoTokenizer.from_pretrained(
+            'neuralmind/bert-base-portuguese-cased', use_fast=True,
+            clean_up_tokenization_spaces=True)
+        tokenizer_en = transformers.AutoTokenizer.from_pretrained(
+            'bert-base-uncased', use_fast=True,
+            clean_up_tokenization_spaces=True)
 
         # Train the tokenizer on your dataset
-        tp=tokenizer_pt.train_new_from_iterator(pt_sentences, vocab_size=2**13)
-        te=tokenizer_en.train_new_from_iterator(en_sentences, vocab_size=2**13)
+        tp = tokenizer_pt.train_new_from_iterator(pt_sentences, vocab_size=2**13)
+        te = tokenizer_en.train_new_from_iterator(en_sentences, vocab_size=2**13)
 
         self.tokenizer_pt = tp
         self.tokenizer_en = te
