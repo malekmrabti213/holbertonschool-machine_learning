@@ -19,8 +19,8 @@ class Dataset:
         )
 
         # Initialize tokenizers
-        self.tokenizer_pt,
-        self.tokenizer_en = self.tokenize_dataset(self.data_train)
+        self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
+            self.data_train)
 
     def tokenize_dataset(self, data):
         """
