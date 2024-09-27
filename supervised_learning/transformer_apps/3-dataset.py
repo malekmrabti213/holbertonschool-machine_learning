@@ -16,19 +16,22 @@ class Dataset:
         self.max_len = max_len
         
         # Load the dataset
-        self.data_train, self.info = tfds.load('ted_hrlr_translate/pt_to_en', split='train',
-                                               as_supervised=True, with_info=True)
-        self.data_valid = tfds.load('ted_hrlr_translate/pt_to_en', split='validation',
+        self.data_train, self.info = tfds.load('ted_hrlr_translate/pt_to_en',
+                                               split='train',
+                                               as_supervised=True,
+                                               with_info=True)
+        self.data_valid = tfds.load('ted_hrlr_translate/pt_to_en',
+                                    split='validation',
                                     as_supervised=True)
 
         # Initialize tokenizers
         self.tokenizer_pt, self.tokenizer_en = self.tokenize_dataset(
             self.data_train)
-        
+
         # Update data_train and data_valid by tokenizing the examples
         self.data_train = self.data_train.map(self.tf_encode)
         self.data_valid = self.data_valid.map(self.tf_encode)
-        
+
         # Set up the data pipeline
         self.data_train = self.setup_pipeline(self.data_train,
                                               is_training=True)
@@ -58,9 +61,9 @@ class Dataset:
 
         # Train the tokenizer on your dataset
         tp = tokenizer_pt.train_new_from_iterator(pt_sentences,
-                                                vocab_size=2**13)
+                                                  vocab_size=2**13)
         te = tokenizer_en.train_new_from_iterator(en_sentences,
-                                                vocab_size=2**13)
+                                                  vocab_size=2**13)
 
         self.tokenizer_pt = tp
         self.tokenizer_en = te
@@ -103,38 +106,37 @@ class Dataset:
             inp=[pt, en],
             Tout=[tf.int64, tf.int64]
         )
-        
+
         # Set the shape of the tensors
         pt_tokens.set_shape([None])
         en_tokens.set_shape([None])
 
         return pt_tokens, en_tokens
 
+
     def setup_pipeline(self, dataset, is_training):
         """
         """
         # Filter out sentences with more than max_len tokens
         def filter_fn(pt, en):
+            """
+            """
             return tf.logical_and(
                 tf.size(pt) <= self.max_len,
                 tf.size(en) <= self.max_len
             )
-        
+
         dataset = dataset.filter(filter_fn)
 
-        # Cache the dataset to improve performance
         dataset = dataset.cache()
 
         train_examples = self.info.splits['train'].num_examples
         if is_training:
-            # Shuffle: training examples of 51785 
             dataset = dataset.shuffle(20000)
 
-        # Batch and pad the dataset
         dataset = dataset.padded_batch(self.batch_size,
                                        padded_shapes=([None], [None]))
 
-        # Prefetch to improve performance
         if is_training:
             dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
 
