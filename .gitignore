@@ -1077,3 +1077,28 @@ supervised_learning/transformer_apps/5-main.py
 supervised_learning/transformer_apps/5-train.py
 supervised_learning/transformer_apps/5-transformer.py
 supervised_learning/transformer_apps/test.py
+supervised_learning/transformer_apps/__pycache__/1-dataset.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/0-dataset.py
+supervised_learning/Transformer_apps using tf.keras/0-main.py
+supervised_learning/Transformer_apps using tf.keras/1-dataset.py
+supervised_learning/Transformer_apps using tf.keras/1-main.py
+supervised_learning/Transformer_apps using tf.keras/2-dataset.py
+supervised_learning/Transformer_apps using tf.keras/2-main.py
+supervised_learning/Transformer_apps using tf.keras/3-dataset.py
+supervised_learning/Transformer_apps using tf.keras/3-main.py
+supervised_learning/Transformer_apps using tf.keras/4-create_masks.py
+supervised_learning/Transformer_apps using tf.keras/4-main.py
+supervised_learning/Transformer_apps using tf.keras/5-main.py
+supervised_learning/Transformer_apps using tf.keras/5-train.py
+supervised_learning/Transformer_apps using tf.keras/5-transformer.py
+supervised_learning/Transformer_apps using tf.keras/load_dataset.py
+supervised_learning/Transformer_apps using tf.keras/README.md
+supervised_learning/Transformer_apps using tf.keras/__pycache__/0-dataset.cpython-36.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/0-dataset.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/0-dataset.cpython-311.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/1-dataset.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/2-dataset.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/3-dataset.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/4-create_masks.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/5-train.cpython-39.pyc
+supervised_learning/Transformer_apps using tf.keras/__pycache__/5-transformer.cpython-39.pyc
