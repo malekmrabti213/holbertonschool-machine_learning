@@ -73,8 +73,8 @@ class Dataset:
         """
         """
         # Define special tokens for Portuguese and English
-        pt_start_token_id = len(self.tokenizer_pt) 
-        pt_end_token_id = len(self.tokenizer_pt) + 1 
+        pt_start_token_id = len(self.tokenizer_pt)
+        pt_end_token_id = len(self.tokenizer_pt) + 1
 
         en_start_token_id = len(self.tokenizer_en)
         en_end_token_id = len(self.tokenizer_en) + 1
