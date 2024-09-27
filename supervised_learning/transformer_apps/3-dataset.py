@@ -128,7 +128,7 @@ class Dataset:
         train_examples = self.info.splits['train'].num_examples
         if is_training:
             # Shuffle: training examples of 51785 
-            dataset = dataset.shuffle(train_examples)
+            dataset = dataset.shuffle(20000)
 
         # Batch and pad the dataset
         dataset = dataset.padded_batch(self.batch_size,
