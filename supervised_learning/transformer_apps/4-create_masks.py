@@ -3,22 +3,22 @@
 
 import tensorflow as tf
 
-def create_padding_mask(seq):
 
+def create_padding_mask(seq):
     """
     """
     seq = tf.cast(tf.math.equal(seq, 0), tf.float32)
     return seq[:, tf.newaxis, tf.newaxis, :]
 
-def create_look_ahead_mask(size):
 
+def create_look_ahead_mask(size):
     """
     """
     mask = 1 - tf.linalg.band_part(tf.ones((size, size)), -1, 0)
     return mask  # (seq_len, seq_len)
 
+
 def create_masks(inp, tar):
-    
     """
     """
     enc_padding_mask = create_padding_mask(inp)
