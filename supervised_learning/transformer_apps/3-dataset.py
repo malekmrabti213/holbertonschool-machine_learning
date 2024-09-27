@@ -14,7 +14,7 @@ class Dataset:
         """
         self.batch_size = batch_size
         self.max_len = max_len
-        
+
         # Load the dataset
         self.data_train, self.info = tfds.load('ted_hrlr_translate/pt_to_en',
                                                split='train',
@@ -37,7 +37,6 @@ class Dataset:
                                               is_training=True)
         self.data_valid = self.setup_pipeline(self.data_valid,
                                               is_training=False)
-
 
     def tokenize_dataset(self, data):
         """
@@ -70,16 +69,15 @@ class Dataset:
 
         return self.tokenizer_pt, self.tokenizer_en
 
-
     def encode(self, pt, en):
         """
         """
         # Define special tokens for Portuguese and English
-        pt_start_token_id = len(self.tokenizer_pt)  
-        pt_end_token_id = len(self.tokenizer_pt) + 1  
+        pt_start_token_id = len(self.tokenizer_pt) 
+        pt_end_token_id = len(self.tokenizer_pt) + 1 
 
-        en_start_token_id = len(self.tokenizer_en) 
-        en_end_token_id = len(self.tokenizer_en) + 1  
+        en_start_token_id = len(self.tokenizer_en)
+        en_end_token_id = len(self.tokenizer_en) + 1
 
         # Convert tensors to strings
         pt_text = pt.numpy().decode('utf-8')
@@ -113,11 +111,9 @@ class Dataset:
 
         return pt_tokens, en_tokens
 
-
     def setup_pipeline(self, dataset, is_training):
         """
         """
-        # Filter out sentences with more than max_len tokens
         def filter_fn(pt, en):
             """
             """
