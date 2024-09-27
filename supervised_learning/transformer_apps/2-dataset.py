@@ -48,10 +48,10 @@ class Dataset:
             clean_up_tokenization_spaces=True)
 
         # Train the tokenizer on your dataset
-        tp=tokenizer_pt.train_new_from_iterator(pt_sentences,
-                                                vocab_size = 2**13)
-        te=tokenizer_en.train_new_from_iterator(en_sentences,
-                                                vocab_size = 2**13)
+        tp = tokenizer_pt.train_new_from_iterator(pt_sentences,
+                                                  vocab_size=2**13)
+        te = tokenizer_en.train_new_from_iterator(en_sentences,
+                                                  vocab_size=2**13)
 
         self.tokenizer_pt = tp
         self.tokenizer_en = te
