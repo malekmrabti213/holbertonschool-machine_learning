@@ -1103,3 +1103,6 @@ supervised_learning/Transformer_apps using tf.keras/__pycache__/4-create_masks.c
 supervised_learning/Transformer_apps using tf.keras/__pycache__/5-train.cpython-39.pyc
 supervised_learning/Transformer_apps using tf.keras/__pycache__/5-transformer.cpython-39.pyc
 supervised_learning/transformer_apps/__pycache__/1-dataset.cpython-39.pyc
+supervised_learning/qa_bot/__pycache__/0-qa.cpython-39.pyc
+reinforcement-learning/deep_q_learning/train.py
+supervised_learning/qa_bot/ZendeskArticles
