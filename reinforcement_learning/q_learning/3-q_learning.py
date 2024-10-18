@@ -2,7 +2,6 @@
 """
 3-q_learning
 """
-import gym
 import numpy as np
 epsilon_greedy = __import__('2-epsilon_greedy').epsilon_greedy
 
