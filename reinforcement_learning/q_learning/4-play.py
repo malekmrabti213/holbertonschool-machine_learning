@@ -4,6 +4,7 @@ play
 """
 import numpy as np
 
+
 def play(env, Q, max_steps=100):
     """
     Function that has the trained agent play an episode
@@ -25,16 +26,16 @@ def play(env, Q, max_steps=100):
         rendered_output = env.render()
         # Store the rendered output
         rendered_outputs.append(rendered_output)
-        
+
         # Select the best action based on the Q-table
         action = np.argmax(Q[state])
-        
+
         # Execute the action and observe the next state and reward
         new_state, reward, terminated, truncated, _ = env.step(action)
-        
+
         # Accumulate the rewards
         total_rewards += reward
-        
+
         # Check if the episode has ended
         if terminated or truncated:
             # Render the final state before breaking
@@ -42,7 +43,7 @@ def play(env, Q, max_steps=100):
             # Store the last rendered output
             rendered_outputs.append(rendered_output)
             break
-        
+
         # Move to the next state
         state = new_state
 
