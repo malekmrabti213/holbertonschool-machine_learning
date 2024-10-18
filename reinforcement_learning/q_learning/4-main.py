@@ -12,5 +12,11 @@ desc = [['S', 'F', 'F'], ['F', 'H', 'H'], ['F', 'F', 'G']]
 env = load_frozen_lake(desc=desc)
 Q = q_init(env)
 
-Q, total_rewards  = train(env, Q)
-print(play(env, Q))
+Q, _ = train(env, Q)
+
+env.reset()
+total_rewards, rendered_outputs = play(env, Q)
+
+print(f'Total Rewards: {total_rewards}')
+for output in rendered_outputs:
+    print(output)
