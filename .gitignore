@@ -1116,3 +1116,11 @@ reinforcement_learning/q_learning/0-main.py
 reinforcement_learning/q_learning/0-main.py
 reinforcement_learning/q_learning/3-checker_0.py
 reinforcement_learning/q_learning/4-checker.py
+reinforcement_learning/deep_q_learning/play.py
+policy.h5
+reinforcement_learning/deep_q_learning/play.py
+reinforcement_learning/deep_q_learning/train.py
+reinforcement_learning/temporal_difference/0-main.py
+reinforcement_learning/temporal_difference/0-checker1.py
+reinforcement_learning/temporal_difference/0-checker0.py
+reinforcement_learning/temporal_difference/0-checker2.py
