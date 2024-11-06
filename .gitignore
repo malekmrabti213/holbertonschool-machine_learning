@@ -1133,3 +1133,5 @@ reinforcement_learning/temporal_difference/2-checker1.py
 reinforcement_learning/temporal_difference/2-main.py
 reinforcement_learning/policy_gradients/0-checker_0.py
 reinforcement_learning/policy_gradients/0-checker_1.py
+reinforcement_learning/policy_gradients/1-checker.py
+reinforcement_learning/policy_gradients/1-main.py
