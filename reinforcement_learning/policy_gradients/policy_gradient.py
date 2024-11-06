@@ -15,13 +15,14 @@ def policy(state, weight):
 
     return exp / np.sum(exp)
 
-# Vectorized softmax Jacobian
+
 def softmax_grad(softmax):
     """
     """
-    s = softmax.reshape(-1,1)
+    s = softmax.reshape(-1, 1)
 
     return np.diagflat(s) - np.dot(s, s.T)
+
 
 def policy_gradient(state, weight):
     """
