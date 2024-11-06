@@ -15,8 +15,6 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
 
     for episode in range(nb_episodes):
         state, _ = env.reset()
-        print(state)
-
         grads = []
         rewards = []
         actions = []
@@ -48,7 +46,6 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
             actions.append(action)
 
 
-
         for i in range(len(grads)):
             # Calculate rewards from this step forward
             reward = sum([R * gamma ** R for R in rewards[i:]])
@@ -58,7 +55,6 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
 
         scores.append(sum(rewards))
 
-        print('Episode: {}     Score: {}'.format(episode, scores[episode]),
-              end='\r', flush=False)
+        print('Episode: {} Score: {}'.format(episode, scores[episode]))
 
     return scores
