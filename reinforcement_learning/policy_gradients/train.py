@@ -33,7 +33,7 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
             # print(grad)
 
             # Update environment
-            state, reward, terminated, truncated, _  = env.step(action)
+            state, reward, terminated, truncated, _ = env.step(action)
 
             # Update `done` flag after each step
             done = terminated or truncated
@@ -45,8 +45,6 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
             grads.append(grad)
             rewards.append(reward)
             actions.append(action)
-
-
         for i in range(len(grads)):
             # Calculate rewards from this step forward
             reward = sum([R * gamma ** R for R in rewards[i:]])
