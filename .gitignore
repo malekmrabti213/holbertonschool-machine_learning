@@ -1148,3 +1148,4 @@ reinforcement_learning/policy_gradients/2-main.py
 reinforcement_learning/policy_gradients/3-checker.py
 pipeline/Data_Collection/2-user_location.py
 reinforcement_learning/temporal_difference/move.py
+pipeline/pandas/0-checker.py
