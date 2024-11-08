@@ -1146,3 +1146,5 @@ reinforcement_learning/policy_gradients/__pycache__/policy_gradient.cpython-39.p
 reinforcement_learning/policy_gradients/__pycache__/train.cpython-39.pyc
 reinforcement_learning/policy_gradients/2-main.py
 reinforcement_learning/policy_gradients/3-checker.py
+pipeline/Data_Collection/2-user_location.py
+reinforcement_learning/temporal_difference/move.py
