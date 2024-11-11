@@ -1158,3 +1158,5 @@ pipeline/pandas/3-main.py
 pipeline/pandas/4-checker.py
 pipeline/pandas/4-main.py
 pipeline/pandas/3-checker.py
+pipeline/pandas/5-checker.py
+pipeline/pandas/5-main.py
