@@ -1155,3 +1155,6 @@ coinbaseUSD_1-min_data_2014-12-01_to_2019-01-09.csv
 pipeline/pandas/2-checker.py
 pipeline/pandas/3-checker
 pipeline/pandas/3-main.py
+pipeline/pandas/4-checker.py
+pipeline/pandas/4-main.py
+pipeline/pandas/3-checker.py
