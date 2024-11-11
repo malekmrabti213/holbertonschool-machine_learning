@@ -2,6 +2,7 @@
 """
 Task 4
 """
+import pandas as pd
 
 
 def array(df):
