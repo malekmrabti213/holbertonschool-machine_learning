@@ -1160,3 +1160,5 @@ pipeline/pandas/4-main.py
 pipeline/pandas/3-checker.py
 pipeline/pandas/5-checker.py
 pipeline/pandas/5-main.py
+pipeline/pandas/6-main.py
+pipeline/pandas/6-checker.py
