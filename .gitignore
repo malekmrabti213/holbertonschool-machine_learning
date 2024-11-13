@@ -1162,3 +1162,6 @@ pipeline/pandas/5-checker.py
 pipeline/pandas/5-main.py
 pipeline/pandas/6-main.py
 pipeline/pandas/6-checker.py
+0-test
+pipeline/pandas/7-checker.py
+pipeline/pandas/7-main.py
