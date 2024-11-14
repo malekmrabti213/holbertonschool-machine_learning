@@ -1167,3 +1167,8 @@ pipeline/pandas/7-checker.py
 pipeline/pandas/7-main.py
 pipeline/pandas/8-main.py
 pipeline/pandas/8-checker.py
+pipeline/pandas/9-checker0.py
+pipeline/pandas/9-checker2.py
+pipeline/pandas/9-checker1.py
+.gitignore
+pipeline/pandas/9-main.py
