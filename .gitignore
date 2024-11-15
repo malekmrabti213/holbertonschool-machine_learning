@@ -1174,3 +1174,5 @@ pipeline/pandas/9-checker1.py
 pipeline/pandas/9-main.py
 pipeline/pandas/10-checker.py
 pipeline/pandas/10-main.py
+pipeline/pandas/13-checker.py
+pipeline/pandas/13-main.py
