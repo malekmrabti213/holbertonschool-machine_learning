@@ -1180,3 +1180,5 @@ bitstamp.csv
 pipeline/pandas/11-checker1.py
 pipeline/pandas/11-checker0.py
 pipeline/pandas/11-main.py
+pipeline/pandas/12-checker.py
+pipeline/pandas/12-main.py
