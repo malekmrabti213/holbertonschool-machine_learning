@@ -1182,3 +1182,5 @@ pipeline/pandas/11-checker0.py
 pipeline/pandas/11-main.py
 pipeline/pandas/12-checker.py
 pipeline/pandas/12-main.py
+pipeline/pandas/14-test.py
+pipeline/pandas/14-visualize.py
