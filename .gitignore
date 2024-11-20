@@ -1184,3 +1184,17 @@ pipeline/pandas/12-checker.py
 pipeline/pandas/12-main.py
 pipeline/pandas/14-test.py
 pipeline/pandas/14-visualize.py
+pipeline/apis/2-user_location.py
+pipeline/data_augmentation/0-checker.py
+pipeline/data_augmentation/0-main.py
+pipeline/data_augmentation/1-checker.py
+pipeline/data_augmentation/1-main.py
+pipeline/data_augmentation/2-checker.py
+pipeline/data_augmentation/2-main.py
+pipeline/data_augmentation/3-main.py
+pipeline/data_augmentation/4-checker.py
+pipeline/data_augmentation/4-main.py
+pipeline/data_augmentation/5-checker.py
+pipeline/data_augmentation/5-main.py
+pipeline/data_augmentation/100-checker.py
+pipeline/data_augmentation/100-main.py
