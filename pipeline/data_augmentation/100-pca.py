@@ -16,13 +16,14 @@ def pca_color(image, alphas):
     std = tf.math.reduce_std(flat_image, axis=0)
     flat_image /= std
     # print(flat_image)
-    cov = tf.linalg.matmul(flat_image,flat_image, transpose_a=True) / tf.cast(h * w, dtype=tf.float32)
-    l, v = tf.linalg.eigh(cov)
+    div = tf.cast(h * w, dtype=tf.float32)
+    cov = tf.linalg.matmul(flat_image, flat_image, transpose_a=True) / div
+    el, v = tf.linalg.eigh(cov)
     alphas = tf.convert_to_tensor(alphas, dtype=tf.float32)
     # print(alphas)
-    l = tf.reshape(l * alphas, [3, 1])
-    # print(l)
-    deltas = tf.linalg.matmul(v, l)
+    el = tf.reshape(el * alphas, [3, 1])
+    # print(el)
+    deltas = tf.linalg.matmul(v, el)
     # print(deltas)
     flat_image += tf.transpose(deltas)
     flat_image *= std
