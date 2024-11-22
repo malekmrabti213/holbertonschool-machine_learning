@@ -1198,3 +1198,4 @@ pipeline/data_augmentation/5-checker.py
 pipeline/data_augmentation/5-main.py
 pipeline/data_augmentation/100-checker.py
 pipeline/data_augmentation/100-main.py
+pipeline/data_augmentation/3-checker.py
